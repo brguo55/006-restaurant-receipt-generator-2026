@@ -5,13 +5,25 @@ let menuData = [];
 
 const categoryOrder = [
   "Appetizers",
+  "Salads",
+  "Soups",
   "Beef",
-  "Chicken Entrees",
+  "Pork",
+  "Chicken",
+  "Duck",
   "Seafood",
-  "Tofu and Vegetable",
   "Moo Shu",
+  "Tofu and Vegetable",
+  "House Specialties",
+  "Health Conscious",
+  "Fried Rice or Lo Mein",
   "Egg Foo Young",
   "Noodle",
+  "Combinations",
+  "Traditional Chinese Cuisine",
+  "Hot Pot",
+  "Dessert",
+  "Beverages",
   "Hunan Special Meal Combo",
 ];
 
