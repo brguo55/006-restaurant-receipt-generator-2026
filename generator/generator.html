@@ -8,36 +8,41 @@
   </head>
   <body>
     <div class="wrap">
-      <div class="card">
-        <h1>Hunam Demo</h1>
-        <div class="small">
-          先做 demo：English-only / English+Chinese 显示，小票生成。后面我再帮你换成 CSV 导入版。
-        </div>
-        <div class="top">
-          <div>
-            <label>Display</label>
-            <select id="mode">
-              <option value="en">English only</option>
-              <option value="both">English + Chinese</option>
-            </select>
+      <div class="card menu-card">
+        <div class="menu-header">
+          <h1>Hunam Demo</h1>
+          <div class="small">
+            先做 demo：English-only / English+Chinese 显示，小票生成。后面我再帮你换成 CSV 导入版。
+          </div>
+          <div class="top">
+            <div>
+              <label>Display</label>
+              <select id="mode">
+                <option value="en">English only</option>
+                <option value="both">English + Chinese</option>
+              </select>
+            </div>
+            <div>
+              <label>Order Type</label>
+              <select id="type">
+                <option>Dine In</option>
+                <option>Take Out</option>
+              </select>
+            </div>
+            <div>
+              <label>Table / Customer</label>
+              <input id="who" placeholder="Table 5 / John" />
+            </div>
           </div>
           <div>
-            <label>Order Type</label>
-            <select id="type">
-              <option>Dine In</option>
-              <option>Take Out</option>
-            </select>
-          </div>
-          <div>
-            <label>Table / Customer</label>
-            <input id="who" placeholder="Table 5 / John" />
+            <label>Note</label>
+            <textarea id="note" placeholder="Special instructions..."></textarea>
           </div>
         </div>
-        <div>
-          <label>Note</label>
-          <textarea id="note" placeholder="Special instructions..."></textarea>
+        <div class="menu-content">
+          <nav id="categoryNav" class="category-nav"></nav>
+          <div id="menu" class="menu-items"></div>
         </div>
-        <div id="menu"></div>
       </div>
 
       <div class="card">
