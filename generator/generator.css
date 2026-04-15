@@ -9,6 +9,7 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 24px;
+  padding-left: 232px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 24px;
@@ -32,7 +33,6 @@ body {
   border-bottom: 1px solid #e5e7eb;
 }
 .menu-content {
-  display: flex;
   flex: 1;
   overflow: hidden;
 }
@@ -288,21 +288,28 @@ button {
 
 /* Category Navigator */
 .category-nav {
-  position: relative;
-  width: 180px;
-  background: #fafbfc;
-  border-right: 1px solid #e5e7eb;
-  padding: 20px 0;
+  position: fixed;
+  top: 50%;
+  left: 16px;
+  transform: translateY(-50%);
+  width: 200px;
+  max-height: calc(100vh - 48px);
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 12px 0;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 1px;
   overflow-y: auto;
   flex-shrink: 0;
+  z-index: 100;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08), 0 1px 4px rgba(0, 0, 0, 0.04);
 }
 
 .cat-link {
   display: block;
-  padding: 10px 16px;
+  padding: 9px 20px;
   border-radius: 0;
   background: transparent;
   color: #6b7280;
@@ -312,18 +319,17 @@ button {
   line-height: 1.4;
   transition: all 0.15s ease;
   border-left: 3px solid transparent;
-  white-space: nowrap;
-  overflow: text-overflow;
-  text-overflow: ellipsis;
+  white-space: normal;
+  word-break: break-word;
 }
 
 .cat-link:hover {
-  background: #f0f1f3;
+  background: #f3f4f6;
   color: #1f2937;
 }
 
 .cat-link.active {
-  background: transparent;
+  background: #f0f4ff;
   color: #1f3b73;
   border-left-color: #1f3b73;
   font-weight: 600;
@@ -338,9 +344,7 @@ button {
 @media (max-width: 900px) {
   .wrap {
     grid-template-columns: 1fr;
-  }
-  .menu-content {
-    flex-direction: column;
+    padding-left: 24px;
   }
   .category-nav {
     display: none;
