@@ -67,10 +67,17 @@ h2 {
   padding: 16px;
   border-radius: 6px;
   border: 1px solid #e5e7eb;
+  align-items: flex-end;
 }
 .top > div {
-  flex: 1;
-  min-width: 160px;
+  flex: 1 1 0;
+  min-width: 0;
+}
+.top select,
+.top input {
+  height: 42px;
+  padding: 0 12px;
+  box-sizing: border-box;
 }
 label {
   display: block;
