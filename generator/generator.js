@@ -130,33 +130,37 @@ function updateTotalsDisplay() {
 
 function genReceipt() {
   const { subtotal, tax, tip, total } = calculateTotals();
-  const lines = [];
-  lines.push("Hunam Chinese Restaurant");
-  lines.push("790 Martin Luther King Jr Blvd, Chapel Hill, NC 27514");
-  lines.push("--------------------------------");
-  lines.push(
-    `${$("type").value}${$("who").value ? " | " + $("who").value : ""}`
-  );
-  lines.push(new Date().toLocaleString());
-  lines.push("--------------------------------");
+  const parts = [];
+
+  parts.push(`<div class="rc-center">Hunam Chinese Restaurant / 南苑餐厅</div>`);
+  parts.push(`<div class="rc-center rc-small">790 Martin Luther King Jr Blvd, Chapel Hill, NC 27514</div>`);
+  parts.push(`<div class="rc-divider"></div>`);
+
+  const meta = `${$("type").value}${$("who").value ? " | " + $("who").value : ""}`;
+  parts.push(`<div class="rc-center rc-small">${meta}</div>`);
+  parts.push(`<div class="rc-center rc-small">${new Date().toLocaleString()}</div>`);
+  parts.push(`<div class="rc-divider"></div>`);
+
   order.forEach((v) => {
-    lines.push(`${v.qty} x ${label(v.item)}`);
-    lines.push(`    ${money(v.qty * v.item.price)}`);
+    parts.push(`<div class="rc-item"><span>${v.qty} x ${label(v.item)}</span><span>${money(v.qty * v.item.price)}</span></div>`);
   });
-  lines.push("--------------------------------");
-  lines.push(`Subtotal: ${money(subtotal)}`);
-  lines.push(`Tax (7.5%): ${money(tax)}`);
-  lines.push(`Tip: ${money(tip)}`);
-  lines.push("--------------------------------");
-  lines.push(`Total: ${money(total)}`);
+
+  parts.push(`<div class="rc-divider"></div>`);
+  parts.push(`<div class="rc-row"><span>Subtotal</span><span>${money(subtotal)}</span></div>`);
+  parts.push(`<div class="rc-row"><span>Tax (7.5%)</span><span>${money(tax)}</span></div>`);
+  parts.push(`<div class="rc-row"><span>Tip</span><span>${money(tip)}</span></div>`);
+  parts.push(`<div class="rc-divider"></div>`);
+  parts.push(`<div class="rc-row rc-total"><span>Total</span><span>${money(total)}</span></div>`);
+
   if ($("note").value.trim()) {
-    lines.push("--------------------------------");
-    lines.push("NOTE:");
-    lines.push($("note").value.trim());
+    parts.push(`<div class="rc-divider"></div>`);
+    parts.push(`<div class="rc-note"><strong>NOTE:</strong> ${$("note").value.trim()}</div>`);
   }
-  lines.push("--------------------------------");
-  lines.push("Thank you!");
-  $("receipt").textContent = lines.join("\n");
+
+  parts.push(`<div class="rc-divider"></div>`);
+  parts.push(`<div class="rc-center rc-thank">Thank you! 欢迎再次光临！</div>`);
+
+  $("receipt").innerHTML = parts.join("");
 }
 
 // ============================================================================
@@ -199,7 +203,7 @@ function clearOrder() {
   activeTipPct = null;
   $("tipInput").value = "";
   renderOrder();
-  $("receipt").textContent = "";
+  $("receipt").innerHTML = "";
 }
 
 // ============================================================================
@@ -364,7 +368,7 @@ function bindEvents() {
   $("clear").onclick = clearOrder;
 
   $("printBtn").onclick = () => {
-    if (!$("receipt").textContent.trim()) genReceipt();
+    if (!$("receipt").innerHTML.trim()) genReceipt();
     window.print();
   };
 
