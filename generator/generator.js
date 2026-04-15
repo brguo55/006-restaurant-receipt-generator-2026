@@ -12,6 +12,10 @@ const $ = (id) => document.getElementById(id);
 let menuData = [];
 const order = new Map();
 
+const TAX_RATE = 0.075;
+let tipAmount = 0;
+let activeTipPct = null;
+
 const categoryOrder = [
   "Appetizers",
   "Salads",
@@ -74,11 +78,58 @@ function calculateSubtotal() {
   return subtotal;
 }
 
+function calculateTax(subtotal) {
+  return subtotal * TAX_RATE;
+}
+
+function calculateTotals() {
+  const subtotal = calculateSubtotal();
+  const tax = calculateTax(subtotal);
+  const total = subtotal + tax + tipAmount;
+  return { subtotal, tax, tip: tipAmount, total };
+}
+
+function setTipByPercent(pct) {
+  activeTipPct = pct;
+  const subtotal = calculateSubtotal();
+  tipAmount = subtotal * (pct / 100);
+  $("tipInput").value = "";
+  updateTotalsDisplay();
+}
+
+function setTipByAmount(amount) {
+  activeTipPct = null;
+  tipAmount = amount >= 0 ? amount : 0;
+  updateTotalsDisplay();
+}
+
+function recalcTipIfPercent() {
+  if (activeTipPct !== null) {
+    const subtotal = calculateSubtotal();
+    tipAmount = subtotal * (activeTipPct / 100);
+  }
+}
+
+function updateTotalsDisplay() {
+  const { subtotal, tax, tip, total } = calculateTotals();
+  $("subtotal").textContent = money(subtotal);
+  $("tax").textContent = money(tax);
+  $("tipDisplay").textContent = money(tip);
+  $("total").textContent = money(total);
+
+  // Highlight active tip button
+  document.querySelectorAll(".tip-btn").forEach((btn) => {
+    const pct = parseInt(btn.dataset.pct, 10);
+    btn.classList.toggle("active", activeTipPct === pct);
+  });
+}
+
 // ============================================================================
 // RECEIPT GENERATION
 // ============================================================================
 
 function genReceipt() {
+  const { subtotal, tax, tip, total } = calculateTotals();
   const lines = [];
   lines.push("Hunam Chinese Restaurant");
   lines.push("790 Martin Luther King Jr Blvd, Chapel Hill, NC 27514");
@@ -93,7 +144,11 @@ function genReceipt() {
     lines.push(`    ${money(v.qty * v.item.price)}`);
   });
   lines.push("--------------------------------");
-  lines.push(`Total: ${$("total").textContent}`);
+  lines.push(`Subtotal: ${money(subtotal)}`);
+  lines.push(`Tax (7.5%): ${money(tax)}`);
+  lines.push(`Tip: ${money(tip)}`);
+  lines.push("--------------------------------");
+  lines.push(`Total: ${money(total)}`);
   if ($("note").value.trim()) {
     lines.push("--------------------------------");
     lines.push("NOTE:");
@@ -140,6 +195,9 @@ function incrementItem(key) {
 
 function clearOrder() {
   order.clear();
+  tipAmount = 0;
+  activeTipPct = null;
+  $("tipInput").value = "";
   renderOrder();
   $("receipt").textContent = "";
 }
@@ -193,7 +251,6 @@ function renderOrder() {
   let subtotal = 0;
 
   order.forEach((v, key) => {
-    subtotal += v.item.price * v.qty;
     const el = document.createElement("div");
     el.className = "line";
     el.innerHTML = `
@@ -217,8 +274,8 @@ function renderOrder() {
     root.appendChild(el);
   });
 
-  $("subtotal").textContent = money(subtotal);
-  $("total").textContent = money(subtotal);
+  recalcTipIfPercent();
+  updateTotalsDisplay();
 }
 
 // ============================================================================
@@ -310,6 +367,17 @@ function bindEvents() {
     if (!$("receipt").textContent.trim()) genReceipt();
     window.print();
   };
+
+  // Tip percentage buttons
+  document.querySelectorAll(".tip-btn").forEach((btn) => {
+    btn.onclick = () => setTipByPercent(parseInt(btn.dataset.pct, 10));
+  });
+
+  // Custom tip input
+  $("tipInput").addEventListener("input", () => {
+    const val = parseFloat($("tipInput").value);
+    setTipByAmount(isNaN(val) ? 0 : val);
+  });
 }
 
 // ============================================================================

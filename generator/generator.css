@@ -243,6 +243,64 @@ button {
   margin: 16px 0;
   color: #1f3b73;
 }
+
+/* Tip Section */
+.tip-section {
+  margin: 12px 0;
+  padding: 12px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+}
+.tip-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  padding: 0 4px;
+}
+.tip-buttons {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+.tip-btn {
+  flex: 1;
+  min-width: 50px;
+  padding: 8px 4px;
+  background: #e5e7eb;
+  color: #374151;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 4px;
+}
+.tip-btn:hover {
+  background: #d1d5db;
+}
+.tip-btn.active {
+  background: #1f3b73;
+  color: #fff;
+}
+.tip-custom {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.tip-custom label {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  min-width: auto;
+}
+.tip-custom input {
+  flex: 1;
+  padding: 8px 10px;
+  font-size: 14px;
+}
+
 .actions {
   display: flex;
   gap: 10px;

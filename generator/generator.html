@@ -51,6 +51,26 @@
         <div class="sum">
           <span>Subtotal</span><span id="subtotal">$0.00</span>
         </div>
+        <div class="sum">
+          <span>Tax (7.5%)</span><span id="tax">$0.00</span>
+        </div>
+        <div class="tip-section">
+          <div class="tip-header">
+            <span>Tip</span><span id="tipDisplay">$0.00</span>
+          </div>
+          <div class="tip-buttons">
+            <button class="tip-btn" data-pct="15">15%</button>
+            <button class="tip-btn" data-pct="18">18%</button>
+            <button class="tip-btn" data-pct="20">20%</button>
+            <button class="tip-btn" data-pct="25">25%</button>
+            <button class="tip-btn" data-pct="30">30%</button>
+            <button class="tip-btn" data-pct="0">No Tip</button>
+          </div>
+          <div class="tip-custom">
+            <label for="tipInput">Custom $</label>
+            <input id="tipInput" type="number" min="0" step="0.01" placeholder="0.00" />
+          </div>
+        </div>
         <div class="sum total">
           <span>Total</span><span id="total">$0.00</span>
         </div>
