@@ -192,6 +192,44 @@ button {
   background: #0f1e38;
   transform: scale(0.98);
 }
+
+/* Variant Popup */
+.variant-popup {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 2px solid #1f3b73;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+  z-index: 200;
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+.variant-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 0;
+  background: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1f2937;
+  border-bottom: 1px solid #e5e7eb;
+}
+.variant-option:last-child {
+  border-bottom: none;
+}
+.variant-option:hover {
+  background: #1f3b73;
+  color: #fff;
+}
+
 .line {
   display: grid;
   grid-template-columns: 1fr auto auto;
