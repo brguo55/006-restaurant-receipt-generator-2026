@@ -195,17 +195,13 @@ button {
 
 /* Variant Popup */
 .variant-popup {
-  position: absolute;
-  bottom: 100%;
-  left: 0;
-  right: 0;
+  position: fixed;
   background: #fff;
   border: 2px solid #1f3b73;
   border-radius: 8px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
   z-index: 200;
   overflow: hidden;
-  margin-bottom: 4px;
 }
 .variant-option {
   display: flex;

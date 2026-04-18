@@ -145,7 +145,11 @@ function showVariantPopup(items, buttonEl) {
     popup.appendChild(btn);
   });
 
-  buttonEl.closest('.item').appendChild(popup);
+  document.body.appendChild(popup);
+  const rect = buttonEl.getBoundingClientRect();
+  popup.style.left = rect.left + 'px';
+  popup.style.width = rect.width + 'px';
+  popup.style.bottom = (window.innerHeight - rect.top + 4) + 'px';
 
   setTimeout(() => {
     document.addEventListener('click', closeVariantPopup, { once: true });
