@@ -17,9 +17,9 @@ let tipAmount = 0;
 let activeTipPct = null;
 
 const categoryOrder = [
-  "Appetizers",
-  "Salads",
-  "Soups",
+  "Appetizer",
+  "Salad",
+  "Soup",
   "Pork",
   "Beef",
   "Chicken",
@@ -27,16 +27,16 @@ const categoryOrder = [
   "Seafood",
   "Moo Shu",
   "Tofu and Vegetable",
-  "House Specialties",
+  "House Specialty",
   "Health Conscious",
   "Fried Rice or Lo Mein",
   "Egg Foo Young",
   "Noodle",
-  "Combinations",
+  "Combination",
   "Traditional Chinese Cuisine",
   "Hot Pot",
   "Dessert",
-  "Beverages",
+  "Beverage",
   "Hunan Special Meal Combo",
 ];
 
@@ -49,7 +49,12 @@ function money(n) {
 }
 
 function label(item) {
-  const en = item.code ? `${item.code} ${item.en}` : item.en;
+  const en = item.en;
+  return $("mode").value === "both" && item.zh ? `${en} / ${item.zh}` : en;
+}
+
+function receiptLabel(item) {
+  const en = item.en;
   return $("mode").value === "both" && item.zh ? `${en} / ${item.zh}` : en;
 }
 
@@ -64,6 +69,92 @@ function parseCSV(text) {
     });
     return obj;
   });
+}
+
+// ============================================================================
+// ITEM GROUPING (e.g. Fried/Steamed Dumplings → "Dumplings")
+// ============================================================================
+
+function getBaseCode(code) {
+  return code.replace(/[a-z]+$/, '');
+}
+
+function groupItems(items) {
+  const groups = new Map();
+  items.forEach(item => {
+    const base = getBaseCode(item.code);
+    if (!groups.has(base)) groups.set(base, []);
+    groups.get(base).push(item);
+  });
+  return [...groups.values()];
+}
+
+function getGroupEnLabel(items) {
+  const wordSets = items.map(i => new Set(i.en.split(' ')));
+  const commonWords = [...wordSets[0]].filter(w => wordSets.every(s => s.has(w)));
+  const ordered = items[0].en.split(' ').filter(w => commonWords.includes(w));
+  return ordered.join(' ') || items[0].en;
+}
+
+function getGroupZhLabel(items) {
+  const zhs = items.map(i => i.zh).filter(Boolean);
+  if (!zhs.length) return '';
+  let common = '';
+  const minLen = Math.min(...zhs.map(z => z.length));
+  for (let i = 1; i <= minLen; i++) {
+    const ch = zhs[0][zhs[0].length - i];
+    if (zhs.every(z => z[z.length - i] === ch)) {
+      common = ch + common;
+    } else break;
+  }
+  return common || zhs[0];
+}
+
+function groupLabel(items) {
+  const en = getGroupEnLabel(items);
+  if ($("mode").value === "both") {
+    const zh = getGroupZhLabel(items);
+    return zh ? `${en} / ${zh}` : en;
+  }
+  return en;
+}
+
+function getGroupPrice(items) {
+  const prices = items.map(i => i.price).filter(p => p > 0);
+  if (!prices.length) return { min: 0, max: 0, same: true };
+  const min = Math.min(...prices);
+  const max = Math.max(...prices);
+  return { min, max, same: min === max };
+}
+
+function showVariantPopup(items, buttonEl) {
+  closeVariantPopup();
+  const popup = document.createElement('div');
+  popup.className = 'variant-popup';
+  popup.id = 'variantPopup';
+
+  items.forEach(item => {
+    const btn = document.createElement('button');
+    btn.className = 'variant-option';
+    btn.innerHTML = `<span>${label(item)}</span><span>${money(item.price)}</span>`;
+    btn.onclick = (e) => {
+      e.stopPropagation();
+      add(item);
+      closeVariantPopup();
+    };
+    popup.appendChild(btn);
+  });
+
+  buttonEl.closest('.item').appendChild(popup);
+
+  setTimeout(() => {
+    document.addEventListener('click', closeVariantPopup, { once: true });
+  }, 0);
+}
+
+function closeVariantPopup() {
+  const existing = document.getElementById('variantPopup');
+  if (existing) existing.remove();
 }
 
 // ============================================================================
@@ -141,8 +232,10 @@ function genReceipt() {
   parts.push(`<div class="rc-center rc-small">${new Date().toLocaleString()}</div>`);
   parts.push(`<div class="rc-divider"></div>`);
 
+  let itemNum = 0;
   order.forEach((v) => {
-    parts.push(`<div class="rc-item"><span>${v.qty} x ${label(v.item)}</span><span>${money(v.qty * v.item.price)}</span></div>`);
+    itemNum++;
+    parts.push(`<div class="rc-item"><span>${String(itemNum).padStart(2, '0')} ${receiptLabel(v.item)} x${v.qty}</span><span>${money(v.qty * v.item.price)}</span></div>`);
   });
 
   parts.push(`<div class="rc-divider"></div>`);
@@ -224,18 +317,39 @@ function renderMenu() {
     sec.innerHTML = `<h2>${cat}</h2><div class="grid"></div>`;
 
     const grid = sec.querySelector(".grid");
-    items.forEach((item) => {
-      const el = document.createElement("div");
-      el.className = "item";
-      el.innerHTML = `
-        <div class="row">
-          <div class="name">${label(item)}</div>
-          <div class="price">${money(item.price)}</div>
-        </div>
-        <button class="add">Add</button>
-      `;
-      el.querySelector("button").onclick = () => add(item);
-      grid.appendChild(el);
+    const grouped = groupItems(items);
+    grouped.forEach((group) => {
+      if (group.length === 1) {
+        const item = group[0];
+        const el = document.createElement("div");
+        el.className = "item";
+        el.innerHTML = `
+          <div class="row">
+            <div class="name">${label(item)}</div>
+            <div class="price">${money(item.price)}</div>
+          </div>
+          <button class="add">Add</button>
+        `;
+        el.querySelector("button").onclick = () => add(item);
+        grid.appendChild(el);
+      } else {
+        const priceInfo = getGroupPrice(group);
+        const el = document.createElement("div");
+        el.className = "item";
+        el.style.position = "relative";
+        el.innerHTML = `
+          <div class="row">
+            <div class="name">${groupLabel(group)}</div>
+            <div class="price">${priceInfo.same ? money(priceInfo.min) : `from ${money(priceInfo.min)}`}</div>
+          </div>
+          <button class="add">Add</button>
+        `;
+        el.querySelector("button").onclick = (e) => {
+          e.stopPropagation();
+          showVariantPopup(group, e.target);
+        };
+        grid.appendChild(el);
+      }
     });
 
     root.appendChild(sec);
