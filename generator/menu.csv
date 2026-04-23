@@ -183,15 +183,15 @@ Traditional Chinese Cuisine,Q34,Szechuan Pickled Fish,酸菜鱼,18.95
 Traditional Chinese Cuisine,Q35,Pan-Fried Flounder w. Chef's Sauce,香煎龙利鱼,28.95
 Traditional Chinese Cuisine,Q36a,Jumbo Oyster w. Ginger and Scallions,姜葱生蚝,29.95
 Traditional Chinese Cuisine,Q36b,Fried Jumbo Oyster,炸生蚝,29.95
-Traditional Chinese Cuisine,Q37,Peking Duck Two Way,北京片皮鸭三食,62.95
+Traditional Chinese Cuisine,Q37,Peking Duck Two Way,北京片皮鸭两吃,62.95
 Hot Pot,R1,Eggplant Hot Pot,鱼香茄子煲,15.95
 Hot Pot,R2,Eight Treasure Tofu Hot Pot,八珍豆腐煲,19.95
 Hot Pot,R3,Salted Fish Chicken & Egg Plant In Hot Pot,咸鱼鸡粒茄子煲,18.95
-Hot Pot,R4,Beef Stew Hot Pot,柱侯牛腩煲,20.95
+Hot Pot,R4,Beef Stew Hot Pot,柱侯酱牛腩煲,20.95
 Hot Pot,R5,Braised Tofu w. Mix Vegetable In Hot Pot,红烧豆腐煲,16.95
 Hot Pot,R6,Braised Lamb Hot Pot (Serve Fresh Lettuce),腐竹红烧羊肉,28.95
-Dessert,S1,Chinese Fried Donut (10),中式油条（10）,5.95
-Dessert,S2,Sesame Ball,芝麻球,5.50
+Dessert,S1,Chinese Fried Donut (10),中式甜甜圈（10）,5.95
+Dessert,S2,Sesame Ball (6),芝麻球（6）,5.50
 Beverage,T1,Hot Tea,热茶,1.95
 Beverage,T2a,Sweet Ice Tea,甜冰茶,2.75
 Beverage,T2b,Unsweet Ice Tea,无糖冰茶,2.75
@@ -209,8 +209,8 @@ Hunan Special Meal Combo,U1d,Shrimp Chow Mein,炒面套餐（虾）,14.95
 Hunan Special Meal Combo,U1e,Vegetable Chow Mein,炒面套餐（菜）,14.95
 Hunan Special Meal Combo,U2,Szechuan Pork,四川猪肉套餐,14.95
 Hunan Special Meal Combo,U3,Cantonese Chicken,广东鸡套餐,14.95
-Hunan Special Meal Combo,U4a,Sweet and Sour Chicken,糖醋鸡套餐,14.95
-Hunan Special Meal Combo,U4b,Sweet and Sour Shrimp,糖醋虾套餐,14.95
+Hunan Special Meal Combo,U4a,Sweet & Sour Chicken,糖醋鸡套餐,14.95
+Hunan Special Meal Combo,U4b,Sweet & Sour Shrimp,糖醋虾套餐,14.95
 Hunan Special Meal Combo,U5,Pepper Steak,黑椒牛套餐,14.95
 Hunan Special Meal Combo,U6,Crispy Sesame Beef,芝麻牛套餐,14.95
 Hunan Special Meal Combo,U7a,Chicken Egg Foo Young,鸡芙蓉蛋套餐,14.95
@@ -224,13 +224,13 @@ Hunan Special Meal Combo,U8c,Curry Shrimp,咖喱虾套餐,14.95
 Hunan Special Meal Combo,U9a,Chicken with Hot Garlic Sauce,蒜酱鸡套餐,14.95
 Hunan Special Meal Combo,U9b,Beef with Hot Garlic Sauce,蒜酱牛套餐,14.95
 Hunan Special Meal Combo,U9c,Shrimp with Hot Garlic Sauce,蒜酱虾套餐,14.95
-Hunan Special Meal Combo,U10a,Chicken with Kung Pao Sauce with Chicken,宫保鸡套餐,14.95
+Hunan Special Meal Combo,U10a,Chicken with Kung Pao Sauce,宫保鸡套餐,14.95
 Hunan Special Meal Combo,U10b,Beef with Kung Pao Sauce,宫保牛套餐,14.95
 Hunan Special Meal Combo,U10c,Shrimp with Kung Pao Sauce,宫保虾套餐,14.95
-Hunan Special Meal Combo,U11a,Broccoli with Chicken,西兰花鸡套餐,14.95
-Hunan Special Meal Combo,U11b,Broccoli with Beef,西兰花牛套餐,14.95
-Hunan Special Meal Combo,U11c,Broccoli with Shrimp,西兰花虾套餐,14.95
-Hunan Special Meal Combo,U12,Double Cooked Pork,回锅肉套餐,14.95
+Hunan Special Meal Combo,U11a,Chicken with Broccoli with Chicken,西兰花鸡套餐,14.95
+Hunan Special Meal Combo,U11b,Beef with Broccoli,西兰花牛套餐,14.95
+Hunan Special Meal Combo,U11c,Shrimp with Broccoli,西兰花虾套餐,14.95
+Hunan Special Meal Combo,U12,Double Cooked Pork,回锅肉(美式)套餐,14.95
 Hunan Special Meal Combo,U13a,Vegetarian Delight in Kung Pao Sauce,宫保杂菜套餐,14.95
 Hunan Special Meal Combo,U13b,Vegetarian Delight in Garlic Sauce,蒜酱杂菜套餐,14.95
 Hunan Special Meal Combo,U13c,Vegetarian Delight in Curry Sauce,咖喱杂菜套餐,14.95
@@ -238,7 +238,7 @@ Hunan Special Meal Combo,U14a,Hunam Chicken,湖南鸡套餐,14.95
 Hunan Special Meal Combo,U14b,Hunam Shrimp,湖南虾套餐,14.95
 Hunan Special Meal Combo,U15a,Cashew Chicken,腰果鸡套餐,14.95
 Hunan Special Meal Combo,U15b,Cashew Shrimp,腰果虾套餐,14.95
-Hunan Special Meal Combo,U16,Cantonese Roast Duck,广东烤鸭套餐（加1元）,15.95
+Hunan Special Meal Combo,U16,Cantonese Roast Duck,广东烤鸭套餐,15.95
 Hunan Special Meal Combo,U17,Lemon Chicken,柠檬鸡套餐,14.95
 Hunan Special Meal Combo,U18a,String Bean in Garlic Sauce with Chicken,蒜蓉四季豆鸡套餐,14.95
 Hunan Special Meal Combo,U18b,String Bean in Garlic Sauce with Shrimp,蒜蓉四季豆虾套餐,14.95
@@ -250,12 +250,12 @@ Hunan Special Meal Combo,U20c,General Tso's Shrimp,左宗虾套餐,14.95
 Hunan Special Meal Combo,U21a,Chicken with Sauteed Mixed Vegetables,杂菜鸡套餐,14.95
 Hunan Special Meal Combo,U21b,Beef with Sauteed Mixed Vegetables,杂菜牛套餐,14.95
 Hunan Special Meal Combo,U21c,Shrimp with Sauteed Mixed Vegetables,杂菜虾套餐,14.95
-Hunan Special Meal Combo,U22a,Spicy Black Bean Sauce Chicken,豉椒鸡套餐,14.95
-Hunan Special Meal Combo,U22b,Spicy Black Bean Sauce Shrimp,豉椒虾套餐,14.95
+Hunan Special Meal Combo,U22a,Chicken with Spicy Black Bean Sauce,豉椒鸡套餐,14.95
+Hunan Special Meal Combo,U22b,Shrimp with Spicy Black Bean Sauce,豉椒虾套餐,14.95
 Hunan Special Meal Combo,U23a,Chicken Wings with Pepper & Salt Sauce,椒盐鸡翅套餐,14.95
-Hunan Special Meal Combo,U23b,Chicken Wings with Garlic Sauce,蒜酱鸡翅套餐,14.95
-Hunan Special Meal Combo,U24a,Shredded Chicken with Szechuan Style,四川鸡丝套餐,14.95
-Hunan Special Meal Combo,U24b,Shredded Pork with Szechuan Style,四川肉丝套餐,14.95
+Hunan Special Meal Combo,U23b,Chicken Wings <span>with&nbsp;Garlic&nbsp;Sauce</span>,蒜酱鸡翅套餐,14.95
+Hunan Special Meal Combo,U24a,Shredded Chicken <span>with</span> Szechuan Style,四川鸡丝套餐,14.95
+Hunan Special Meal Combo,U24b,Shredded Pork <span class="with-word">with</span> Szechuan Style,四川肉丝套餐,14.95
 Hunan Special Meal Combo,U25,Honey Sesame Chicken,蜂蜜芝麻鸡套餐,14.95
 Hunan Special Meal Combo,U26a,Chicken Fried Rice,鸡炒饭套餐,14.95
 Hunan Special Meal Combo,U26b,Pork Fried Rice,猪炒饭套餐,14.95
