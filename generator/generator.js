@@ -42,12 +42,22 @@ const categoryOrder = [
   "Hunan Special Meal Combo",
 ];
 
+const FRIED_RICE_LO_MEIN_CATEGORY = "Fried Rice or Lo Mein";
+const FRIED_RICE_LO_MEIN_TITLE = "Fried Rice & Lo Mein";
+
 // ============================================================================
 // HELPER FUNCTIONS
 // ============================================================================
 
 function money(n) {
   return `$${n.toFixed(2)}`;
+}
+
+function displayCategoryName(category) {
+  if (category === FRIED_RICE_LO_MEIN_CATEGORY) {
+    return FRIED_RICE_LO_MEIN_TITLE;
+  }
+  return category;
 }
 
 function label(item) {
@@ -171,16 +181,16 @@ function getGroupPrice(items) {
   return { min, max, same: min === max };
 }
 
-function showVariantPopup(items, buttonEl) {
+function showPopupOptions(options, buttonEl) {
   closeVariantPopup();
   const popup = document.createElement('div');
   popup.className = 'variant-popup';
   popup.id = 'variantPopup';
 
-  items.forEach(item => {
+  options.forEach(({ item, text }) => {
     const btn = document.createElement('button');
     btn.className = 'variant-option';
-    btn.innerHTML = `<span>${label(item)}</span><span>${money(item.price)}</span>`;
+    btn.innerHTML = `<span>${text}</span><span>${money(item.price)}</span>`;
     btn.onclick = (e) => {
       e.stopPropagation();
       add(item);
@@ -200,9 +210,77 @@ function showVariantPopup(items, buttonEl) {
   }, 0);
 }
 
+function showVariantPopup(items, buttonEl) {
+  showPopupOptions(
+    items.map((item) => ({ item, text: label(item) })),
+    buttonEl
+  );
+}
+
 function closeVariantPopup() {
   const existing = document.getElementById('variantPopup');
   if (existing) existing.remove();
+}
+
+function getFriedRiceLoMeinSections(items) {
+  const itemByName = new Map(items.map((item) => [item.en, item]));
+
+  const makeOption = (text, zh, itemName) => {
+    const item = itemByName.get(itemName);
+    if (!item) return null;
+    return {
+      item,
+      text: $("mode").value === "both" ? `${text} / ${zh}` : text,
+    };
+  };
+
+  return [
+    {
+      title: "Fried Rice",
+      options: [
+        makeOption("Vegetable", "菜", "Vegetable Fried Rice"),
+        makeOption("Chicken", "鸡", "Chicken Fried Rice"),
+        makeOption("Pork", "猪", "Roast Pork Fried Rice"),
+        makeOption("Shrimp", "虾", "Shrimp Fried Rice"),
+        makeOption("Beef", "牛", "Beef Fried Rice"),
+        makeOption("House Special", "招牌", "House Special Fried Rice"),
+      ].filter(Boolean),
+    },
+    {
+      title: "Lo Mein",
+      options: [
+        makeOption("Vegetable", "菜", "Vegetable Lo Mein"),
+        makeOption("Chicken", "鸡", "Chicken Lo Mein"),
+        makeOption("Pork", "猪", "Roast Pork Lo Mein"),
+        makeOption("Shrimp", "虾", "Shrimp Lo Mein"),
+        makeOption("Beef", "牛", "Beef Lo Mein"),
+        makeOption("House Special", "招牌", "House Special Lo Mein"),
+      ].filter(Boolean),
+    },
+  ].filter((section) => section.options.length > 0);
+}
+
+function renderFriedRiceLoMeinSection(grid, items) {
+  const sections = getFriedRiceLoMeinSections(items);
+
+  sections.forEach((section) => {
+    const priceInfo = getGroupPrice(section.options.map((option) => option.item));
+    const el = document.createElement("div");
+    el.className = "item";
+    el.style.position = "relative";
+    el.innerHTML = `
+      <div class="row">
+        <div class="name">${section.title}</div>
+        <div class="price">${priceInfo.same ? money(priceInfo.min) : `from ${money(priceInfo.min)}`}</div>
+      </div>
+      <button class="add">Add</button>
+    `;
+    el.querySelector("button").onclick = (e) => {
+      e.stopPropagation();
+      showPopupOptions(section.options, e.target);
+    };
+    grid.appendChild(el);
+  });
 }
 
 // ============================================================================
@@ -365,9 +443,15 @@ function renderMenu() {
     const sec = document.createElement("div");
     sec.className = "cat";
     sec.id = `cat-${cat.replace(/\s+/g, '-').toLowerCase()}`;
-    sec.innerHTML = `<h2>${cat}</h2><div class="grid"></div>`;
+    sec.innerHTML = `<h2>${displayCategoryName(cat)}</h2><div class="grid"></div>`;
 
     const grid = sec.querySelector(".grid");
+    if (cat === FRIED_RICE_LO_MEIN_CATEGORY) {
+      renderFriedRiceLoMeinSection(grid, items);
+      root.appendChild(sec);
+      return;
+    }
+
     const grouped = groupItems(items);
     grouped.forEach((group) => {
       if (group.length === 1) {
@@ -462,7 +546,7 @@ function renderCategoryNavigator() {
   availableCategories.forEach(cat => {
     const link = document.createElement("a");
     link.href = "#";
-    link.textContent = cat;
+    link.textContent = displayCategoryName(cat);
     link.className = "cat-link";
     link.dataset.category = cat;
     link.onclick = (e) => {
