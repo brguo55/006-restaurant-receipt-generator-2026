@@ -110,17 +110,17 @@ Gluten-Free Steamed Dishes,L2,Steamed Vegetable with Shrimp,清蒸虾仁时蔬,1
 Gluten-Free Steamed Dishes,L3,Steamed Vegetable with Tofu,清蒸豆腐时蔬,13.95
 Gluten-Free Steamed Dishes,L4,Steamed Seafood Delight,清蒸海鲜什锦,18.95
 Fried Rice or Lo Mein,M1a,Vegetable Fried Rice,菜炒饭,12.95
-Fried Rice or Lo Mein,M1b,Vegetable Lo Mein,菜捞面,12.95
-Fried Rice or Lo Mein,M2a,Chicken Fried Rice,鸡炒饭,12.95
+Fried Rice or Lo Mein,M1b,Chicken Fried Rice,鸡炒饭,12.95
+Fried Rice or Lo Mein,M1c,Roast Pork Fried Rice,叉烧炒饭,12.95
+Fried Rice or Lo Mein,M1d,Shrimp Fried Rice,虾炒饭,13.95
+Fried Rice or Lo Mein,M1e,Beef Fried Rice,牛炒饭,13.95
+Fried Rice or Lo Mein,M1f,House Special Fried Rice,招牌炒饭,15.95
+Fried Rice or Lo Mein,M2a,Vegetable Lo Mein,菜捞面,12.95
 Fried Rice or Lo Mein,M2b,Chicken Lo Mein,鸡捞面,12.95
-Fried Rice or Lo Mein,M2c,Roast Pork Fried Rice,叉烧炒饭,12.95
-Fried Rice or Lo Mein,M2d,Roast Pork Lo Mein,叉烧捞面,12.95
-Fried Rice or Lo Mein,M3a,Shrimp Fried Rice,虾炒饭,13.95
-Fried Rice or Lo Mein,M3b,Shrimp Lo Mein,虾捞面,13.95
-Fried Rice or Lo Mein,M3c,Beef Fried Rice,牛炒饭,13.95
-Fried Rice or Lo Mein,M3d,Beef Lo Mein,牛捞面,13.95
-Fried Rice or Lo Mein,M4a,House Special Fried Rice,招牌炒饭,15.95
-Fried Rice or Lo Mein,M4b,House Special Lo Mein,招牌捞面,15.95
+Fried Rice or Lo Mein,M2c,Roast Pork Lo Mein,叉烧捞面,12.95
+Fried Rice or Lo Mein,M2d,Shrimp Lo Mein,虾捞面,13.95
+Fried Rice or Lo Mein,M2e,Beef Lo Mein,牛捞面,13.95
+Fried Rice or Lo Mein,M2f,House Special Lo Mein,招牌捞面,15.95
 Egg Foo Young,N1,Vegetable Egg Foo Young,蔬菜芙蓉蛋,14.95
 Egg Foo Young,N2,Chicken Egg Foo Young,鸡芙蓉蛋,14.95
 Egg Foo Young,N3,Pork Egg Foo Young,猪芙蓉蛋,14.95
@@ -130,10 +130,10 @@ Noodle,O1a,Chicken Soup Noodle,鸡汤面,14.95
 Noodle,O1b,Vegetable Soup Noodle,菜汤面,14.95
 Noodle,O2,Beef Stew Soup Noodle,牛腩汤面,15.95
 Noodle,O3,Singapore Rice Noodle,星洲炒米粉,14.95
-Noodle,O4,Vegetable Chow Fun,菜炒河粉,15.95
-Noodle,O5,Chicken Chow Fun,鸡炒河粉,15.95
-Noodle,O6,Pork Chow Fun,猪炒河粉,15.95
-Noodle,O7,Beef Chow Fun,牛炒河粉,15.95
+Noodle,O4,Vegetable Chow Fun,干炒菜河粉,15.95
+Noodle,O5,Chicken Chow Fun,干炒鸡河粉,15.95
+Noodle,O6,Pork Chow Fun,干炒叉烧河粉,15.95
+Noodle,O7,Beef Chow Fun,干炒牛河粉,15.95
 Noodle,O8,Cantonese Style Chow Mein with Vegetable,广东炒面（菜）,17.95
 Noodle,O9,Cantonese Style Chow Mein with Chicken,广东炒面（鸡）,18.95
 Noodle,O10,Cantonese Style Chow Mein with Roast Pork,广东炒面（叉烧）,18.95
