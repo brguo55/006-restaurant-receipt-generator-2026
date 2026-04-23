@@ -97,9 +97,9 @@ House Specialty,K1,Honey Walnut Prawn,蜂蜜核桃虾,20.95
 House Specialty,K2,Flower Steak Kew,花牛肉,19.95
 House Specialty,K3,Papao Lachiang,八宝腊肠,16.95
 House Specialty,K4,Mongolian Lamb,蒙古羊肉,19.95
-House Specialty,K5,Chicken and Beef Hunam Style,湘式鸡牛,15.95
+House Specialty,K5,Chicken and Beef Hunam Style,湖南双味,15.95
 House Specialty,K6,Seafood Delight,海鲜珍味,18.95
-House Specialty,K7,Triple Crown,三皇一帝,15.95
+House Specialty,K7,Triple Crown,御品三鲜,15.95
 House Specialty,K8,Happy Family,全家福,18.95
 House Specialty,K9,Lake Tung Ting Shrimp,洞庭虾,15.95
 House Specialty,K10,Ginger Prawn,姜虾,15.95
@@ -130,18 +130,18 @@ Noodle,O1a,Chicken Soup Noodle,鸡汤面,14.95
 Noodle,O1b,Vegetable Soup Noodle,菜汤面,14.95
 Noodle,O2,Beef Stew Soup Noodle,牛腩汤面,15.95
 Noodle,O3,Singapore Rice Noodle,星洲炒米粉,14.95
-Noodle,O4,Chow Fun with Vegetable,菜炒河粉,15.95
-Noodle,O5,Chow Fun with Chicken,鸡炒河粉,15.95
-Noodle,O6,Chow Fun with Pork,猪炒河粉,15.95
-Noodle,O7,Chow Fun with Beef,牛炒河粉,15.95
+Noodle,O4,Vegetable Chow Fun,菜炒河粉,15.95
+Noodle,O5,Chicken Chow Fun,鸡炒河粉,15.95
+Noodle,O6,Pork Chow Fun,猪炒河粉,15.95
+Noodle,O7,Beef Chow Fun,牛炒河粉,15.95
 Noodle,O8,Cantonese Style Chow Mein with Vegetable,广东炒面（菜）,17.95
 Noodle,O9,Cantonese Style Chow Mein with Chicken,广东炒面（鸡）,18.95
 Noodle,O10,Cantonese Style Chow Mein with Roast Pork,广东炒面（叉烧）,18.95
 Noodle,O11,Cantonese Style Chow Mein with Shrimp,广东炒面（虾）,21.95
 Noodle,O12,Cantonese Style Chow Mein with Seafood,广东炒面（海鲜）,21.95
-Kid's Menu,W1,Sweet & Sour Chicken Kid's Meal,儿童糖醋鸡套餐,7.95
-Kid's Menu,W2,Chicken Finger & Beef Sticks Kid's Meal,儿童鸡柳牛肉串套餐,7.95
-Kid's Menu,W3,Sesame Chicken Kid's Meal,儿童芝麻鸡套餐,7.95
+Kid's Menu,W1,Sweet & Sour Chicken (Kid's Meal),儿童糖醋鸡套餐,7.95
+Kid's Menu,W2,Chicken Finger & Beef Sticks (Kid's Meal),儿童鸡柳牛肉串套餐,7.95
+Kid's Menu,W3,Sesame Chicken (Kid's Meal),儿童芝麻鸡套餐,7.95
 Combination,P1,Steak and Shrimp,牛肉虾,22.95
 Combination,P2,Orange Chicken and Shrimp,橙鸡虾,19.95
 Combination,P3,Roast Duck and Sesame Chicken,烤鸭鸡,24.95
@@ -262,7 +262,7 @@ Hunan Special Meal Combo,U26b,Pork Fried Rice,猪炒饭套餐,14.95
 Hunan Special Meal Combo,U26c,Beef Fried Rice,牛炒饭套餐,14.95
 Hunan Special Meal Combo,U26d,Shrimp Fried Rice,虾炒饭套餐,14.95
 Hunan Special Meal Combo,U26e,Vegetable Fried Rice,菜炒饭套餐,14.95
-Hunan Special Meal Combo,U28,Triple Crown,三皇一帝套餐,14.95
+Hunan Special Meal Combo,U28,Triple Crown,御品三鲜套餐,14.95
 Hunan Special Meal Combo,U29a,Chicken Lo Mein,鸡捞面套餐,14.95
 Hunan Special Meal Combo,U29b,Roast Pork Lo Mein,叉烧捞面套餐,14.95
 Hunan Special Meal Combo,U29c,Beef Lo Mein,牛捞面套餐,14.95
