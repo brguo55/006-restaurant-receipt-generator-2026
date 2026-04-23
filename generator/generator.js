@@ -40,10 +40,12 @@ const categoryOrder = [
   "Dessert",
   "Beverage",
   "Hunan Special Meal Combo",
+  "Others",
 ];
 
 const FRIED_RICE_LO_MEIN_CATEGORY = "Fried Rice or Lo Mein";
 const FRIED_RICE_LO_MEIN_TITLE = "Fried Rice & Lo Mein";
+const OTHERS_CATEGORY = "Others";
 
 // ============================================================================
 // HELPER FUNCTIONS
@@ -283,6 +285,72 @@ function renderFriedRiceLoMeinSection(grid, items) {
   });
 }
 
+function getOthersSections(items) {
+  const itemByCode = new Map(items.map((item) => [item.code, item]));
+
+  const makeOption = (code) => {
+    const item = itemByCode.get(code);
+    if (!item) return null;
+    return {
+      item,
+      text: label(item),
+    };
+  };
+
+  return [
+    {
+      title: "Seasonal Vegetables",
+      options: [
+        makeOption("V1a"),
+        makeOption("V1b"),
+        makeOption("V1c"),
+      ].filter(Boolean),
+    },
+  ].filter((section) => section.options.length > 0);
+}
+
+function renderOthersSection(grid, items) {
+  const sections = getOthersSections(items);
+  const sectionCodes = new Set();
+
+  sections.forEach((section) => {
+    section.options.forEach((option) => sectionCodes.add(option.item.code));
+
+    const priceInfo = getGroupPrice(section.options.map((option) => option.item));
+    const el = document.createElement("div");
+    el.className = "item";
+    el.style.position = "relative";
+    el.innerHTML = `
+      <div class="row">
+        <div class="name">${section.title}</div>
+        <div class="price">${priceInfo.same ? money(priceInfo.min) : `from ${money(priceInfo.min)}`}</div>
+      </div>
+      <button class="add">Add</button>
+    `;
+    el.querySelector("button").onclick = (e) => {
+      e.stopPropagation();
+      showPopupOptions(section.options, e.target);
+    };
+    grid.appendChild(el);
+  });
+
+  items
+    .filter((item) => !sectionCodes.has(item.code))
+    .forEach((item) => {
+      const el = document.createElement("div");
+      el.className = "item";
+      el.innerHTML = `
+        <div class="row">
+          <div class="name">${label(item)}</div>
+          <div class="price">${money(item.price)}</div>
+        </div>
+        <button class="add">Add</button>
+      `;
+      el.querySelector("button").onclick = () => add(item);
+      grid.appendChild(el);
+    });
+}
+
 // ============================================================================
 // CALCULATIONS
 // ============================================================================
@@ -448,6 +516,12 @@ function renderMenu() {
     const grid = sec.querySelector(".grid");
     if (cat === FRIED_RICE_LO_MEIN_CATEGORY) {
       renderFriedRiceLoMeinSection(grid, items);
+      root.appendChild(sec);
+      return;
+    }
+
+    if (cat === OTHERS_CATEGORY) {
+      renderOthersSection(grid, items);
       root.appendChild(sec);
       return;
     }
