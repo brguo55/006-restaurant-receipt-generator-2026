@@ -26,12 +26,14 @@ const categoryOrder = [
   "Duck",
   "Seafood",
   "Moo Shu",
+  "Side Order",
   "Tofu and Vegetable",
   "House Specialty",
-  "Health Conscious",
+  "Gluten-Free Steamed Dishes",
   "Fried Rice or Lo Mein",
   "Egg Foo Young",
   "Noodle",
+  "Kid's Menu",
   "Combination",
   "Traditional Chinese Cuisine",
   "Hot Pot",
@@ -60,15 +62,46 @@ function receiptLabel(item) {
 
 function parseCSV(text) {
   const lines = text.trim().split(/\r?\n/);
-  const headers = lines[0].split(',');
+  const headers = parseCSVLine(lines[0]);
   return lines.slice(1).map(line => {
-    const values = line.split(',');
+    const values = parseCSVLine(line);
     const obj = {};
     headers.forEach((h, i) => {
-      obj[h] = h === 'price' ? parseFloat(values[i]) : values[i];
+      obj[h] = h === 'price' ? parseFloat(values[i]) : values[i] ?? '';
     });
     return obj;
   });
+}
+
+function parseCSVLine(line) {
+  const values = [];
+  let current = '';
+  let inQuotes = false;
+
+  for (let i = 0; i < line.length; i++) {
+    const ch = line[i];
+
+    if (ch === '"') {
+      if (inQuotes && line[i + 1] === '"') {
+        current += '"';
+        i++;
+      } else {
+        inQuotes = !inQuotes;
+      }
+      continue;
+    }
+
+    if (ch === ',' && !inQuotes) {
+      values.push(current.trim());
+      current = '';
+      continue;
+    }
+
+    current += ch;
+  }
+
+  values.push(current.trim());
+  return values;
 }
 
 // ============================================================================
@@ -93,6 +126,17 @@ function getGroupEnLabel(items) {
   const wordSets = items.map(i => new Set(i.en.split(' ')));
   const commonWords = [...wordSets[0]].filter(w => wordSets.every(s => s.has(w)));
   const ordered = items[0].en.split(' ').filter(w => commonWords.includes(w));
+  const trailingJoiners = new Set(['with', 'or', '&']);
+  const leadingJoiners = new Set(['with', 'or', '&']);
+
+  while (ordered.length && leadingJoiners.has(ordered[0].toLowerCase())) {
+    ordered.shift();
+  }
+
+  while (ordered.length && trailingJoiners.has(ordered[ordered.length - 1].toLowerCase())) {
+    ordered.pop();
+  }
+
   return ordered.join(' ') || items[0].en;
 }
 
@@ -229,6 +273,7 @@ function genReceipt() {
 
   parts.push(`<div class="rc-center">Hunam Chinese Restaurant / 南苑餐厅</div>`);
   parts.push(`<div class="rc-center rc-small">790 Martin Luther King Jr Blvd, Chapel Hill, NC 27514</div>`);
+  parts.push(`<div class="rc-center rc-small">Tel: (919) 967-6133 | Fax: (919) 967-6723</div>`);
   parts.push(`<div class="rc-divider"></div>`);
 
   const meta = `${$("type").value}${$("who").value ? " | " + $("who").value : ""}`;
@@ -256,6 +301,8 @@ function genReceipt() {
 
   parts.push(`<div class="rc-divider"></div>`);
   parts.push(`<div class="rc-center rc-thank">Thank you! 欢迎再次光临！</div>`);
+  parts.push(`<div class="rc-center rc-small">https://www.hunamrestaurant.net/</div>`);
+  parts.push(`<div class="rc-center rc-small">Proudly serving the Chapel Hill, Carrboro, and UNC communities since 1980.</div>`);
 
   $("receipt").innerHTML = parts.join("");
 }

@@ -6,12 +6,12 @@ body {
   padding: 0;
 }
 .wrap {
-  max-width: 1200px;
+  max-width: 1440px;
   margin: 0 auto;
   padding: 24px;
   padding-left: 232px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1.55fr) minmax(340px, 0.9fr);
   gap: 24px;
   min-height: 100vh;
 }
