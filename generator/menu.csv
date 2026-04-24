@@ -125,90 +125,107 @@ Combination,O2,Steak and Shrimp,牛肉虾,22.95
 Combination,O3,Roast Duck and Sesame Chicken,烤鸭和鸡,24.95
 Combination,O4,Roast Duck and Shrimp,烤鸭和虾,24.95
 
-House Specialty,P1,Chicken and Beef Hunam Style,湖南双味,15.95
-House Specialty,P2,Flower Steak Kew,花牛肉,19.95
-House Specialty,P3,Ginger Prawn,姜虾,15.95
-House Specialty,P4,Happy Family,全家福,18.95
-House Specialty,P5,Honey Walnut Prawn,蜂蜜核桃虾,20.95
-House Specialty,P6,Lake Tung Ting Shrimp,洞庭虾,15.95
-House Specialty,P7,Mongolian Lamb,蒙古羊肉,19.95
-House Specialty,P8,Orange Beef,橙汁牛肉,15.95
-House Specialty,P9,Papao Lachiang,八宝腊肠,16.95
-House Specialty,P10,Seafood Delight,海鲜珍味,18.95
-House Specialty,P11,Shrimp in Lobster Sauce,龙虾酱虾,15.95
-House Specialty,P12,Triple Crown,御品三鲜,15.95
+House Specialty,P1,Honey Walnut Prawn,蜂蜜核桃虾,20.95
+House Specialty,P2,Papao Lachiang,八宝腊肠,16.95
+House Specialty,P3,Chicken and Beef Hunam Style,湖南双味,15.95
+House Specialty,P4,Triple Crown,御品三鲜,15.95
+House Specialty,P5,Lake Tung Ting Shrimp,洞庭虾,15.95
+House Specialty,P6,Orange Beef,橙汁牛肉,15.95
+House Specialty,P7,Flower Steak Kew,花牛肉,19.95
+House Specialty,P8,Mongolian Lamb,蒙古羊肉,19.95
+House Specialty,P9,Seafood Delight,海鲜珍味,18.95
+House Specialty,P10,Happy Family,全家福,18.95
+House Specialty,P11,Ginger Prawn,姜虾,15.95
+House Specialty,P12,Shrimp in Lobster Sauce,龙虾酱虾,15.95
 
 Fried Rice & Lo Mein,Q1a,Beef Fried Rice,牛炒饭,13.95
 Fried Rice & Lo Mein,Q2a,Beef Lo Mein,牛捞面,13.95
+Fried Rice & Lo Mein,Q11,Vegetable Fried Rice,菜炒饭,12.95
 Fried Rice & Lo Mein,Q1b,Chicken Fried Rice,鸡炒饭,12.95
-Fried Rice & Lo Mein,Q2b,Chicken Lo Mein,鸡捞面,12.95
-Fried Rice & Lo Mein,Q1c,House Special Fried Rice,招牌炒饭,15.95
-Fried Rice & Lo Mein,Q2c,House Special Lo Mein,招牌捞面,15.95
-Fried Rice & Lo Mein,Q1d,Roast Pork Fried Rice,叉烧炒饭,12.95
-Fried Rice & Lo Mein,Q2d,Roast Pork Lo Mein,叉烧捞面,12.95
+Fried Rice & Lo Mein,Q1c,Roast Pork Fried Rice,叉烧炒饭,12.95
+Fried Rice & Lo Mein,Q1d,Beef Fried Rice,牛炒饭,13.95
 Fried Rice & Lo Mein,Q1e,Shrimp Fried Rice,虾炒饭,13.95
+Fried Rice & Lo Mein,Q1f,House Special Fried Rice,招牌炒饭,15.95
+Fried Rice & Lo Mein,Q2a,Vegetable Lo Mein,菜捞面,12.95
+Fried Rice & Lo Mein,Q2b,Chicken Lo Mein,鸡捞面,12.95
+Fried Rice & Lo Mein,Q2c,Roast Pork Lo Mein,叉烧捞面,12.95
+Fried Rice & Lo Mein,Q2d,Beef Lo Mein,牛捞面,13.95
 Fried Rice & Lo Mein,Q2e,Shrimp Lo Mein,虾捞面,13.95
-Fried Rice & Lo Mein,Q1f,Vegetable Fried Rice,菜炒饭,12.95
-Fried Rice & Lo Mein,Q2f,Vegetable Lo Mein,菜捞面,12.95
+Fried Rice & Lo Mein,Q2f,House Special Lo Mein,招牌捞面,15.95
 
-Noodle,R1,Beef Chow Fun,干炒牛河粉,15.95
-Noodle,R2,Beef Stew Soup Noodle,牛腩汤面,15.95
-Noodle,R3,Cantonese Style Chow Mein with Chicken,广东炒面（鸡）,18.95
-Noodle,R4,Cantonese Style Chow Mein with Roast Pork,广东炒面（叉烧）,18.95
-Noodle,R5,Cantonese Style Chow Mein with Seafood,广东炒面（海鲜）,21.95
-Noodle,R6,Cantonese Style Chow Mein with Shrimp,广东炒面（虾）,21.95
-Noodle,R7,Cantonese Style Chow Mein with Vegetable,广东炒面（菜）,17.95
-Noodle,R8,Chicken Chow Fun,干炒鸡河粉,15.95
-Noodle,R9a,Chicken Soup Noodle,鸡汤面,14.95
-Noodle,R10,Pork Chow Fun,干炒叉烧河粉,15.95
-Noodle,R11,Singapore Rice Noodle,星洲炒米粉,14.95
-Noodle,R12,Vegetable Chow Fun,干炒菜河粉,15.95
-Noodle,R9b,Vegetable Soup Noodle,菜汤面,14.95
+Noodle,T1a,Chicken Soup Noodle,鸡汤面,14.95
+Noodle,T1b,Vegetable Soup Noodle,菜汤面,14.95
+Noodle,T2,Beef Stew Soup Noodle,牛腩汤面,15.95
+Noodle,T3,Singapore Rice Noodle,星洲炒米粉,14.95
+Noodle,T4a,Beef Chow Fun,干炒牛河粉,15.95
+Noodle,T4b,Chicken Chow Fun,干炒鸡河粉,15.95
+Noodle,T4c,Pork Chow Fun,干炒叉烧河粉,15.95
+Noodle,T4d,Vegetable Chow Fun,干炒菜河粉,15.95
+Noodle,T5a,Cantonese Style Chow Mein with Chicken,广东炒面（鸡）,18.95
+Noodle,T5b,Cantonese Style Chow Mein with Roast Pork,广东炒面（叉烧）,18.95
+Noodle,T5c,Cantonese Style Chow Mein with Seafood,广东炒面（海鲜）,21.95
+Noodle,T5d,Cantonese Style Chow Mein with Shrimp,广东炒面（虾）,21.95
+Noodle,T5e,Cantonese Style Chow Mein with Vegetable,广东炒面（菜）,17.95
 
-Chinese Cuisine,S1,Baby Ribs with Black Pepper Sauce Hot Pot,黑椒牛仔骨,22.95
-Chinese Cuisine,S2,Beef Tripe w. Black Bean Sauce,豉汁牛百叶,18.95
-Chinese Cuisine,S3,Black Pepper Ribeye Cubes on Hot Plate,铁板黑椒牛柳粒,19.95
-Chinese Cuisine,S4,Buddha Delight,罗汉斋,15.95
-Chinese Cuisine,S5,Chinese Vegetables w. Black Mushrooms,冬菇时蔬,16.95
-Chinese Cuisine,S6,Chive Flower w. Chinese Bacon,韭菜花炒腊味,18.95
-Chinese Cuisine,S7,Crispy Fish in Sweet and Sour Sauce,糖醋菊花鱼,17.95
-Chinese Cuisine,S8,Crispy Fried Tofu w. Soy Sauce,酥炸豆腐,14.95
-Chinese Cuisine,S9,Crispy Pepper Salt Pork Chops,椒盐排骨,17.95
-Chinese Cuisine,S10,Crispy Roast Duck (1/2),广式烧鸭（半只）,24.95
-Chinese Cuisine,S11,Crispy Walnut Prawns,生汁核桃大虾,19.95
-Chinese Cuisine,S12,Dry Sauteed String Bean w. Ground Pork,干煸四季豆,15.95
-Chinese Cuisine,S13,Five Spice Beef Tripe,麻辣肚丝,14.95
-Chinese Cuisine,S14a,Fried Jumbo Oyster,炸生蚝,29.95
-Chinese Cuisine,S15,Fried Shrimp in Shell w. Soy Sauce,豉油皇大虾,18.95
-Chinese Cuisine,S14b,Jumbo Oyster w. Ginger and Scallions,姜葱生蚝,29.95
-Chinese Cuisine,S16,Ma Po Tofu,麻婆豆腐,15.95
-Chinese Cuisine,S17,Pan-Fried Flounder w. Chef's Sauce,香煎龙利鱼,28.95
-Chinese Cuisine,S18,Peking Duck Two Way,北京片皮鸭两吃,62.95
-Chinese Cuisine,S19,Pepper Salt Deep Fried Jumbo Shrimp,椒盐大虾,18.95
-Chinese Cuisine,S20,Pepper Salt Squid,椒盐鲜鱿,18.95
-Chinese Cuisine,S21,Pork Belly w. Preserved Vegetable,梅菜扣肉,18.95
-Chinese Cuisine,S22,Sauteed Chinese Broccoli,清炒芥蓝,14.95
-Chinese Cuisine,S23,Sauteed Fish Filet w. Chinese Vegetable,时菜炒鱼球,18.95
-Chinese Cuisine,S24,Sauteed Lamb w. Ginger and Chives,小炒羊,18.95
-Chinese Cuisine,S25,Scrambled Egg w. Beef,滑蛋鲜牛肉,18.95
-Chinese Cuisine,S26,Scrambled Egg w. Shrimp,滑蛋炒虾仁,18.95
-Chinese Cuisine,S27,Shredded Duck w. String Beans,姜葱炒鸭丝,19.95
-Chinese Cuisine,S28,Shredded Pork w. Chili Pepper,辣椒肉丝,16.95
-Chinese Cuisine,S29,Sizzling Steak w. Onion (Cantonese Style),铁板中式牛柳,19.95
-Chinese Cuisine,S30,Snow Pea Leaves,清炒豆苗,15.95
-Chinese Cuisine,S31,Squid w. Chinese Vegetable,时菜炒鲜鱿,18.95
-Chinese Cuisine,S32,Steamed Chicken w. Spicy Chili Sauce,口水鸡,14.95
-Chinese Cuisine,S33,Sweet and Sour Pork Chops,果汁排骨,17.95
-Chinese Cuisine,S34,Szechuan Pickled Fish,酸菜鱼,18.95
-Chinese Cuisine,S35a,Szechuan Spicy Boiled Beef,水煮牛,19.95
-Chinese Cuisine,S35b,Szechuan Spicy Boiled Fish,水煮鱼,19.95
-Chinese Cuisine,S36,Twice Cooked Pork,回锅肉,16.95
-Hot Pot,T1,Beef Stew Hot Pot,柱侯酱牛腩煲,20.95
-Hot Pot,T2,Braised Lamb Hot Pot (Serve Fresh Lettuce),腐竹红烧羊肉,28.95
-Hot Pot,T3,Braised Tofu w. Mix Vegetable In Hot Pot,红烧豆腐煲,16.95
-Hot Pot,T4,Eggplant Hot Pot,鱼香茄子煲,15.95
-Hot Pot,T5,Eight Treasure Tofu Hot Pot,八珍豆腐煲,19.95
-Hot Pot,T6,Salted Fish Chicken & Egg Plant In Hot Pot,咸鱼鸡粒茄子煲,18.95
+Chinese Cuisine,R1,Baby Ribs with Black Pepper Sauce Hot Pot,黑椒牛仔骨,22.95
+Chinese Cuisine,R2,Beef Tripe w. Black Bean Sauce,豉汁牛百叶,18.95
+Chinese Cuisine,R3,Black Pepper Ribeye Cubes on Hot Plate,铁板黑椒牛柳粒,19.95
+Chinese Cuisine,R4,Buddha Delight,罗汉斋,15.95
+Chinese Cuisine,R5,Chinese Vegetables w. Black Mushrooms,冬菇时蔬,16.95
+Chinese Cuisine,R6,Chive Flower w. Chinese Bacon,韭菜花炒腊味,18.95
+Chinese Cuisine,R7,Crispy Fish in Sweet and Sour Sauce,糖醋菊花鱼,17.95
+Chinese Cuisine,R8,Crispy Fried Tofu w. Soy Sauce,酥炸豆腐,14.95
+Chinese Cuisine,R9,Crispy Pepper Salt Pork Chops,椒盐排骨,17.95
+Chinese Cuisine,R10,Crispy Roast Duck (1/2),广式烧鸭（半只）,24.95
+Chinese Cuisine,R11,Crispy Walnut Prawns,生汁核桃大虾,19.95
+Chinese Cuisine,R12,Dry Sauteed String Bean w. Ground Pork,干煸四季豆,15.95
+Chinese Cuisine,R13,Five Spice Beef Tripe,麻辣肚丝,14.95
+Chinese Cuisine,R14a,Fried Jumbo Oyster,炸生蚝,29.95
+Chinese Cuisine,R15,Fried Shrimp in Shell w. Soy Sauce,豉油皇大虾,18.95
+Chinese Cuisine,R14b,Jumbo Oyster w. Ginger and Scallions,姜葱生蚝,29.95
+Chinese Cuisine,R16,Ma Po Tofu,麻婆豆腐,15.95
+Chinese Cuisine,R17,Pan-Fried Flounder w. Chef's Sauce,香煎龙利鱼,28.95
+Chinese Cuisine,R18,Peking Duck Two Way,北京片皮鸭两吃,62.95
+Chinese Cuisine,R19,Pepper Salt Deep Fried Jumbo Shrimp,椒盐大虾,18.95
+Chinese Cuisine,R20,Pepper Salt Squid,椒盐鲜鱿,18.95
+Chinese Cuisine,R21,Pork Belly w. Preserved Vegetable,梅菜扣肉,18.95
+Chinese Cuisine,R22,Sauteed Chinese Broccoli,清炒芥蓝,14.95
+Chinese Cuisine,R23,Sauteed Fish Filet w. Chinese Vegetable,时菜炒鱼球,18.95
+Chinese Cuisine,R24,Sauteed Lamb w. Ginger and Chives,小炒羊,18.95
+Chinese Cuisine,R25,Scrambled Egg w. Beef,滑蛋鲜牛肉,18.95
+Chinese Cuisine,R26,Scrambled Egg w. Shrimp,滑蛋炒虾仁,18.95
+Chinese Cuisine,R27,Shredded Duck w. String Beans,姜葱炒鸭丝,19.95
+Chinese Cuisine,R28,Shredded Pork w. Chili Pepper,辣椒肉丝,16.95
+Chinese Cuisine,R29,Sizzling Steak w. Onion (Cantonese Style),铁板中式牛柳,19.95
+Chinese Cuisine,R30,Snow Pea Leaves,清炒豆苗,15.95
+Chinese Cuisine,R31,Squid w. Chinese Vegetable,时菜炒鲜鱿,18.95
+Chinese Cuisine,R32,Steamed Chicken w. Spicy Chili Sauce,口水鸡,14.95
+Chinese Cuisine,R33,Sweet and Sour Pork Chops,果汁排骨,17.95
+Chinese Cuisine,R34,Szechuan Pickled Fish,酸菜鱼,18.95
+Chinese Cuisine,R35a,Szechuan Spicy Boiled Beef,水煮牛,19.95
+Chinese Cuisine,R35b,Szechuan Spicy Boiled Fish,水煮鱼,19.95
+Chinese Cuisine,R36,Twice Cooked Pork,回锅肉,16.95
+
+Hot Pot,S1,Beef Stew Hot Pot,柱侯酱牛腩煲,20.95
+Hot Pot,S2,Braised Lamb Hot Pot (Serve Fresh Lettuce),腐竹红烧羊肉,28.95
+Hot Pot,S3,Braised Tofu w. Mix Vegetable In Hot Pot,红烧豆腐煲,16.95
+Hot Pot,S4,Eggplant Hot Pot,鱼香茄子煲,15.95
+Hot Pot,S5,Eight Treasure Tofu Hot Pot,八珍豆腐煲,19.95
+Hot Pot,S6,Salted Fish Chicken & Egg Plant In Hot Pot,咸鱼鸡粒茄子煲,18.95
+
+Noodle,T1a,Chicken Soup Noodle,鸡汤面,14.95
+Noodle,T1b,Vegetable Soup Noodle,菜汤面,14.95
+Noodle,T2,Beef Stew Soup Noodle,牛腩汤面,15.95
+Noodle,T3,Singapore Rice Noodle,星洲炒米粉,14.95
+Noodle,T4a,Beef Chow Fun,干炒牛河粉,15.95
+Noodle,T4b,Chicken Chow Fun,干炒鸡河粉,15.95
+Noodle,T4c,Pork Chow Fun,干炒叉烧河粉,15.95
+Noodle,T4d,Vegetable Chow Fun,干炒菜河粉,15.95
+Noodle,T5a,Cantonese Style Chow Mein with Chicken,广东炒面（鸡）,18.95
+Noodle,T5b,Cantonese Style Chow Mein with Roast Pork,广东炒面（叉烧）,18.95
+Noodle,T5c,Cantonese Style Chow Mein with Seafood,广东炒面（海鲜）,21.95
+Noodle,T5d,Cantonese Style Chow Mein with Shrimp,广东炒面（虾）,21.95
+Noodle,T5e,Cantonese Style Chow Mein with Vegetable,广东炒面（菜）,17.95
 
 Hunam Special Combo,U1a,Beef Chow Mein,炒面套餐（牛）,14.95
 Hunam Special Combo,U2a,Beef Egg Foo Young,牛芙蓉蛋套餐,14.95
