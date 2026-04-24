@@ -220,6 +220,138 @@ button {
   color: #b91c1c;
 }
 
+.combo-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(17, 24, 39, 0.42);
+  z-index: 300;
+}
+
+.combo-modal {
+  width: min(560px, 100%);
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  background: #fff;
+  border: 2px solid #1f3b73;
+  border-radius: 12px;
+  box-shadow: 0 18px 44px rgba(15, 23, 42, 0.24);
+  padding: 20px;
+}
+
+.combo-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.combo-modal-header h3 {
+  margin: 0;
+  color: #1f3b73;
+  font-size: 20px;
+}
+
+.combo-close {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  background: #e5e7eb;
+  color: #374151;
+  font-size: 26px;
+  line-height: 1;
+}
+
+.combo-close:hover {
+  background: #d1d5db;
+}
+
+.combo-modal-item {
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 16px;
+  line-height: 1.45;
+}
+
+.combo-form {
+  display: grid;
+  gap: 16px;
+}
+
+.combo-group {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #f9fafb;
+  padding: 14px;
+}
+
+.combo-group-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #374151;
+  margin-bottom: 12px;
+}
+
+.combo-options {
+  display: grid;
+  gap: 8px;
+}
+
+.combo-choice {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.combo-choice input {
+  width: auto;
+  margin: 2px 0 0;
+  box-shadow: none;
+}
+
+.combo-note,
+.combo-error,
+.line-detail,
+.rc-entry-option {
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.combo-note {
+  color: #6b7280;
+}
+
+.combo-error {
+  min-height: 16px;
+  color: #b91c1c;
+}
+
+.combo-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.combo-actions button {
+  min-width: 128px;
+}
+
+.line-detail {
+  margin-bottom: 3px;
+}
+
 /* Variant Popup */
 .variant-popup {
   position: fixed;
@@ -455,6 +587,10 @@ button {
   line-height: 1.25;
   overflow-wrap: anywhere;
 }
+.rc-entry-option {
+  color: #4b5563;
+  padding-top: 1px;
+}
 .rc-entry-meta,
 .rc-summary-row {
   display: table;
@@ -559,6 +695,12 @@ button {
   .wrap {
     grid-template-columns: 1fr;
     padding-left: 24px;
+  }
+  .combo-modal {
+    padding: 16px;
+  }
+  .combo-actions button {
+    width: 100%;
   }
   .addon-fields {
     grid-template-columns: 1fr;

@@ -49,11 +49,32 @@ const FRIED_RICE_LO_MEIN_TITLE = "Fried Rice & Lo Mein";
 const NOODLE_CATEGORY = "Noodle";
 const BEVERAGE_CATEGORY = "Beverage";
 const ADD_ON_CATEGORY = "Add-On";
+const HUNAM_SPECIAL_COMBO_CATEGORY = "Hunam Special Combo";
 const OTHERS_CATEGORY = "Others";
 const OTHERS_SEASONAL_VEGETABLES = [
   "Stir-Fried Snow Pea Leaves",
   "Stir-Fried Baby Broccoli",
   "Stir-Fried Bok Choy",
+];
+const HUNAM_COMBO_NO_RICE_BASE_CODES = new Set(["U26", "U29"]);
+const HUNAM_COMBO_SIDE_OPTIONS = [
+  { key: "egg-roll", en: "Egg Roll", zh: "蛋卷", surcharge: 0 },
+  { key: "veggie-roll", en: "Veggie Roll", zh: "素春卷", surcharge: 0 },
+  { key: "egg-drop-soup", en: "Egg Drop Soup", zh: "蛋花汤", surcharge: 0 },
+  { key: "wanton-soup", en: "Wanton Soup", zh: "馄饨汤", surcharge: 0 },
+  { key: "hot-sour-soup", en: "Hot & Sour Soup", zh: "酸辣汤", surcharge: 0 },
+  {
+    key: "egg-drop-wanton-soup",
+    en: "Egg Drop Soup with Wanton",
+    zh: "蛋花馄饨汤",
+    surcharge: 1,
+  },
+];
+const HUNAM_COMBO_RICE_OPTIONS = [
+  { key: "fried-rice", en: "Fried Rice", zh: "炒饭", surcharge: 0 },
+  { key: "white-rice", en: "White Rice", zh: "白饭", surcharge: 0 },
+  { key: "brown-rice", en: "Brown Rice", zh: "糙米饭", surcharge: 1 },
+  { key: "lo-mein", en: "Lo Mein", zh: "捞面", surcharge: 1 },
 ];
 
 // ============================================================================
@@ -193,7 +214,46 @@ function getGroupPrice(items) {
 }
 
 function getOrderKey(item) {
-  return `${item.category}::${item.code}`;
+  const comboSuffix = item.comboSelection
+    ? `::${item.comboSelection.side.key}::${item.comboSelection.rice?.key || 'no-rice'}`
+    : '';
+  return `${item.category}::${item.code}${comboSuffix}`;
+}
+
+function formatComboOption(option) {
+  const text = $("mode").value === "both" && option.zh ? `${option.en} / ${option.zh}` : option.en;
+  return option.surcharge > 0 ? `${text} (+${money(option.surcharge)})` : text;
+}
+
+function getHunamComboDetailLines(item) {
+  if (!item.comboSelection) return [];
+
+  const lines = [`Side: ${formatComboOption(item.comboSelection.side)}`];
+  if (item.comboSelection.rice) {
+    lines.push(`Rice: ${formatComboOption(item.comboSelection.rice)}`);
+  }
+  return lines;
+}
+
+function isHunamComboBaseItem(item) {
+  return item.category === HUNAM_SPECIAL_COMBO_CATEGORY && !item.comboSelection;
+}
+
+function hunamComboSkipsRice(item) {
+  return HUNAM_COMBO_NO_RICE_BASE_CODES.has(getBaseCode(item.code));
+}
+
+function createHunamComboConfiguredItem(item, sideOption, riceOption) {
+  const surcharge = sideOption.surcharge + (riceOption?.surcharge || 0);
+  return {
+    ...item,
+    basePrice: item.price,
+    price: item.price + surcharge,
+    comboSelection: {
+      side: sideOption,
+      rice: riceOption || null,
+    },
+  };
 }
 
 function createAddOnItem(name, price) {
@@ -247,6 +307,90 @@ function showVariantPopup(items, buttonEl) {
 function closeVariantPopup() {
   const existing = document.getElementById('variantPopup');
   if (existing) existing.remove();
+}
+
+function closeHunamComboModal() {
+  const existing = document.getElementById('hunamComboModal');
+  if (existing) existing.remove();
+}
+
+function showHunamComboModal(item) {
+  closeHunamComboModal();
+
+  const skipsRice = hunamComboSkipsRice(item);
+  const overlay = document.createElement('div');
+  overlay.className = 'combo-modal-backdrop';
+  overlay.id = 'hunamComboModal';
+
+  const renderOptions = (name, options) => options.map((option) => `
+    <label class="combo-choice">
+      <input type="radio" name="${name}" value="${option.key}" />
+      <span>${formatComboOption(option)}</span>
+    </label>
+  `).join('');
+
+  overlay.innerHTML = `
+    <div class="combo-modal" role="dialog" aria-modal="true" aria-labelledby="comboModalTitle">
+      <div class="combo-modal-header">
+        <h3 id="comboModalTitle">Hunam Combo Choices</h3>
+        <button type="button" class="combo-close" aria-label="Close">×</button>
+      </div>
+      <div class="combo-modal-item">${label(item)}</div>
+      <form class="combo-form">
+        <div class="combo-group">
+          <div class="combo-group-title">Choose one side</div>
+          <div class="combo-options">
+            ${renderOptions('comboSide', HUNAM_COMBO_SIDE_OPTIONS)}
+          </div>
+        </div>
+        <div class="combo-group">
+          <div class="combo-group-title">Choose one rice/noodle</div>
+          ${skipsRice ? '<div class="combo-note">This combo does not include a rice or noodle choice.</div>' : `<div class="combo-options">${renderOptions('comboRice', HUNAM_COMBO_RICE_OPTIONS)}</div>`}
+        </div>
+        <div class="small combo-error" aria-live="polite"></div>
+        <div class="combo-actions">
+          <button type="button" class="secondary combo-cancel">Cancel</button>
+          <button type="submit" class="primary combo-submit">Add Combo</button>
+        </div>
+      </form>
+    </div>
+  `;
+
+  document.body.appendChild(overlay);
+
+  const close = () => closeHunamComboModal();
+  overlay.querySelector('.combo-close').onclick = close;
+  overlay.querySelector('.combo-cancel').onclick = close;
+  overlay.onclick = (e) => {
+    if (e.target === overlay) close();
+  };
+
+  const form = overlay.querySelector('.combo-form');
+  const errorEl = overlay.querySelector('.combo-error');
+  form.onsubmit = (e) => {
+    e.preventDefault();
+    const sideKey = form.elements.comboSide.value;
+    const riceKey = skipsRice ? null : form.elements.comboRice.value;
+
+    if (!sideKey) {
+      errorEl.textContent = 'Choose one side.';
+      return;
+    }
+
+    if (!skipsRice && !riceKey) {
+      errorEl.textContent = 'Choose one rice or noodle option.';
+      return;
+    }
+
+    const sideOption = HUNAM_COMBO_SIDE_OPTIONS.find((option) => option.key === sideKey);
+    const riceOption = skipsRice ? null : HUNAM_COMBO_RICE_OPTIONS.find((option) => option.key === riceKey);
+    errorEl.textContent = '';
+    addResolvedItem(createHunamComboConfiguredItem(item, sideOption, riceOption));
+    close();
+  };
+
+  const firstInput = overlay.querySelector('input[type="radio"]');
+  if (firstInput) firstInput.focus();
 }
 
 function getFriedRiceLoMeinSections(items) {
@@ -671,9 +815,13 @@ function genReceipt() {
   parts.push(`<div class="rc-divider"></div>`);
 
   order.forEach((v) => {
+    const detailLines = getHunamComboDetailLines(v.item)
+      .map((line) => `<div class="rc-entry-option">${line}</div>`)
+      .join('');
     parts.push(`
       <div class="rc-entry">
         <div class="rc-entry-name">${receiptLabel(v.item)}</div>
+        ${detailLines}
         <div class="rc-entry-meta">
           <span>${v.qty} x ${money(v.item.price)}</span>
           <span>${money(v.qty * v.item.price)}</span>
@@ -709,12 +857,20 @@ function genReceipt() {
 // CART OPERATIONS
 // ============================================================================
 
-function add(item) {
+function addResolvedItem(item) {
   const key = getOrderKey(item);
   const v = order.get(key) || { item, qty: 0 };
   v.qty++;
   order.set(key, v);
   renderOrder();
+}
+
+function add(item) {
+  if (isHunamComboBaseItem(item)) {
+    showHunamComboModal(item);
+    return;
+  }
+  addResolvedItem(item);
 }
 
 function remove(key) {
@@ -744,6 +900,7 @@ function clearOrder() {
   tipAmount = 0;
   activeTipPct = null;
   $("tipInput").value = "";
+  closeHunamComboModal();
   renderOrder();
   $("receipt").innerHTML = "";
 }
@@ -755,6 +912,7 @@ function clearOrder() {
 function renderMenu() {
   const root = $("menu");
   root.innerHTML = "";
+  closeHunamComboModal();
 
   categoryOrder.forEach((cat) => {
     const items = menuData.filter((x) => x.category === cat);
@@ -845,14 +1003,17 @@ function renderMenu() {
 function renderOrder() {
   const root = $("order");
   root.innerHTML = "";
-  let subtotal = 0;
 
   order.forEach((v, key) => {
+    const detailLines = getHunamComboDetailLines(v.item)
+      .map((line) => `<div class="small line-detail">${line}</div>`)
+      .join('');
     const el = document.createElement("div");
     el.className = "line";
     el.innerHTML = `
       <div>
         <div style="font-weight:900">${label(v.item)}</div>
+        ${detailLines}
         <div class="small">${money(v.item.price)} each</div>
       </div>
       <div class="qty">
