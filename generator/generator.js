@@ -34,9 +34,9 @@ const categoryOrder = [
   "Combination",
   "House Specialty",
   "Fried Rice & Lo Mein",
-  "Noodle",
   "Chinese Cuisine",
   "Hot Pot",
+  "Noodle",
   "Hunam Special Combo",
   "Side Order",
   "Beverage",
@@ -45,11 +45,12 @@ const categoryOrder = [
 
 const FRIED_RICE_LO_MEIN_CATEGORY = "Fried Rice & Lo Mein";
 const FRIED_RICE_LO_MEIN_TITLE = "Fried Rice & Lo Mein";
+const NOODLE_CATEGORY = "Noodle";
 const OTHERS_CATEGORY = "Others";
 const OTHERS_SEASONAL_VEGETABLES = [
+  "Stir-Fried Snow Pea Leaves",
   "Stir-Fried Baby Broccoli",
   "Stir-Fried Bok Choy",
-  "Stir-Fried Snow Pea Leaves",
 ];
 
 // ============================================================================
@@ -278,6 +279,93 @@ function renderFriedRiceLoMeinSection(grid, items) {
     const priceInfo = getGroupPrice(section.options.map((option) => option.item));
     const el = document.createElement("div");
     el.className = "item";
+    el.style.position = "relative";
+    el.innerHTML = `
+      <div class="row">
+        <div class="name">${section.title}</div>
+        <div class="price">${priceInfo.same ? money(priceInfo.min) : `from ${money(priceInfo.min)}`}</div>
+      </div>
+      <button class="add">Add</button>
+    `;
+    el.querySelector("button").onclick = (e) => {
+      e.stopPropagation();
+      showPopupOptions(section.options, e.target);
+    };
+    grid.appendChild(el);
+  });
+}
+
+function getNoodleSections(items) {
+  const itemByCode = new Map(items.map((item) => [item.code, item]));
+
+  const makeOption = (text, zh, code) => {
+    const item = itemByCode.get(code);
+    if (!item) return null;
+    return {
+      item,
+      text: $("mode").value === "both" ? `${text} / ${zh}` : text,
+    };
+  };
+
+  const makeSingle = (title, code) => {
+    const item = itemByCode.get(code);
+    if (!item) return null;
+    return { title, item };
+  };
+
+  return [
+    {
+      title: "Soup Noodle",
+      options: [
+        makeOption("Chicken", "鸡", "T1a"),
+        makeOption("Vegetable", "菜", "T1b"),
+      ].filter(Boolean),
+    },
+    makeSingle("Beef Stew Soup Noodle", "T2"),
+    makeSingle("Singapore Rice Noodle", "T3"),
+    {
+      title: "Chow Fun",
+      options: [
+        makeOption("Beef", "牛", "T4a"),
+        makeOption("Chicken", "鸡", "T4b"),
+        makeOption("Pork", "猪", "T4c"),
+        makeOption("Vegetable", "菜", "T4d"),
+      ].filter(Boolean),
+    },
+    {
+      title: "Cantonese Style Chow Mein",
+      options: [
+        makeOption("Chicken", "鸡", "T5a"),
+        makeOption("Roast Pork", "叉烧", "T5b"),
+        makeOption("Seafood", "海鲜", "T5c"),
+        makeOption("Shrimp", "虾", "T5d"),
+        makeOption("Vegetable", "菜", "T5e"),
+      ].filter(Boolean),
+    },
+  ].filter((section) => section && (section.item || section.options?.length));
+}
+
+function renderNoodleSection(grid, items) {
+  const sections = getNoodleSections(items);
+
+  sections.forEach((section) => {
+    const el = document.createElement("div");
+    el.className = "item";
+
+    if (section.item) {
+      el.innerHTML = `
+        <div class="row">
+          <div class="name">${section.title}</div>
+          <div class="price">${money(section.item.price)}</div>
+        </div>
+        <button class="add">Add</button>
+      `;
+      el.querySelector("button").onclick = () => add(section.item);
+      grid.appendChild(el);
+      return;
+    }
+
+    const priceInfo = getGroupPrice(section.options.map((option) => option.item));
     el.style.position = "relative";
     el.innerHTML = `
       <div class="row">
@@ -537,6 +625,12 @@ function renderMenu() {
     const grid = sec.querySelector(".grid");
     if (cat === FRIED_RICE_LO_MEIN_CATEGORY) {
       renderFriedRiceLoMeinSection(grid, items);
+      root.appendChild(sec);
+      return;
+    }
+
+    if (cat === NOODLE_CATEGORY) {
+      renderNoodleSection(grid, items);
       root.appendChild(sec);
       return;
     }
