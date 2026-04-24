@@ -46,6 +46,11 @@ const categoryOrder = [
 const FRIED_RICE_LO_MEIN_CATEGORY = "Fried Rice & Lo Mein";
 const FRIED_RICE_LO_MEIN_TITLE = "Fried Rice & Lo Mein";
 const OTHERS_CATEGORY = "Others";
+const OTHERS_SEASONAL_VEGETABLES = [
+  "Stir-Fried Baby Broccoli",
+  "Stir-Fried Bok Choy",
+  "Stir-Fried Snow Pea Leaves",
+];
 
 // ============================================================================
 // HELPER FUNCTIONS
@@ -183,6 +188,10 @@ function getGroupPrice(items) {
   return { min, max, same: min === max };
 }
 
+function getOrderKey(item) {
+  return `${item.category}::${item.code}`;
+}
+
 function showPopupOptions(options, buttonEl) {
   closeVariantPopup();
   const popup = document.createElement('div');
@@ -286,10 +295,10 @@ function renderFriedRiceLoMeinSection(grid, items) {
 }
 
 function getOthersSections(items) {
-  const itemByCode = new Map(items.map((item) => [item.code, item]));
+  const itemByName = new Map(items.map((item) => [item.en, item]));
 
-  const makeOption = (code) => {
-    const item = itemByCode.get(code);
+  const makeOption = (name) => {
+    const item = itemByName.get(name);
     if (!item) return null;
     return {
       item,
@@ -300,11 +309,7 @@ function getOthersSections(items) {
   return [
     {
       title: "Seasonal Vegetables",
-      options: [
-        makeOption("V1a"),
-        makeOption("V1b"),
-        makeOption("V1c"),
-      ].filter(Boolean),
+      options: OTHERS_SEASONAL_VEGETABLES.map(makeOption).filter(Boolean),
     },
   ].filter((section) => section.options.length > 0);
 }
@@ -474,7 +479,7 @@ function genReceipt() {
 // ============================================================================
 
 function add(item) {
-  const key = item.code;
+  const key = getOrderKey(item);
   const v = order.get(key) || { item, qty: 0 };
   v.qty++;
   order.set(key, v);
