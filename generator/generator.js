@@ -633,8 +633,8 @@ function submitAddOnForm(form) {
     return;
   }
 
-  if (!Number.isFinite(price) || price <= 0) {
-    errorEl.textContent = 'Enter a valid price above 0.';
+  if (!Number.isFinite(price) || price < 0) {
+    errorEl.textContent = 'Enter a valid price of 0 or more.';
     priceInput.focus();
     return;
   }
@@ -656,7 +656,7 @@ function renderAddOnSection(grid) {
       </div>
       <div class="addon-field addon-price-field">
         <label>Price</label>
-        <input name="addOnPrice" type="number" min="0.01" step="0.01" placeholder="0.00" inputmode="decimal" />
+        <input name="addOnPrice" type="number" min="0" step="0.01" placeholder="0.00" inputmode="decimal" />
       </div>
     </div>
     <button class="add" type="submit">Add to Order</button>
