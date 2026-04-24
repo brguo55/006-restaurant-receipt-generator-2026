@@ -47,6 +47,7 @@ const categoryOrder = [
 const FRIED_RICE_LO_MEIN_CATEGORY = "Fried Rice & Lo Mein";
 const FRIED_RICE_LO_MEIN_TITLE = "Fried Rice & Lo Mein";
 const NOODLE_CATEGORY = "Noodle";
+const BEVERAGE_CATEGORY = "Beverage";
 const ADD_ON_CATEGORY = "Add-On";
 const OTHERS_CATEGORY = "Others";
 const OTHERS_SEASONAL_VEGETABLES = [
@@ -396,6 +397,85 @@ function renderNoodleSection(grid, items) {
   });
 }
 
+function getBeverageSections(items) {
+  const itemByCode = new Map(items.map((item) => [item.code, item]));
+
+  const makeOption = (text, zh, code) => {
+    const item = itemByCode.get(code);
+    if (!item) return null;
+    return {
+      item,
+      text: $("mode").value === "both" ? `${text} / ${zh}` : text,
+    };
+  };
+
+  const makeSingle = (title, code) => {
+    const item = itemByCode.get(code);
+    if (!item) return null;
+    return { title, item };
+  };
+
+  return [
+    makeSingle("Hot Tea", "W1"),
+    {
+      title: "Ice Tea",
+      options: [
+        makeOption("Unsweet", "无糖", "W2b"),
+        makeOption("Sweet", "甜", "W2a"),
+      ].filter(Boolean),
+    },
+    {
+      title: "Soft Drink",
+      options: [
+        makeOption("Coke", "可乐", "W3a"),
+        makeOption("Diet Coke", "健怡可乐", "W3b"),
+        makeOption("Dr. Pepper", "胡椒博士", "W3c"),
+        makeOption("Sprite", "雪碧", "W3d"),
+      ].filter(Boolean),
+    },
+    makeSingle("Apple Juice", "W4"),
+    makeSingle("Orange Juice", "W5"),
+    makeSingle("Wong Lo Kat", "W6"),
+  ].filter((section) => section && (section.item || section.options?.length));
+}
+
+function renderBeverageSection(grid, items) {
+  const sections = getBeverageSections(items);
+
+  sections.forEach((section) => {
+    const el = document.createElement("div");
+    el.className = "item";
+
+    if (section.item) {
+      el.innerHTML = `
+        <div class="row">
+          <div class="name">${section.title}</div>
+          <div class="price">${money(section.item.price)}</div>
+        </div>
+        <button class="add">Add</button>
+      `;
+      el.querySelector("button").onclick = () => add(section.item);
+      grid.appendChild(el);
+      return;
+    }
+
+    const priceInfo = getGroupPrice(section.options.map((option) => option.item));
+    el.style.position = "relative";
+    el.innerHTML = `
+      <div class="row">
+        <div class="name">${section.title}</div>
+        <div class="price">${priceInfo.same ? money(priceInfo.min) : `from ${money(priceInfo.min)}`}</div>
+      </div>
+      <button class="add">Add</button>
+    `;
+    el.querySelector("button").onclick = (e) => {
+      e.stopPropagation();
+      showPopupOptions(section.options, e.target);
+    };
+    grid.appendChild(el);
+  });
+}
+
 function submitAddOnForm(form) {
   const nameInput = form.elements.addOnName;
   const priceInput = form.elements.addOnPrice;
@@ -694,6 +774,12 @@ function renderMenu() {
 
     if (cat === NOODLE_CATEGORY) {
       renderNoodleSection(grid, items);
+      root.appendChild(sec);
+      return;
+    }
+
+    if (cat === BEVERAGE_CATEGORY) {
+      renderBeverageSection(grid, items);
       root.appendChild(sec);
       return;
     }
