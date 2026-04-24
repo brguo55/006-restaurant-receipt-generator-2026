@@ -41,11 +41,13 @@ const categoryOrder = [
   "Side Order",
   "Beverage",
   "Others",
+  "Add-On",
 ];
 
 const FRIED_RICE_LO_MEIN_CATEGORY = "Fried Rice & Lo Mein";
 const FRIED_RICE_LO_MEIN_TITLE = "Fried Rice & Lo Mein";
 const NOODLE_CATEGORY = "Noodle";
+const ADD_ON_CATEGORY = "Add-On";
 const OTHERS_CATEGORY = "Others";
 const OTHERS_SEASONAL_VEGETABLES = [
   "Stir-Fried Snow Pea Leaves",
@@ -191,6 +193,18 @@ function getGroupPrice(items) {
 
 function getOrderKey(item) {
   return `${item.category}::${item.code}`;
+}
+
+function createAddOnItem(name, price) {
+  const trimmedName = name.trim();
+  const normalizedName = trimmedName.toLowerCase().replace(/\s+/g, '-');
+  return {
+    category: ADD_ON_CATEGORY,
+    code: `addon-${normalizedName}-${price.toFixed(2)}`,
+    en: trimmedName,
+    zh: '',
+    price,
+  };
 }
 
 function showPopupOptions(options, buttonEl) {
@@ -380,6 +394,55 @@ function renderNoodleSection(grid, items) {
     };
     grid.appendChild(el);
   });
+}
+
+function submitAddOnForm(form) {
+  const nameInput = form.elements.addOnName;
+  const priceInput = form.elements.addOnPrice;
+  const errorEl = form.querySelector('.addon-error');
+  const name = nameInput.value.trim();
+  const price = parseFloat(priceInput.value);
+
+  if (!name) {
+    errorEl.textContent = 'Enter a dish name.';
+    nameInput.focus();
+    return;
+  }
+
+  if (!Number.isFinite(price) || price <= 0) {
+    errorEl.textContent = 'Enter a valid price above 0.';
+    priceInput.focus();
+    return;
+  }
+
+  errorEl.textContent = '';
+  add(createAddOnItem(name, price));
+  form.reset();
+  nameInput.focus();
+}
+
+function renderAddOnSection(grid) {
+  const form = document.createElement('form');
+  form.className = 'item addon-item';
+  form.innerHTML = `
+    <div class="addon-fields">
+      <div class="addon-field addon-name-field">
+        <label>Dish Name</label>
+        <input name="addOnName" type="text" placeholder="Special dish name" autocomplete="off" />
+      </div>
+      <div class="addon-field addon-price-field">
+        <label>Price</label>
+        <input name="addOnPrice" type="number" min="0.01" step="0.01" placeholder="0.00" inputmode="decimal" />
+      </div>
+    </div>
+    <button class="add" type="submit">Add to Order</button>
+    <div class="small addon-error" aria-live="polite"></div>
+  `;
+  form.onsubmit = (e) => {
+    e.preventDefault();
+    submitAddOnForm(form);
+  };
+  grid.appendChild(form);
 }
 
 function getOthersSections(items) {
@@ -615,7 +678,7 @@ function renderMenu() {
 
   categoryOrder.forEach((cat) => {
     const items = menuData.filter((x) => x.category === cat);
-    if (!items.length) return;
+    if (!items.length && cat !== ADD_ON_CATEGORY) return;
 
     const sec = document.createElement("div");
     sec.className = "cat";
@@ -631,6 +694,12 @@ function renderMenu() {
 
     if (cat === NOODLE_CATEGORY) {
       renderNoodleSection(grid, items);
+      root.appendChild(sec);
+      return;
+    }
+
+    if (cat === ADD_ON_CATEGORY) {
+      renderAddOnSection(grid);
       root.appendChild(sec);
       return;
     }
@@ -729,7 +798,7 @@ function renderCategoryNavigator() {
   nav.innerHTML = "";
 
   const availableCategories = categoryOrder.filter(cat =>
-    menuData.some(item => item.category === cat)
+    cat === ADD_ON_CATEGORY || menuData.some(item => item.category === cat)
   );
 
   availableCategories.forEach(cat => {

@@ -139,6 +139,10 @@ textarea:focus {
 .item:hover {
   background-color: #f9fafb;
 }
+.addon-item {
+  grid-column: 1 / -1;
+  border-right: none;
+}
 .item:nth-child(odd) {
   border-right: none;
 }
@@ -191,6 +195,29 @@ button {
 .add:active {
   background: #0f1e38;
   transform: scale(0.98);
+}
+
+.addon-fields {
+  display: grid;
+  grid-template-columns: minmax(0, 1.8fr) minmax(140px, 0.8fr);
+  gap: 12px;
+  align-items: end;
+}
+
+.addon-field label {
+  margin-bottom: 6px;
+  font-size: 13px;
+}
+
+.addon-field input {
+  background: #fff;
+}
+
+.addon-error {
+  min-height: 18px;
+  margin-top: 8px;
+  margin-bottom: 0;
+  color: #b91c1c;
 }
 
 /* Variant Popup */
@@ -532,6 +559,9 @@ button {
   .wrap {
     grid-template-columns: 1fr;
     padding-left: 24px;
+  }
+  .addon-fields {
+    grid-template-columns: 1fr;
   }
   .category-nav {
     display: none;
