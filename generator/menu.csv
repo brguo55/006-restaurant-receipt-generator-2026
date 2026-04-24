@@ -49,81 +49,81 @@ Beef,F6,Spicy Mongolian Beef,蒙古牛肉,14.95
 Beef,F7,Crispy Sesame Beef,芝麻牛肉,15.95
 Beef,F8,Sizzling Beef in Black Pepper Sauce,铁板黑椒牛肉,17.95
 
-Chicken,G1,Black Bean Sauce with Spicy Chicken,豉椒鸡,14.95
-Chicken,G2,Cantonese Chicken,广东鸡,15.95
-Chicken,G3,Cashew Chicken,腰果鸡,14.95
-Chicken,G4,Chicken String Bean in Hot Garlic Sauce,蒜酱四季豆鸡,14.95
+Chicken,G1,Honey Sesame Chicken,蜂蜜芝麻鸡,14.95
+Chicken,G2,General Tso's Chicken,左宗鸡,14.95
+Chicken,G3,Fresh Broccoli with Chicken,西兰花鸡,14.95
+Chicken,G4,Moo Goo Gai Pan,蘑菇鸡,14.95
 Chicken,G5,Coconut Curry Sauce with Chicken,椰奶咖喱鸡,14.95
-Chicken,G6,Fresh Broccoli with Chicken,西兰花鸡,14.95
-Chicken,G7,General Tso's Chicken,左宗鸡,14.95
-Chicken,G8,Honey Sesame Chicken,蜂蜜芝麻鸡,14.95
-Chicken,G9,Honey Walnut Chicken,核桃鸡,16.95
-Chicken,G10,Kung Pao Chicken,宫保鸡,14.95
-Chicken,G11,Lemon Chicken,柠檬鸡,15.95
-Chicken,G12,Moo Goo Gai Pan,蘑菇鸡,14.95
-Chicken,G13,Orange Peel Chicken,陈皮鸡,14.95
-Chicken,G14,Shredded Chicken Szechwan Style,四川鸡丝,14.95
-Chicken,G15,Snow Peas with Chicken,豌豆鸡,14.95
-Chicken,G16,Spicy Hunan Chicken,湘辣鸡,14.95
-Chicken,G17,Spicy Mongolian Chicken,蒙古鸡,14.95
-Chicken,G18,Sweet & Sour Chicken,糖醋鸡,14.95
+Chicken,G6,Sweet & Sour Chicken,糖醋鸡,14.95
+Chicken,G7,Kung Pao Chicken,宫保鸡,14.95
+Chicken,G8,Black Bean Sauce with Spicy Chicken,豉椒鸡,14.95
+Chicken,G9,Spicy Hunan Chicken,湘辣鸡,14.95
+Chicken,G10,Shredded Chicken Szechwan Style,四川鸡丝,14.95
+Chicken,G11,Spicy Mongolian Chicken,蒙古鸡,14.95
+Chicken,G12,Chicken String Bean in Hot Garlic Sauce,蒜酱四季豆鸡,14.95
+Chicken,G13,Snow Peas with Chicken,豌豆鸡,14.95
+Chicken,G14,Cashew Chicken,腰果鸡,14.95
+Chicken,G15,Orange Peel Chicken,陈皮鸡,14.95
+Chicken,G16,Lemon Chicken,柠檬鸡,15.95
+Chicken,G17,Cantonese Chicken,广东鸡,15.95
+Chicken,G18,Honey Walnut Chicken,核桃鸡,16.95
 
-Seafood,H1,Black Bean Sauce with Shrimp,豉椒虾,15.95
-Seafood,H2,Cashew Nuts with Shrimp,腰果虾,15.95
-Seafood,H3,Chinese Vegetables with Squid,时蔬鱿鱼,18.95
-Seafood,H4,Coconut Curry Sauce with Shrimp,椰奶咖喱虾,15.95
-Seafood,H5,Kung Pao Shrimp,宫保虾,15.95
-Seafood,H6,Kung Pao Squid,宫保鱿鱼,18.95
-Seafood,H7,Pepper Salt Fried Squid,椒盐炸鱿鱼,18.95
-Seafood,H8,Sauteed Vegetables with Shrimp,时蔬虾,15.95
-Seafood,H9,Steamed or Sauteed Fish Fillet,清蒸或清炒鱼片,19.95
-Seafood,H10,String Bean in Hot Garlic Sauce with Shrimp,蒜酱四季豆虾,15.95
-Seafood,H11,Sweet & Sour Shrimp,糖醋虾,15.95
+Seafood,H1,Pepper Salt Fried Squid,椒盐炸鱿鱼,18.95
+Seafood,H2,Chinese Vegetables with Squid,时蔬鱿鱼,18.95
+Seafood,H3,Kung Pao Squid,宫保鱿鱼,18.95
+Seafood,H4,Cashew Nuts with Shrimp,腰果虾,15.95
+Seafood,H5,Sweet & Sour Shrimp,糖醋虾,15.95
+Seafood,H6,Sauteed Vegetables with Shrimp,时蔬虾,15.95
+Seafood,H7,Coconut Curry Sauce with Shrimp,椰奶咖喱虾,15.95
+Seafood,H8,String Bean in Hot Garlic Sauce with Shrimp,蒜酱四季豆虾,15.95
+Seafood,H9,Kung Pao Shrimp,宫保虾,15.95
+Seafood,H10,Black Bean Sauce with Shrimp,豉椒虾,15.95
+Seafood,H11,Steamed or Sauteed Fish Fillet,清蒸或清炒鱼片,19.95
 Seafood,H12,Szechuan Spicy Boiled Fish,四川水煮鱼,19.95
 
-Duck,I1,Beijing Duck Two Way,北京烤鸭两吃,62.95
+Duck,I1,String Beans with Shredded Duck,四季豆鸭丝,19.95
 Duck,I2a,Cantonese Roast Duck (Half),广东烤鸭（半只）,24.95
 Duck,I2b,Cantonese Roast Duck (Whole),广东烤鸭（整只）,43.95
-Duck,I3,String Beans with Shredded Duck,四季豆鸭丝,19.95
+Duck,I3,Beijing Duck Two Way,北京烤鸭两吃,62.95
 
 Tofu and Vegetable,J1a,Broccoli Garlic Sauce (Half),蒜蓉西兰花（半份）,5.50
 Tofu and Vegetable,J1b,Broccoli Garlic Sauce (Whole),蒜蓉西兰花（整份）,12.95
-Tofu and Vegetable,J2,Eggplant in Garlic Sauce,鱼香茄子,13.95
-Tofu and Vegetable,J3,Orange Tofu,橙味豆腐,14.50
-Tofu and Vegetable,J4,Sauteed Chinese Vegetable w. Black Mushroom,冬菇时蔬,16.95
-Tofu and Vegetable,J5,Sauteed Snow Peas,清炒雪豆,13.95
-Tofu and Vegetable,J6a,String Bean in Garlic Sauce (Half),蒜蓉四季豆（半份）,5.50
-Tofu and Vegetable,J6b,String Bean in Garlic Sauce (Whole),蒜蓉四季豆（整份）,12.95
-Tofu and Vegetable,J7,Szechwan Tofu,四川豆腐,13.95
-Tofu and Vegetable,J8,Vegetable with Coconut Curry Sauce,椰奶咖喱杂菜,13.95
-Tofu and Vegetable,J9,Vegetables with Tofu,豆腐杂菜,12.95
+Tofu and Vegetable,J2a,String Bean in Garlic Sauce (Half),蒜蓉四季豆（半份）,5.50
+Tofu and Vegetable,J2b,String Bean in Garlic Sauce (Whole),蒜蓉四季豆（整份）,12.95
+Tofu and Vegetable,J3,Sauteed Snow Peas,清炒雪豆,13.95
+Tofu and Vegetable,J4,Vegetables with Tofu,豆腐杂菜,12.95
+Tofu and Vegetable,J5,Vegetable with Coconut Curry Sauce,椰奶咖喱杂菜,13.95
+Tofu and Vegetable,J6,Szechwan Tofu,四川豆腐,13.95
+Tofu and Vegetable,J7,Eggplant in Garlic Sauce,鱼香茄子,13.95
+Tofu and Vegetable,J8,Orange Tofu,橙味豆腐,14.50
+Tofu and Vegetable,J9,Sauteed Chinese Vegetable w. Black Mushroom,冬菇时蔬,16.95
 
-Moo Shu,K1,Moo Shu with Chicken,木须鸡,14.95
-Moo Shu,K2,Moo Shu with Pork,木须猪,14.95
-Moo Shu,K3,Moo Shu with Shredded Duck,木须鸭丝,18.95
-Moo Shu,K4,Moo Shu with Shrimp,木须虾,15.95
-Moo Shu,K5,Moo Shu with Tofu,木须豆腐,14.95
-Moo Shu,K6,Moo Shu with Vegetable,木须菜,14.95
+Moo Shu,K1,Moo Shu with Vegetable,木须菜,14.95
+Moo Shu,K2,Moo Shu with Tofu,木须豆腐,14.95
+Moo Shu,K3,Moo Shu with Chicken,木须鸡,14.95
+Moo Shu,K4,Moo Shu with Pork,木须猪,14.95
+Moo Shu,K5,Moo Shu with Shrimp,木须虾,15.95
+Moo Shu,K6,Moo Shu with Shredded Duck,木须鸭丝,18.95
 
-Egg Foo Young,L1,Chicken Egg Foo Young,鸡芙蓉蛋,14.95
-Egg Foo Young,L2,Combination Egg Foo Young,招牌芙蓉蛋,14.95
+Egg Foo Young,L1,Vegetable Egg Foo Young,蔬菜芙蓉蛋,14.95
+Egg Foo Young,L2,Chicken Egg Foo Young,鸡芙蓉蛋,14.95
 Egg Foo Young,L3,Pork Egg Foo Young,猪芙蓉蛋,14.95
-Egg Foo Young,L4,Shrimp Egg Foo Young,虾芙蓉蛋,14.95
-Egg Foo Young,L5,Vegetable Egg Foo Young,蔬菜芙蓉蛋,14.95
+Egg Foo Young,L4,Shrimp Egg Foo Young,虾芙蓉蛋,15.95
+Egg Foo Young,L5,Combination Egg Foo Young,招牌芙蓉蛋,14.95
 
-Gluten-Free Steamed Dishes,M1,Steamed Seafood Delight,清蒸海鲜什锦,18.95
+Gluten-Free Steamed Dishes,M1,Steamed Vegetable with White Meat Chicken,清蒸鸡肉时蔬,14.95
 Gluten-Free Steamed Dishes,M2,Steamed Vegetable with Shrimp,清蒸虾仁时蔬,15.95
 Gluten-Free Steamed Dishes,M3,Steamed Vegetable with Tofu,清蒸豆腐时蔬,13.95
-Gluten-Free Steamed Dishes,M4,Steamed Vegetable with White Meat Chicken,清蒸鸡肉时蔬,14.95
+Gluten-Free Steamed Dishes,M4,Steamed Seafood Delight,清蒸海鲜什锦,18.95
 
-Kid's Meal,N1,Chicken Finger & Beef Sticks (Kid's Meal),儿童鸡柳牛肉串套餐,7.95
-Kid's Meal,N2,Sesame Chicken (Kid's Meal),儿童芝麻鸡套餐,7.95
-Kid's Meal,N3,Sweet & Sour Chicken (Kid's Meal),儿童糖醋鸡套餐,7.95
+Kid's Meal,N1,Sweet & Sour Chicken (Kid's Meal),儿童糖醋鸡套餐,7.95
+Kid's Meal,N2,Chicken Finger & Beef Sticks (Kid's Meal),儿童鸡柳牛肉串套餐,7.95
+Kid's Meal,N3,Sesame Chicken (Kid's Meal),儿童芝麻鸡套餐,7.95
 
 Combination,O1,Orange Chicken and Shrimp,橙鸡和虾,19.95
-Combination,O2,Roast Duck and Sesame Chicken,烤鸭和鸡,24.95
-Combination,O3,Roast Duck and Shrimp,烤鸭和虾,24.95
-Combination,O4,Steak and Shrimp,牛肉虾,22.95
+Combination,O2,Steak and Shrimp,牛肉虾,22.95
+Combination,O3,Roast Duck and Sesame Chicken,烤鸭和鸡,24.95
+Combination,O4,Roast Duck and Shrimp,烤鸭和虾,24.95
 
 House Specialty,P1,Chicken and Beef Hunam Style,湖南双味,15.95
 House Specialty,P2,Flower Steak Kew,花牛肉,19.95
