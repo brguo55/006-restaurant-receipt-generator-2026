@@ -18,32 +18,32 @@ let activeTipPct = null;
 
 const categoryOrder = [
   "Appetizer",
+  "Dessert",
   "Salad",
   "Soup",
   "Pork",
   "Beef",
   "Chicken",
-  "Duck",
   "Seafood",
-  "Moo Shu",
-  "Side Order",
+  "Duck",
   "Tofu and Vegetable",
-  "House Specialty",
-  "Gluten-Free Steamed Dishes",
-  "Fried Rice or Lo Mein",
+  "Moo Shu",
   "Egg Foo Young",
-  "Noodle",
-  "Kid's Menu",
+  "Gluten-Free Steamed Dishes",
+  "Kid's Meal",
   "Combination",
-  "Traditional Chinese Cuisine",
+  "House Specialty",
+  "Fried Rice & Lo Mein",
+  "Noodle",
+  "Chinese Cuisine",
   "Hot Pot",
-  "Dessert",
+  "Hunam Special Combo",
+  "Side Order",
   "Beverage",
-  "Hunan Special Meal Combo",
   "Others",
 ];
 
-const FRIED_RICE_LO_MEIN_CATEGORY = "Fried Rice or Lo Mein";
+const FRIED_RICE_LO_MEIN_CATEGORY = "Fried Rice & Lo Mein";
 const FRIED_RICE_LO_MEIN_TITLE = "Fried Rice & Lo Mein";
 const OTHERS_CATEGORY = "Others";
 
@@ -463,7 +463,7 @@ function genReceipt() {
   parts.push(`<div class="rc-center rc-thank">Thank you!</div>`);
   parts.push(`<div class="rc-center rc-small">欢迎再次光临</div>`);
   parts.push(`<div class="rc-center rc-small">hunamrestaurant.net</div>`);
-  parts.push(`<div class="rc-center rc-small">Serving Chapel Hill since 1980</div>`);
+  parts.push(`<div class="rc-center rc-small">Serving North Carolina since 1980</div>`);
   parts.push(`</div>`);
 
   $("receipt").innerHTML = parts.join("");
