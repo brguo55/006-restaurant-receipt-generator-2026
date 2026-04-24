@@ -416,29 +416,43 @@ function updateTotalsDisplay() {
 function genReceipt() {
   const { subtotal, tax, tip, total } = calculateTotals();
   const parts = [];
+  const who = $("who").value.trim();
 
-  parts.push(`<div class="rc-center">Hunam Chinese Restaurant / 南苑餐厅</div>`);
-  parts.push(`<div class="rc-center rc-small">790 Martin Luther King Jr Blvd, Chapel Hill, NC 27514</div>`);
-  parts.push(`<div class="rc-center rc-small">Tel: (919) 967-6133 | Fax: (919) 967-6723</div>`);
+  parts.push(`<div class="rc-slip">`);
+  parts.push(`<div class="rc-center rc-brand">Hunam Chinese Restaurant</div>`);
+  parts.push(`<div class="rc-center rc-brand-sub">南苑餐厅</div>`);
+  parts.push(`<div class="rc-center rc-small">790 Martin Luther King Jr Blvd</div>`);
+  parts.push(`<div class="rc-center rc-small">Chapel Hill, NC 27514</div>`);
+  parts.push(`<div class="rc-center rc-small">(919) 967-6133</div>`);
+  parts.push(`<div class="rc-divider"></div>`);
+  parts.push(`<div class="rc-meta">`);
+  parts.push(`<div class="rc-meta-line">Order: ${$("type").value}</div>`);
+  if (who) {
+    parts.push(`<div class="rc-meta-line">Ref: ${who}</div>`);
+  }
+  parts.push(`<div class="rc-meta-line">${new Date().toLocaleString()}</div>`);
+  parts.push(`</div>`);
   parts.push(`<div class="rc-divider"></div>`);
 
-  const meta = `${$("type").value}${$("who").value ? " | " + $("who").value : ""}`;
-  parts.push(`<div class="rc-center rc-small">${meta}</div>`);
-  parts.push(`<div class="rc-center rc-small">${new Date().toLocaleString()}</div>`);
-  parts.push(`<div class="rc-divider"></div>`);
-
-  let itemNum = 0;
   order.forEach((v) => {
-    itemNum++;
-    parts.push(`<div class="rc-item"><span>${String(itemNum).padStart(2, '0')} ${receiptLabel(v.item)} x${v.qty}</span><span>${money(v.qty * v.item.price)}</span></div>`);
+    parts.push(`
+      <div class="rc-entry">
+        <div class="rc-entry-name">${receiptLabel(v.item)}</div>
+        <div class="rc-entry-meta">
+          <span>${v.qty} x ${money(v.item.price)}</span>
+          <span>${money(v.qty * v.item.price)}</span>
+        </div>
+      </div>
+    `);
   });
 
   parts.push(`<div class="rc-divider"></div>`);
-  parts.push(`<div class="rc-row"><span>Subtotal</span><span>${money(subtotal)}</span></div>`);
-  parts.push(`<div class="rc-row"><span>Tax (7.5%)</span><span>${money(tax)}</span></div>`);
-  parts.push(`<div class="rc-row"><span>Tip</span><span>${money(tip)}</span></div>`);
-  parts.push(`<div class="rc-divider"></div>`);
-  parts.push(`<div class="rc-row rc-total"><span>Total</span><span>${money(total)}</span></div>`);
+  parts.push(`<div class="rc-summary">`);
+  parts.push(`<div class="rc-summary-row"><span>Subtotal</span><span>${money(subtotal)}</span></div>`);
+  parts.push(`<div class="rc-summary-row"><span>Tax (7.5%)</span><span>${money(tax)}</span></div>`);
+  parts.push(`<div class="rc-summary-row"><span>Tip</span><span>${money(tip)}</span></div>`);
+  parts.push(`<div class="rc-summary-row rc-total"><span>Total</span><span>${money(total)}</span></div>`);
+  parts.push(`</div>`);
 
   if ($("note").value.trim()) {
     parts.push(`<div class="rc-divider"></div>`);
@@ -446,9 +460,11 @@ function genReceipt() {
   }
 
   parts.push(`<div class="rc-divider"></div>`);
-  parts.push(`<div class="rc-center rc-thank">Thank you! 欢迎再次光临！</div>`);
-  parts.push(`<div class="rc-center rc-small">https://www.hunamrestaurant.net/</div>`);
-  parts.push(`<div class="rc-center rc-small">Proudly serving the Chapel Hill, Carrboro, and UNC communities since 1980.</div>`);
+  parts.push(`<div class="rc-center rc-thank">Thank you!</div>`);
+  parts.push(`<div class="rc-center rc-small">欢迎再次光临</div>`);
+  parts.push(`<div class="rc-center rc-small">hunamrestaurant.net</div>`);
+  parts.push(`<div class="rc-center rc-small">Serving Chapel Hill since 1980</div>`);
+  parts.push(`</div>`);
 
   $("receipt").innerHTML = parts.join("");
 }

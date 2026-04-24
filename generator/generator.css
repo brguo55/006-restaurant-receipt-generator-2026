@@ -371,57 +371,105 @@ button {
 }
 .receipt {
   margin-top: 16px;
-  background: #f9fafb;
-  border: 2px dashed #9ca3af;
-  border-radius: 6px;
-  padding: 20px 16px;
-  font-family: "Courier New", "Courier", monospace;
+  width: 72mm;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+  background: #ffffff;
+  border: 1px dashed #111827;
+  border-radius: 0;
+  padding: 10px 8px;
+  font-family: "Courier New", "Menlo", "Monaco", monospace;
   min-height: 240px;
   max-height: 500px;
   overflow-y: auto;
-  font-size: 13px;
-  line-height: 1.5;
-  color: #1f2937;
+  font-size: 12px;
+  line-height: 1.35;
+  color: #111827;
+  font-variant-numeric: tabular-nums;
+}
+.rc-slip {
+  width: 100%;
 }
 .rc-center {
   text-align: center;
+}
+.rc-brand {
+  font-size: 13px;
   font-weight: 700;
+  line-height: 1.2;
+}
+.rc-brand-sub {
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 2px;
 }
 .rc-small {
-  font-weight: 400;
-  font-size: 12px;
-  color: #4b5563;
+  font-size: 11px;
+  line-height: 1.25;
 }
 .rc-divider {
-  border-top: 1px dashed #9ca3af;
-  margin: 8px 0;
+  border-top: 1px dashed #000;
+  margin: 6px 0;
 }
-.rc-item {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 2px 0;
+.rc-meta {
+  font-size: 11px;
 }
-.rc-item span:first-child {
-  flex: 1;
+.rc-meta-line {
+  margin: 1px 0;
 }
-.rc-row {
-  display: flex;
-  justify-content: space-between;
+.rc-entry {
+  padding: 4px 0;
+}
+.rc-entry-name {
+  font-weight: 700;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+.rc-entry-meta,
+.rc-summary-row {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+.rc-entry-meta span,
+.rc-summary-row span {
+  display: table-cell;
+  vertical-align: top;
+}
+.rc-entry-meta span:first-child {
+  width: 68%;
+  padding-right: 8px;
+}
+.rc-entry-meta span:last-child,
+.rc-summary-row span:last-child {
+  width: 32%;
+  text-align: right;
+  white-space: nowrap;
+}
+.rc-summary {
+  margin-top: 2px;
+}
+.rc-summary-row {
   padding: 1px 0;
 }
-.rc-total {
-  font-weight: 900;
-  font-size: 14px;
-}
 .rc-note {
-  font-size: 12px;
-  color: #4b5563;
-  padding: 2px 0;
+  font-size: 11px;
+  padding: 2px 0 0;
   white-space: pre-wrap;
 }
+.rc-total {
+  border-top: 1px solid #000;
+  margin-top: 4px;
+  padding-top: 4px;
+  font-size: 13px;
+  font-weight: 700;
+}
 .rc-thank {
-  font-size: 14px;
+  font-size: 12px;
+  font-weight: 700;
   margin-top: 4px;
 }
 
@@ -490,18 +538,78 @@ button {
   }
 }
 @media print {
+  @page {
+    size: 80mm auto;
+    margin: 0;
+  }
+
+  html,
+  body {
+    width: 80mm;
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    color: #000;
+  }
+
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
   body * {
     visibility: hidden;
   }
+
   #receipt,
   #receipt * {
     visibility: visible;
   }
+
   #receipt {
     position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
+    left: 4mm;
+    top: 2mm;
+    width: 72mm;
+    max-width: 72mm;
+    margin: 0;
+    padding: 0;
     background: #fff;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    min-height: 0;
+    max-height: none;
+    overflow: visible;
+    color: #000;
+    font-size: 10px;
+    line-height: 1.25;
+  }
+
+  .rc-brand {
+    font-size: 12px;
+  }
+
+  .rc-brand-sub {
+    font-size: 11px;
+  }
+
+  .rc-small,
+  .rc-meta,
+  .rc-note {
+    font-size: 9px;
+    color: #000;
+  }
+
+  .rc-entry {
+    padding: 3px 0;
+  }
+
+  .rc-entry-meta span:first-child {
+    padding-right: 4px;
+  }
+
+  .rc-total {
+    font-size: 11px;
   }
 }
