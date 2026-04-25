@@ -76,6 +76,7 @@ const OTHERS_SEASONAL_VEGETABLES = [
 const OTHERS_GLOBAL_SIDE_CODES = new Set(["X1a", "X1b", "X1c", "X4", "X5"]);
 const HUNAM_COMBO_NO_RICE_BASE_CODES = new Set(["U26", "U29"]);
 const NO_SIDE_OPTION = { key: "no-side", en: "No Side", zh: "无", surcharge: 0 };
+const NO_STARTER_OPTION = { key: "no-side", en: "No Starter", zh: "无", surcharge: 0 };
 const REGULAR_SIDE_OPTIONS = [
   { key: "white-rice", en: "White Rice", zh: "白饭", surcharge: 0 },
   { key: "fried-rice", en: "Fried Rice", zh: "炒饭", surcharge: 0 },
@@ -89,7 +90,7 @@ const HUNAM_COMBO_SIDE_OPTIONS = [
   { key: "egg-drop-soup", en: "Egg Drop Soup", zh: "蛋花汤", surcharge: 0 },
   { key: "wonton-soup", en: "Wonton Soup", zh: "馄饨汤", surcharge: 0 },
   { key: "hot-sour-soup", en: "Hot & Sour Soup", zh: "酸辣汤", surcharge: 0 },
-  NO_SIDE_OPTION,
+  NO_STARTER_OPTION,
 ];
 const HUNAM_COMBO_RICE_OPTIONS = [
   { key: "white-rice", en: "White Rice", zh: "白饭", surcharge: 0 },
@@ -285,9 +286,9 @@ function formatOption(option) {
 
 function getItemDetailLines(item) {
   if (item.comboSelection) {
-    const lines = [`Soup/Roll: ${formatOption(item.comboSelection.side)}`];
+    const lines = [`Starter: ${formatOption(item.comboSelection.side)}`];
     if (item.comboSelection.rice) {
-      lines.push(`Rice/Noodle: ${formatOption(item.comboSelection.rice)}`);
+      lines.push(`Side: ${formatOption(item.comboSelection.rice)}`);
     }
     return lines;
   }
@@ -524,13 +525,13 @@ function showHunamComboModal(item) {
       <div class="combo-modal-item">${label(item)}</div>
       <form class="combo-form">
         <div class="combo-group">
-          <div class="combo-group-title">Choose one side</div>
+          <div class="combo-group-title">Choose one starter</div>
           <div class="combo-options">
             ${renderOptions('comboSide', HUNAM_COMBO_SIDE_OPTIONS)}
           </div>
         </div>
         <div class="combo-group">
-          <div class="combo-group-title">Choose one rice/noodle</div>
+          <div class="combo-group-title">Choose one side</div>
           ${skipsRice ? '<div class="combo-note">This combo does not include a rice or noodle choice.</div>' : `<div class="combo-options">${renderOptions('comboRice', HUNAM_COMBO_RICE_OPTIONS)}</div>`}
         </div>
         <div class="small combo-error" aria-live="polite"></div>
