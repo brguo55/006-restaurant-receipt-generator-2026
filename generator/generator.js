@@ -53,24 +53,49 @@ const BEVERAGE_CATEGORY = "Beverage";
 const ADD_ON_CATEGORY = "Add-On";
 const HUNAM_SPECIAL_COMBO_CATEGORY = "Hunam Special Combo";
 const OTHERS_CATEGORY = "Others";
+const SIDE_SELECTION_CATEGORIES = new Set([
+  "Pork",
+  "Beef",
+  "Chicken",
+  "Seafood",
+  "Duck",
+  "Tofu and Vegetable",
+  EGG_FOO_YOUNG_CATEGORY,
+  "Gluten-Free Steamed Dishes",
+  "Kid's Meal",
+  "Combination",
+  "House Specialty",
+  "Chinese Cuisine",
+  "Hot Pot",
+]);
 const OTHERS_SEASONAL_VEGETABLES = [
   "Stir-Fried Snow Pea Leaves",
   "Stir-Fried Baby Broccoli",
   "Stir-Fried Bok Choy",
 ];
 const HUNAM_COMBO_NO_RICE_BASE_CODES = new Set(["U26", "U29"]);
+const NO_SIDE_OPTION = { key: "no-side", en: "No Side", zh: "无", surcharge: 0 };
+const REGULAR_SIDE_OPTIONS = [
+  { key: "white-rice", en: "White Rice", zh: "白饭", surcharge: 0 },
+  { key: "fried-rice", en: "Fried Rice", zh: "炒饭", surcharge: 0 },
+  { key: "brown-rice", en: "Brown Rice", zh: "糙米饭", surcharge: 1 },
+  { key: "lo-mein", en: "Lo Mein", zh: "捞面", surcharge: 1 },
+  NO_SIDE_OPTION,
+];
 const HUNAM_COMBO_SIDE_OPTIONS = [
   { key: "egg-roll", en: "Egg Roll", zh: "蛋卷", surcharge: 0 },
   { key: "veggie-roll", en: "Veggie Roll", zh: "素春卷", surcharge: 0 },
   { key: "egg-drop-soup", en: "Egg Drop Soup", zh: "蛋花汤", surcharge: 0 },
   { key: "wonton-soup", en: "Wonton Soup", zh: "馄饨汤", surcharge: 0 },
   { key: "hot-sour-soup", en: "Hot & Sour Soup", zh: "酸辣汤", surcharge: 0 },
+  NO_SIDE_OPTION,
 ];
 const HUNAM_COMBO_RICE_OPTIONS = [
-  { key: "fried-rice", en: "Fried Rice", zh: "炒饭", surcharge: 0 },
   { key: "white-rice", en: "White Rice", zh: "白饭", surcharge: 0 },
+  { key: "fried-rice", en: "Fried Rice", zh: "炒饭", surcharge: 0 },
   { key: "brown-rice", en: "Brown Rice", zh: "糙米饭", surcharge: 1 },
   { key: "lo-mein", en: "Lo Mein", zh: "捞面", surcharge: 1 },
+  NO_SIDE_OPTION,
 ];
 
 // ============================================================================
@@ -210,29 +235,40 @@ function getGroupPrice(items) {
 }
 
 function getOrderKey(item) {
+  const sideSuffix = item.sideSelection ? `::${item.sideSelection.key}` : '';
   const comboSuffix = item.comboSelection
     ? `::${item.comboSelection.side.key}::${item.comboSelection.rice?.key || 'no-rice'}`
     : '';
-  return `${item.category}::${item.code}${comboSuffix}`;
+  return `${item.category}::${item.code}${comboSuffix}${sideSuffix}`;
 }
 
-function formatComboOption(option) {
+function formatOption(option) {
   const text = $("mode").value === "both" && option.zh ? `${option.en} / ${option.zh}` : option.en;
   return option.surcharge > 0 ? `${text} (+${money(option.surcharge)})` : text;
 }
 
-function getHunamComboDetailLines(item) {
-  if (!item.comboSelection) return [];
-
-  const lines = [`Side: ${formatComboOption(item.comboSelection.side)}`];
-  if (item.comboSelection.rice) {
-    lines.push(`Rice: ${formatComboOption(item.comboSelection.rice)}`);
+function getItemDetailLines(item) {
+  if (item.comboSelection) {
+    const lines = [`Soup/Roll: ${formatOption(item.comboSelection.side)}`];
+    if (item.comboSelection.rice) {
+      lines.push(`Rice/Noodle: ${formatOption(item.comboSelection.rice)}`);
+    }
+    return lines;
   }
-  return lines;
+
+  if (item.sideSelection) {
+    return [`Side: ${formatOption(item.sideSelection)}`];
+  }
+
+  return [];
 }
 
 function isHunamComboBaseItem(item) {
   return item.category === HUNAM_SPECIAL_COMBO_CATEGORY && !item.comboSelection;
+}
+
+function requiresSideSelection(item) {
+  return SIDE_SELECTION_CATEGORIES.has(item.category) && !item.sideSelection && !item.comboSelection;
 }
 
 function hunamComboSkipsRice(item) {
@@ -249,6 +285,16 @@ function createHunamComboConfiguredItem(item, sideOption, riceOption) {
       side: sideOption,
       rice: riceOption || null,
     },
+  };
+}
+
+function createSideConfiguredItem(item, sideOption) {
+  const basePrice = item.basePrice ?? item.price;
+  return {
+    ...item,
+    basePrice,
+    price: basePrice + sideOption.surcharge,
+    sideSelection: sideOption,
   };
 }
 
@@ -310,6 +356,78 @@ function closeHunamComboModal() {
   if (existing) existing.remove();
 }
 
+function closeSideSelectionModal() {
+  const existing = document.getElementById('sideSelectionModal');
+  if (existing) existing.remove();
+}
+
+function showSideSelectionModal(item) {
+  closeSideSelectionModal();
+
+  const overlay = document.createElement('div');
+  overlay.className = 'combo-modal-backdrop';
+  overlay.id = 'sideSelectionModal';
+
+  const renderOptions = (name, options) => options.map((option) => `
+    <label class="combo-choice">
+      <input type="radio" name="${name}" value="${option.key}" />
+      <span>${formatOption(option)}</span>
+    </label>
+  `).join('');
+
+  overlay.innerHTML = `
+    <div class="combo-modal" role="dialog" aria-modal="true" aria-labelledby="sideSelectionModalTitle">
+      <div class="combo-modal-header">
+        <h3 id="sideSelectionModalTitle">Choose a Side</h3>
+        <button type="button" class="combo-close" aria-label="Close">×</button>
+      </div>
+      <div class="combo-modal-item">${label(item)}</div>
+      <form class="combo-form">
+        <div class="combo-group">
+          <div class="combo-group-title">Choose one rice/noodle side</div>
+          <div class="combo-options">
+            ${renderOptions('regularSide', REGULAR_SIDE_OPTIONS)}
+          </div>
+        </div>
+        <div class="small combo-error" aria-live="polite"></div>
+        <div class="combo-actions">
+          <button type="button" class="secondary combo-cancel">Cancel</button>
+          <button type="submit" class="primary combo-submit">Add Item</button>
+        </div>
+      </form>
+    </div>
+  `;
+
+  document.body.appendChild(overlay);
+
+  const close = () => closeSideSelectionModal();
+  overlay.querySelector('.combo-close').onclick = close;
+  overlay.querySelector('.combo-cancel').onclick = close;
+  overlay.onclick = (e) => {
+    if (e.target === overlay) close();
+  };
+
+  const form = overlay.querySelector('.combo-form');
+  const errorEl = overlay.querySelector('.combo-error');
+  form.onsubmit = (e) => {
+    e.preventDefault();
+    const sideKey = form.elements.regularSide.value;
+
+    if (!sideKey) {
+      errorEl.textContent = 'Choose one rice/noodle side option.';
+      return;
+    }
+
+    const sideOption = REGULAR_SIDE_OPTIONS.find((option) => option.key === sideKey);
+    errorEl.textContent = '';
+    addResolvedItem(createSideConfiguredItem(item, sideOption));
+    close();
+  };
+
+  const firstInput = overlay.querySelector('input[type="radio"]');
+  if (firstInput) firstInput.focus();
+}
+
 function showHunamComboModal(item) {
   closeHunamComboModal();
 
@@ -321,7 +439,7 @@ function showHunamComboModal(item) {
   const renderOptions = (name, options) => options.map((option) => `
     <label class="combo-choice">
       <input type="radio" name="${name}" value="${option.key}" />
-      <span>${formatComboOption(option)}</span>
+      <span>${formatOption(option)}</span>
     </label>
   `).join('');
 
@@ -879,7 +997,7 @@ function genReceipt() {
   parts.push(`<div class="rc-divider"></div>`);
 
   order.forEach((v) => {
-    const detailLines = getHunamComboDetailLines(v.item)
+    const detailLines = getItemDetailLines(v.item)
       .map((line) => `<div class="rc-entry-option">${line}</div>`)
       .join('');
     parts.push(`
@@ -934,6 +1052,12 @@ function add(item) {
     showHunamComboModal(item);
     return;
   }
+
+  if (requiresSideSelection(item)) {
+    showSideSelectionModal(item);
+    return;
+  }
+
   addResolvedItem(item);
 }
 
@@ -965,6 +1089,7 @@ function clearOrder() {
   activeTipPct = null;
   $("tipInput").value = "";
   closeHunamComboModal();
+  closeSideSelectionModal();
   renderOrder();
   $("receipt").innerHTML = "";
 }
@@ -977,6 +1102,7 @@ function renderMenu() {
   const root = $("menu");
   root.innerHTML = "";
   closeHunamComboModal();
+  closeSideSelectionModal();
 
   categoryOrder.forEach((cat) => {
     const items = menuData.filter((x) => x.category === cat);
@@ -1081,7 +1207,7 @@ function renderOrder() {
   root.innerHTML = "";
 
   order.forEach((v, key) => {
-    const detailLines = getHunamComboDetailLines(v.item)
+    const detailLines = getItemDetailLines(v.item)
       .map((line) => `<div class="small line-detail">${line}</div>`)
       .join('');
     const el = document.createElement("div");
