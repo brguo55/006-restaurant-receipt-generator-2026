@@ -565,7 +565,7 @@ button {
   border: 1px dashed #111827;
   border-radius: 0;
   padding: 10px 8px;
-  font-family: Calibri, "Segoe UI", Aptos, "Helvetica Neue", Arial, sans-serif;
+  font-family: "Courier New", Courier, monospace;
   min-height: 240px;
   max-height: 500px;
   overflow-y: auto;
