@@ -623,6 +623,11 @@ button {
   padding: 2px 0 0;
   white-space: pre-wrap;
 }
+.rc-side-summary {
+  font-size: 11px;
+  padding: 2px 0 0;
+  white-space: nowrap;
+}
 .rc-total {
   border-top: 1px solid #000;
   margin-top: 4px;
@@ -797,9 +802,14 @@ button {
 
   .rc-small,
   .rc-meta,
-  .rc-note {
+  .rc-note,
+  .rc-side-summary {
     font-size: 9px;
     color: #000;
+  }
+
+  .rc-side-summary {
+    white-space: nowrap;
   }
 
   .rc-entry {
@@ -812,5 +822,11 @@ button {
 
   .rc-total {
     font-size: 11px;
+  }
+}
+
+@media (max-width: 420px) {
+  .rc-side-summary {
+    white-space: normal;
   }
 }

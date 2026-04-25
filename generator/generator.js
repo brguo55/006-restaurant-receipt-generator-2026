@@ -110,17 +110,41 @@ function displayCategoryName(category) {
   if (category === FRIED_RICE_LO_MEIN_CATEGORY) {
     return FRIED_RICE_LO_MEIN_TITLE;
   }
+  if (category === ADD_ON_CATEGORY) {
+    return 'Signature Food';
+  }
   return category;
+}
+
+function displayCategoryNavigatorName(category) {
+  if (category === ADD_ON_CATEGORY) {
+    return ADD_ON_CATEGORY;
+  }
+  return displayCategoryName(category);
+}
+
+function getHunamComboNumber(item) {
+  if (item.category !== HUNAM_SPECIAL_COMBO_CATEGORY) return '';
+
+  const match = getBaseCode(item.code).match(/^U(\d+)$/i);
+  return match ? match[1] : '';
+}
+
+function prefixHunamComboNumber(text, item) {
+  const comboNumber = getHunamComboNumber(item);
+  return comboNumber ? `${comboNumber}. ${text}` : text;
 }
 
 function label(item) {
   const en = item.en;
-  return $("mode").value === "both" && item.zh ? `${en} / ${item.zh}` : en;
+  const text = $("mode").value === "both" && item.zh ? `${en} / ${item.zh}` : en;
+  return prefixHunamComboNumber(text, item);
 }
 
 function receiptLabel(item) {
   const en = item.en;
-  return $("mode").value === "both" && item.zh ? `${en} / ${item.zh}` : en;
+  const text = $("mode").value === "both" && item.zh ? `${en} / ${item.zh}` : en;
+  return prefixHunamComboNumber(text, item);
 }
 
 function parseCSV(text) {
@@ -219,6 +243,17 @@ function getGroupZhLabel(items) {
 
 function groupLabel(items) {
   const en = getGroupEnLabel(items);
+  const baseText = $("mode").value === "both"
+    ? (() => {
+        const zh = getGroupZhLabel(items);
+        return zh ? `${en} / ${zh}` : en;
+      })()
+    : en;
+
+  if (items[0]?.category === HUNAM_SPECIAL_COMBO_CATEGORY) {
+    return prefixHunamComboNumber(baseText, items[0]);
+  }
+
   if ($("mode").value === "both") {
     const zh = getGroupZhLabel(items);
     return zh ? `${en} / ${zh}` : en;
@@ -261,6 +296,29 @@ function getItemDetailLines(item) {
   }
 
   return [];
+}
+
+function getRiceNoodleSummaryCounts() {
+  const totals = new Map([
+    ["white-rice", { label: "White Rice", qty: 0 }],
+    ["fried-rice", { label: "Fried Rice", qty: 0 }],
+    ["brown-rice", { label: "Brown Rice", qty: 0 }],
+    ["lo-mein", { label: "Lo Mein", qty: 0 }],
+  ]);
+
+  order.forEach((entry) => {
+    const riceKey = entry.item.comboSelection?.rice?.key;
+    const sideKey = entry.item.sideSelection?.key;
+    const selectionKey = riceKey || sideKey;
+
+    if (!selectionKey || selectionKey === "no-side" || !totals.has(selectionKey)) {
+      return;
+    }
+
+    totals.get(selectionKey).qty += entry.qty;
+  });
+
+  return [...totals.values()].filter((entry) => entry.qty > 0);
 }
 
 function isHunamComboBaseItem(item) {
@@ -810,7 +868,7 @@ function submitAddOnForm(form) {
   const price = parseFloat(priceInput.value);
 
   if (!name) {
-    errorEl.textContent = 'Enter a dish name.';
+    errorEl.textContent = 'Enter a signature food name.';
     nameInput.focus();
     return;
   }
@@ -833,8 +891,8 @@ function renderAddOnSection(grid) {
   form.innerHTML = `
     <div class="addon-fields">
       <div class="addon-field addon-name-field">
-        <label>Dish Name</label>
-        <input name="addOnName" type="text" placeholder="Special dish name" autocomplete="off" />
+        <label>Signature Food</label>
+        <input name="addOnName" type="text" placeholder="Signature Food Name" autocomplete="off" />
       </div>
       <div class="addon-field addon-price-field">
         <label>Price</label>
@@ -979,6 +1037,7 @@ function genReceipt() {
   const { subtotal, tax, tip, total } = calculateTotals();
   const parts = [];
   const who = $("who").value.trim();
+  const riceNoodleSummary = getRiceNoodleSummaryCounts();
 
   parts.push(`<div class="rc-slip">`);
   parts.push(`<div class="rc-center rc-brand">Hunam Chinese Restaurant</div>`);
@@ -1023,6 +1082,14 @@ function genReceipt() {
   if ($("note").value.trim()) {
     parts.push(`<div class="rc-divider"></div>`);
     parts.push(`<div class="rc-note"><strong>NOTE:</strong> ${$("note").value.trim()}</div>`);
+  }
+
+  if (riceNoodleSummary.length) {
+    const summaryText = riceNoodleSummary
+      .map((entry) => `${entry.label} x${entry.qty}`)
+      .join(', ');
+    parts.push(`<div class="rc-divider"></div>`);
+    parts.push(`<div class="rc-side-summary">Rice / Noodle Summary: ${summaryText}</div>`);
   }
 
   parts.push(`<div class="rc-divider"></div>`);
@@ -1253,7 +1320,7 @@ function renderCategoryNavigator() {
   availableCategories.forEach(cat => {
     const link = document.createElement("a");
     link.href = "#";
-    link.textContent = displayCategoryName(cat);
+    link.textContent = displayCategoryNavigatorName(cat);
     link.className = "cat-link";
     link.dataset.category = cat;
     link.onclick = (e) => {
@@ -1309,11 +1376,33 @@ function updateActiveCategory() {
   });
 }
 
+function bindMinZeroValidationMessages() {
+  document.addEventListener('invalid', (event) => {
+    const input = event.target;
+    if (!(input instanceof HTMLInputElement)) return;
+    if (input.type !== 'number' || input.min !== '0') return;
+
+    input.setCustomValidity(
+      input.validity.rangeUnderflow ? 'Value must be greater than or equal to 0!' : ''
+    );
+  }, true);
+
+  document.addEventListener('input', (event) => {
+    const input = event.target;
+    if (!(input instanceof HTMLInputElement)) return;
+    if (input.type !== 'number' || input.min !== '0') return;
+
+    input.setCustomValidity('');
+  }, true);
+}
+
 // ============================================================================
 // EVENT BINDINGS
 // ============================================================================
 
 function bindEvents() {
+  bindMinZeroValidationMessages();
+
   $("mode").onchange = () => {
     renderMenu();
     renderOrder();
