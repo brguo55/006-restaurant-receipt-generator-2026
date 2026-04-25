@@ -73,7 +73,7 @@ const OTHERS_SEASONAL_VEGETABLES = [
   "Stir-Fried Baby Broccoli",
   "Stir-Fried Bok Choy",
 ];
-const OTHERS_NO_ADD_SIDE_CODES = new Set(["X2", "X3"]);
+const OTHERS_GLOBAL_SIDE_CODES = new Set(["X1a", "X1b", "X1c", "X4", "X5"]);
 const HUNAM_COMBO_NO_RICE_BASE_CODES = new Set(["U26", "U29"]);
 const NO_SIDE_OPTION = { key: "no-side", en: "No Side", zh: "无", surcharge: 0 };
 const REGULAR_SIDE_OPTIONS = [
@@ -326,8 +326,20 @@ function isHunamComboBaseItem(item) {
   return item.category === HUNAM_SPECIAL_COMBO_CATEGORY && !item.comboSelection;
 }
 
+function globalAddSideEnabled() {
+  return $("addSide")?.value === "yes";
+}
+
+function supportsGlobalSideSelection(item) {
+  if (item.category === OTHERS_CATEGORY) {
+    return OTHERS_GLOBAL_SIDE_CODES.has(item.code);
+  }
+
+  return SIDE_SELECTION_CATEGORIES.has(item.category);
+}
+
 function requiresSideSelection(item) {
-  return SIDE_SELECTION_CATEGORIES.has(item.category) && !item.sideSelection && !item.comboSelection;
+  return globalAddSideEnabled() && supportsGlobalSideSelection(item) && !item.sideSelection && !item.comboSelection;
 }
 
 function hunamComboSkipsRice(item) {
@@ -950,25 +962,6 @@ function getOthersSections(items) {
 function renderOthersSection(grid, items) {
   const sections = getOthersSections(items);
   const sectionCodes = new Set();
-  const renderOthersSideToggle = (item) => {
-    if (OTHERS_NO_ADD_SIDE_CODES.has(item.code)) return '';
-
-    return `
-      <label class="side-toggle item-side-toggle">
-        <input type="checkbox" class="others-add-side" />
-        <span>Add Side</span>
-      </label>
-    `;
-  };
-
-  const getOthersAddHandler = (item, checkboxEl) => () => {
-    if (checkboxEl?.checked) {
-      showSideSelectionModal(item);
-      return;
-    }
-
-    addResolvedItem(item);
-  };
 
   sections.forEach((section) => {
     section.options.forEach((option) => sectionCodes.add(option.item.code));
@@ -982,20 +975,11 @@ function renderOthersSection(grid, items) {
         <div class="name">${section.title}</div>
         <div class="price">${priceInfo.same ? money(priceInfo.min) : `from ${money(priceInfo.min)}`}</div>
       </div>
-      <label class="side-toggle item-side-toggle">
-        <input type="checkbox" class="others-add-side" />
-        <span>Add Side</span>
-      </label>
       <button class="add">Add</button>
     `;
-    const checkbox = el.querySelector('.others-add-side');
     el.querySelector("button").onclick = (e) => {
       e.stopPropagation();
-      showPopupOptions(
-        section.options,
-        e.target,
-        (selectedItem) => getOthersAddHandler(selectedItem, checkbox)()
-      );
+      showPopupOptions(section.options, e.target, add);
     };
     grid.appendChild(el);
   });
@@ -1010,11 +994,9 @@ function renderOthersSection(grid, items) {
           <div class="name">${label(item)}</div>
           <div class="price">${money(item.price)}</div>
         </div>
-        ${renderOthersSideToggle(item)}
         <button class="add">Add</button>
       `;
-      const checkbox = el.querySelector('.others-add-side');
-      el.querySelector("button").onclick = getOthersAddHandler(item, checkbox);
+      el.querySelector("button").onclick = () => add(item);
       grid.appendChild(el);
     });
 }
@@ -1454,6 +1436,10 @@ function bindEvents() {
   $("mode").onchange = () => {
     renderMenu();
     renderOrder();
+  };
+
+  $("addSide").onchange = () => {
+    renderMenu();
   };
 
   $("gen").onclick = genReceipt;
