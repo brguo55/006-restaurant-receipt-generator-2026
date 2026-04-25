@@ -61,14 +61,8 @@ const HUNAM_COMBO_SIDE_OPTIONS = [
   { key: "egg-roll", en: "Egg Roll", zh: "蛋卷", surcharge: 0 },
   { key: "veggie-roll", en: "Veggie Roll", zh: "素春卷", surcharge: 0 },
   { key: "egg-drop-soup", en: "Egg Drop Soup", zh: "蛋花汤", surcharge: 0 },
-  { key: "wanton-soup", en: "Wanton Soup", zh: "馄饨汤", surcharge: 0 },
+  { key: "wonton-soup", en: "Wonton Soup", zh: "馄饨汤", surcharge: 0 },
   { key: "hot-sour-soup", en: "Hot & Sour Soup", zh: "酸辣汤", surcharge: 0 },
-  {
-    key: "egg-drop-wanton-soup",
-    en: "Egg Drop Soup with Wanton",
-    zh: "蛋花馄饨汤",
-    surcharge: 1,
-  },
 ];
 const HUNAM_COMBO_RICE_OPTIONS = [
   { key: "fried-rice", en: "Fried Rice", zh: "炒饭", surcharge: 0 },
