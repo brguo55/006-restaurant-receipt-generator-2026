@@ -46,6 +46,8 @@ const categoryOrder = [
 
 const FRIED_RICE_LO_MEIN_CATEGORY = "Fried Rice & Lo Mein";
 const FRIED_RICE_LO_MEIN_TITLE = "Fried Rice & Lo Mein";
+const MOO_SHU_CATEGORY = "Moo Shu";
+const EGG_FOO_YOUNG_CATEGORY = "Egg Foo Young";
 const NOODLE_CATEGORY = "Noodle";
 const BEVERAGE_CATEGORY = "Beverage";
 const ADD_ON_CATEGORY = "Add-On";
@@ -446,6 +448,74 @@ function renderFriedRiceLoMeinSection(grid, items) {
     };
     grid.appendChild(el);
   });
+}
+
+function getMooShuOptions(items) {
+  return items.map((item) => {
+    const enText = item.en.replace(/^Moo Shu with\s+/i, "");
+    const zhText = item.zh.startsWith("木须") ? item.zh.slice(2) : item.zh;
+
+    return {
+      item,
+      text: $("mode").value === "both" && zhText ? `${enText} / ${zhText}` : enText,
+    };
+  });
+}
+
+function renderMooShuSection(grid, items) {
+  const options = getMooShuOptions(items);
+  if (!options.length) return;
+
+  const priceInfo = getGroupPrice(options.map((option) => option.item));
+  const el = document.createElement("div");
+  el.className = "item";
+  el.style.position = "relative";
+  el.innerHTML = `
+    <div class="row">
+      <div class="name">${MOO_SHU_CATEGORY}</div>
+      <div class="price">${priceInfo.same ? money(priceInfo.min) : `from ${money(priceInfo.min)}`}</div>
+    </div>
+    <button class="add">Add</button>
+  `;
+  el.querySelector("button").onclick = (e) => {
+    e.stopPropagation();
+    showPopupOptions(options, e.target);
+  };
+  grid.appendChild(el);
+}
+
+function getEggFooYoungOptions(items) {
+  return items.map((item) => {
+    const enText = item.en.replace(/\s+Egg Foo Young$/i, "");
+    const zhText = item.zh.endsWith("芙蓉蛋") ? item.zh.slice(0, -3) : item.zh;
+
+    return {
+      item,
+      text: $("mode").value === "both" && zhText ? `${enText} / ${zhText}` : enText,
+    };
+  });
+}
+
+function renderEggFooYoungSection(grid, items) {
+  const options = getEggFooYoungOptions(items);
+  if (!options.length) return;
+
+  const priceInfo = getGroupPrice(options.map((option) => option.item));
+  const el = document.createElement("div");
+  el.className = "item";
+  el.style.position = "relative";
+  el.innerHTML = `
+    <div class="row">
+      <div class="name">${EGG_FOO_YOUNG_CATEGORY}</div>
+      <div class="price">${priceInfo.same ? money(priceInfo.min) : `from ${money(priceInfo.min)}`}</div>
+    </div>
+    <button class="add">Add</button>
+  `;
+  el.querySelector("button").onclick = (e) => {
+    e.stopPropagation();
+    showPopupOptions(options, e.target);
+  };
+  grid.appendChild(el);
 }
 
 function getNoodleSections(items) {
@@ -924,6 +994,18 @@ function renderMenu() {
       return;
     }
 
+    if (cat === MOO_SHU_CATEGORY) {
+      renderMooShuSection(grid, items);
+      root.appendChild(sec);
+      return;
+    }
+
+    if (cat === EGG_FOO_YOUNG_CATEGORY) {
+      renderEggFooYoungSection(grid, items);
+      root.appendChild(sec);
+      return;
+    }
+
     if (cat === NOODLE_CATEGORY) {
       renderNoodleSection(grid, items);
       root.appendChild(sec);
@@ -1060,7 +1142,7 @@ function scrollToCategory(category) {
   const catId = `cat-${category.replace(/\s+/g, '-').toLowerCase()}`;
   const element = $(catId);
   if (element) {
-    element.scrollIntoView({ behavior: "smooth", block: "start" });
+    element.scrollIntoView({ behavior: "smooth", block: "center" });
   }
 }
 
