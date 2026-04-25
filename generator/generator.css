@@ -213,6 +213,32 @@ button {
   background: #fff;
 }
 
+.side-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: auto;
+  margin-bottom: 0;
+  color: #374151;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.side-toggle input {
+  width: auto;
+  margin: 0;
+  box-shadow: none;
+}
+
+.addon-side-toggle {
+  margin-top: 12px;
+}
+
+.item-side-toggle {
+  margin-top: 4px;
+}
+
 .addon-error {
   min-height: 18px;
   margin-top: 8px;

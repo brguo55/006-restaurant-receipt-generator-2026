@@ -73,6 +73,7 @@ const OTHERS_SEASONAL_VEGETABLES = [
   "Stir-Fried Baby Broccoli",
   "Stir-Fried Bok Choy",
 ];
+const OTHERS_NO_ADD_SIDE_CODES = new Set(["X2", "X3"]);
 const HUNAM_COMBO_NO_RICE_BASE_CODES = new Set(["U26", "U29"]);
 const NO_SIDE_OPTION = { key: "no-side", en: "No Side", zh: "无", surcharge: 0 };
 const REGULAR_SIDE_OPTIONS = [
@@ -368,7 +369,7 @@ function createAddOnItem(name, price) {
   };
 }
 
-function showPopupOptions(options, buttonEl) {
+function showPopupOptions(options, buttonEl, onSelectItem = add) {
   closeVariantPopup();
   const popup = document.createElement('div');
   popup.className = 'variant-popup';
@@ -380,7 +381,7 @@ function showPopupOptions(options, buttonEl) {
     btn.innerHTML = `<span>${text}</span><span>${money(item.price)}</span>`;
     btn.onclick = (e) => {
       e.stopPropagation();
-      add(item);
+      onSelectItem(item);
       closeVariantPopup();
     };
     popup.appendChild(btn);
@@ -397,10 +398,11 @@ function showPopupOptions(options, buttonEl) {
   }, 0);
 }
 
-function showVariantPopup(items, buttonEl) {
+function showVariantPopup(items, buttonEl, onSelectItem = add) {
   showPopupOptions(
     items.map((item) => ({ item, text: label(item) })),
-    buttonEl
+    buttonEl,
+    onSelectItem
   );
 }
 
@@ -419,7 +421,7 @@ function closeSideSelectionModal() {
   if (existing) existing.remove();
 }
 
-function showSideSelectionModal(item) {
+function showSideSelectionModal(item, onConfirm = addResolvedItem) {
   closeSideSelectionModal();
 
   const overlay = document.createElement('div');
@@ -478,7 +480,7 @@ function showSideSelectionModal(item) {
 
     const sideOption = REGULAR_SIDE_OPTIONS.find((option) => option.key === sideKey);
     errorEl.textContent = '';
-    addResolvedItem(createSideConfiguredItem(item, sideOption));
+    onConfirm(createSideConfiguredItem(item, sideOption));
     close();
   };
 
@@ -863,6 +865,7 @@ function renderBeverageSection(grid, items) {
 function submitAddOnForm(form) {
   const nameInput = form.elements.addOnName;
   const priceInput = form.elements.addOnPrice;
+  const addSideInput = form.elements.addOnAddSide;
   const errorEl = form.querySelector('.addon-error');
   const name = nameInput.value.trim();
   const price = parseFloat(priceInput.value);
@@ -880,7 +883,18 @@ function submitAddOnForm(form) {
   }
 
   errorEl.textContent = '';
-  add(createAddOnItem(name, price));
+  const item = createAddOnItem(name, price);
+
+  if (addSideInput.checked) {
+    showSideSelectionModal(item, (configuredItem) => {
+      addResolvedItem(configuredItem);
+      form.reset();
+      nameInput.focus();
+    });
+    return;
+  }
+
+  addResolvedItem(item);
   form.reset();
   nameInput.focus();
 }
@@ -899,6 +913,10 @@ function renderAddOnSection(grid) {
         <input name="addOnPrice" type="number" min="0" step="0.01" placeholder="0.00" inputmode="decimal" />
       </div>
     </div>
+    <label class="side-toggle addon-side-toggle">
+      <input name="addOnAddSide" type="checkbox" />
+      <span>Add Side</span>
+    </label>
     <button class="add" type="submit">Add to Order</button>
     <div class="small addon-error" aria-live="polite"></div>
   `;
@@ -932,6 +950,25 @@ function getOthersSections(items) {
 function renderOthersSection(grid, items) {
   const sections = getOthersSections(items);
   const sectionCodes = new Set();
+  const renderOthersSideToggle = (item) => {
+    if (OTHERS_NO_ADD_SIDE_CODES.has(item.code)) return '';
+
+    return `
+      <label class="side-toggle item-side-toggle">
+        <input type="checkbox" class="others-add-side" />
+        <span>Add Side</span>
+      </label>
+    `;
+  };
+
+  const getOthersAddHandler = (item, checkboxEl) => () => {
+    if (checkboxEl?.checked) {
+      showSideSelectionModal(item);
+      return;
+    }
+
+    addResolvedItem(item);
+  };
 
   sections.forEach((section) => {
     section.options.forEach((option) => sectionCodes.add(option.item.code));
@@ -945,11 +982,20 @@ function renderOthersSection(grid, items) {
         <div class="name">${section.title}</div>
         <div class="price">${priceInfo.same ? money(priceInfo.min) : `from ${money(priceInfo.min)}`}</div>
       </div>
+      <label class="side-toggle item-side-toggle">
+        <input type="checkbox" class="others-add-side" />
+        <span>Add Side</span>
+      </label>
       <button class="add">Add</button>
     `;
+    const checkbox = el.querySelector('.others-add-side');
     el.querySelector("button").onclick = (e) => {
       e.stopPropagation();
-      showPopupOptions(section.options, e.target);
+      showPopupOptions(
+        section.options,
+        e.target,
+        (selectedItem) => getOthersAddHandler(selectedItem, checkbox)()
+      );
     };
     grid.appendChild(el);
   });
@@ -964,9 +1010,11 @@ function renderOthersSection(grid, items) {
           <div class="name">${label(item)}</div>
           <div class="price">${money(item.price)}</div>
         </div>
+        ${renderOthersSideToggle(item)}
         <button class="add">Add</button>
       `;
-      el.querySelector("button").onclick = () => add(item);
+      const checkbox = el.querySelector('.others-add-side');
+      el.querySelector("button").onclick = getOthersAddHandler(item, checkbox);
       grid.appendChild(el);
     });
 }
