@@ -1328,7 +1328,7 @@ function renderOrder() {
         <span>${v.qty}</span>
         <button>+</button>
       </div>
-      <button>🗑</button>
+      <button>✕</button>
     `;
 
     const btns = el.querySelectorAll("button");
