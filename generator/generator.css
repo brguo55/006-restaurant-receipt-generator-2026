@@ -154,7 +154,7 @@ textarea:focus {
   display: flex;
   justify-content: space-between;
   gap: 16px;
-  align-items: center;
+  align-items: flex-start;
   margin-bottom: 8px;
 }
 .name {
@@ -162,13 +162,23 @@ textarea:focus {
   line-height: 1.4;
   font-size: 15px;
   flex: 1;
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-break: break-word;
   color: #1f2937;
+}
+.name.name-md {
+  font-size: 13px;
+}
+.name.name-sm {
+  font-size: 12px;
 }
 .price {
   font-weight: 700;
   white-space: nowrap;
   font-size: 15px;
   color: #1f3b73;
+  padding-top: 1px;
 }
 button {
   border: none;

@@ -1292,6 +1292,13 @@ function renderMenu() {
     root.appendChild(sec);
   });
 
+  // Apply slightly smaller font to long title names so they fit without cutoff
+  root.querySelectorAll('.name').forEach(el => {
+    const len = el.textContent.length;
+    el.classList.toggle('name-md', len > 22 && len <= 32);
+    el.classList.toggle('name-sm', len > 32);
+  });
+
   renderCategoryNavigator();
   setupScrollTracking();
 }
