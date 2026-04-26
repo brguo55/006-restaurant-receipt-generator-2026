@@ -150,7 +150,7 @@ function receiptLabel(item) {
 }
 
 function parseCSV(text) {
-  const lines = text.trim().split(/\r?\n/);
+  const lines = text.replace(/^\uFEFF/, '').trim().split(/\r?\n/);
   const headers = parseCSVLine(lines[0]);
   return lines.slice(1).map(line => {
     const values = parseCSVLine(line);
