@@ -541,6 +541,45 @@ button {
   font-size: 14px;
 }
 
+/* Delivery Fee Section */
+.delivery-section {
+  margin: 12px 0;
+  padding: 12px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+}
+.delivery-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  padding: 0 4px;
+}
+.delivery-input-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.delivery-input-row label {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  min-width: auto;
+}
+.delivery-input-row input {
+  flex: 1;
+  padding: 8px 10px;
+  font-size: 14px;
+}
+.delivery-input-row button {
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
 .actions {
   display: flex;
   gap: 10px;

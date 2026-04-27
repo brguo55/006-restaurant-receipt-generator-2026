@@ -15,6 +15,7 @@ const order = new Map();
 const TAX_RATE = 0.075;
 let tipAmount = 0;
 let activeTipPct = null;
+let deliveryFee = 0;
 
 const categoryOrder = [
   "Appetizer",
@@ -1041,8 +1042,8 @@ function calculateTax(subtotal) {
 function calculateTotals() {
   const subtotal = calculateSubtotal();
   const tax = calculateTax(subtotal);
-  const total = subtotal + tax + tipAmount;
-  return { subtotal, tax, tip: tipAmount, total };
+  const total = subtotal + tax + tipAmount + deliveryFee;
+  return { subtotal, tax, tip: tipAmount, delivery: deliveryFee, total };
 }
 
 function setTipByPercent(pct) {
@@ -1067,10 +1068,11 @@ function recalcTipIfPercent() {
 }
 
 function updateTotalsDisplay() {
-  const { subtotal, tax, tip, total } = calculateTotals();
+  const { subtotal, tax, tip, delivery, total } = calculateTotals();
   $("subtotal").textContent = money(subtotal);
   $("tax").textContent = money(tax);
   $("tipDisplay").textContent = money(tip);
+  $("deliveryDisplay").textContent = delivery > 0 ? money(delivery) : "\u2014";
   $("total").textContent = money(total);
 
   // Highlight active tip button
@@ -1085,7 +1087,7 @@ function updateTotalsDisplay() {
 // ============================================================================
 
 function genReceipt() {
-  const { subtotal, tax, tip, total } = calculateTotals();
+  const { subtotal, tax, tip, delivery, total } = calculateTotals();
   const parts = [];
   const who = $("who").value.trim();
   const riceNoodleSummary = getRiceNoodleSummaryCounts();
@@ -1127,6 +1129,9 @@ function genReceipt() {
   parts.push(`<div class="rc-summary-row"><span>Subtotal</span><span>${money(subtotal)}</span></div>`);
   parts.push(`<div class="rc-summary-row"><span>Tax (7.5%)</span><span>${money(tax)}</span></div>`);
   parts.push(`<div class="rc-summary-row"><span>Tip</span><span>${money(tip)}</span></div>`);
+  if (delivery > 0) {
+    parts.push(`<div class="rc-summary-row"><span>Delivery Fee</span><span>${money(delivery)}</span></div>`);
+  }
   parts.push(`<div class="rc-summary-row rc-total"><span>Total</span><span>${money(total)}</span></div>`);
   parts.push(`</div>`);
 
@@ -1205,7 +1210,9 @@ function clearOrder() {
   order.clear();
   tipAmount = 0;
   activeTipPct = null;
+  deliveryFee = 0;
   $("tipInput").value = "";
+  $("deliveryInput").value = "10.00";
   closeHunamComboModal();
   closeSideSelectionModal();
   renderOrder();
@@ -1489,6 +1496,13 @@ function bindEvents() {
     const val = parseFloat($("tipInput").value);
     setTipByAmount(isNaN(val) ? 0 : val);
   });
+
+  // Delivery fee
+  $("deliveryAddBtn").onclick = () => {
+    const val = parseFloat($("deliveryInput").value);
+    deliveryFee = isNaN(val) || val < 0 ? 0 : val;
+    updateTotalsDisplay();
+  };
 }
 
 // ============================================================================
