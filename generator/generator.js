@@ -736,7 +736,13 @@ function getNoodleSections(items) {
       ].filter(Boolean),
     },
     makeSingle("Beef Stew Soup Noodle", "T2"),
-    makeSingle("Singapore Rice Noodle", "T3"),
+    {
+      title: "Singapore Rice Noodle",
+      options: [
+        makeOption("Curry Sauce", "咖喱", "T3a"),
+        makeOption("Soy Sauce", "酱油", "T3b"),
+      ].filter(Boolean),
+    },
     {
       title: "Chow Fun",
       options: [
