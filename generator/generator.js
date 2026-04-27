@@ -878,10 +878,12 @@ function renderBeverageSection(grid, items) {
 function submitAddOnForm(form) {
   const nameInput = form.elements.addOnName;
   const priceInput = form.elements.addOnPrice;
+  const qtyInput = form.elements.addOnQty;
   const addSideInput = form.elements.addOnAddSide;
   const errorEl = form.querySelector('.addon-error');
   const name = nameInput.value.trim();
   const price = parseFloat(priceInput.value);
+  const qty = parseInt(qtyInput.value, 10);
 
   if (!name) {
     errorEl.textContent = 'Enter a signature food name.';
@@ -895,20 +897,28 @@ function submitAddOnForm(form) {
     return;
   }
 
+  if (!Number.isInteger(qty) || qty < 1) {
+    errorEl.textContent = 'Enter a valid quantity of 1 or more.';
+    qtyInput.focus();
+    return;
+  }
+
   errorEl.textContent = '';
   const item = createAddOnItem(name, price);
 
   if (addSideInput.checked) {
     showSideSelectionModal(item, (configuredItem) => {
-      addResolvedItem(configuredItem);
+      for (let i = 0; i < qty; i++) addResolvedItem(configuredItem);
       form.reset();
+      qtyInput.value = '1';
       nameInput.focus();
     });
     return;
   }
 
-  addResolvedItem(item);
+  for (let i = 0; i < qty; i++) addResolvedItem(item);
   form.reset();
+  qtyInput.value = '1';
   nameInput.focus();
 }
 
@@ -924,6 +934,10 @@ function renderAddOnSection(grid) {
       <div class="addon-field addon-price-field">
         <label>Price</label>
         <input name="addOnPrice" type="number" min="0" step="0.01" placeholder="0.00" inputmode="decimal" />
+      </div>
+      <div class="addon-field addon-qty-field">
+        <label>Qty</label>
+        <input name="addOnQty" type="number" min="1" step="1" value="1" inputmode="numeric" />
       </div>
     </div>
     <label class="side-toggle addon-side-toggle">

@@ -210,7 +210,7 @@ button {
 
 .addon-fields {
   display: grid;
-  grid-template-columns: minmax(0, 1.8fr) minmax(140px, 0.8fr);
+  grid-template-columns: minmax(0, 1.8fr) minmax(110px, 0.7fr) minmax(64px, 0.4fr);
   gap: 12px;
   align-items: end;
 }
