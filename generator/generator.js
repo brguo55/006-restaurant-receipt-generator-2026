@@ -1202,7 +1202,7 @@ function genReceipt() {
     }
     parts.push(`<div class="rc-divider"></div>`);
     if (isLargeParty) {
-      parts.push(`<div class="rc-gratuity-msg">*At least 18% service charge on parties of 5 or more</div>`);
+      parts.push(`<div class="rc-gratuity-msg">At least 18% service charge on parties of 5 or more</div>`);
     } else {
       parts.push(`<div class="rc-gratuity-msg">A suggested gratuity of 18% would be appreciated by our wait staff.</div>`);
     }
@@ -1224,7 +1224,6 @@ function genReceipt() {
   parts.push(`<div class="rc-divider"></div>`);
   parts.push(`<div class="rc-center rc-thank">Thank you!</div>`);
   parts.push(`<div class="rc-center rc-small">欢迎再次光临</div>`);
-  parts.push(`<div class="rc-center rc-small">Serving North Carolina since 1980</div>`);
   parts.push(`</div>`);
 
   $("receipt").innerHTML = parts.join("");
