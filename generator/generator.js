@@ -735,8 +735,8 @@ function getNoodleSections(items) {
     {
       title: "Soup Noodle",
       options: [
-        makeOption("Chicken", "鸡", "T1a"),
         makeOption("Vegetable", "菜", "T1b"),
+        makeOption("Chicken", "鸡", "T1a"),
         makeOption("Beef Stew", "牛腩", "T1c"),
       ].filter(Boolean),
     },
@@ -750,20 +750,21 @@ function getNoodleSections(items) {
     {
       title: "Chow Fun",
       options: [
-        makeOption("Beef", "牛", "T3a"),
+        makeOption("Vegetable", "菜", "T3a"),
         makeOption("Chicken", "鸡", "T3b"),
         makeOption("Pork", "猪", "T3c"),
-        makeOption("Vegetable", "菜", "T3d"),
+        makeOption("Beef", "牛", "T3d"),
       ].filter(Boolean),
     },
+    makeSingle("Beef Chow Fun with Black Bean Sauce", "T5"),
     {
       title: "Cantonese Style Chow Mein",
       options: [
+        makeOption("Vegetable", "菜", "T4e"),
         makeOption("Chicken", "鸡", "T4a"),
         makeOption("Roast Pork", "叉烧", "T4b"),
-        makeOption("Seafood", "海鲜", "T4c"),
         makeOption("Shrimp", "虾", "T4d"),
-        makeOption("Vegetable", "菜", "T4e"),
+        makeOption("Seafood", "海鲜", "T4c"),
       ].filter(Boolean),
     },
   ].filter((section) => section && (section.item || section.options?.length));
