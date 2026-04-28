@@ -1516,6 +1516,10 @@ function bindEvents() {
     deliveryFee = isNaN(val) || val < 0 ? 0 : val;
     updateTotalsDisplay();
   };
+  $("deliveryDelBtn").onclick = () => {
+    deliveryFee = 0;
+    updateTotalsDisplay();
+  };
 
   // Receipt tip mode toggle
   function setReceiptTipMode(mode) {
