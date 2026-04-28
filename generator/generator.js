@@ -1136,8 +1136,6 @@ function genReceipt() {
   const { subtotal, tax, tip, delivery, total } = calculateTotals();
   const parts = [];
   const who = $("who").value.trim();
-  const riceNoodleSummary = getRiceNoodleSummaryCounts();
-
   parts.push(`<div class="rc-slip">`);
   parts.push(`<div class="rc-center rc-brand">Hunam Chinese Restaurant</div>`);
   parts.push(`<div class="rc-center rc-brand-sub">南苑餐厅</div>`);
@@ -1213,16 +1211,8 @@ function genReceipt() {
     parts.push(`<div class="rc-note"><strong>NOTE:</strong> ${$("note").value.trim()}</div>`);
   }
 
-  if (riceNoodleSummary.length) {
-    const summaryText = riceNoodleSummary
-      .map((entry) => `${entry.label} x${entry.qty}`)
-      .join(', ');
-    parts.push(`<div class="rc-divider"></div>`);
-    parts.push(`<div class="rc-side-summary">Rice / Noodle Summary: ${summaryText}</div>`);
-  }
-
   parts.push(`<div class="rc-divider"></div>`);
-  parts.push(`<div class="rc-center rc-thank">Thank you!</div>`);
+  parts.push(`<div class="rc-center rc-thank">Thank you!!</div>`);
   parts.push(`<div class="rc-center rc-small">欢迎再次光临</div>`);
   parts.push(`</div>`);
 
