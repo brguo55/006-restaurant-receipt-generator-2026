@@ -619,10 +619,11 @@ button {
   border-radius: 0;
   padding: 12px 10px;
   font-family: Arial, Helvetica, "PingFang SC", "Microsoft YaHei", sans-serif;
-  min-height: 240px;
-  max-height: 560px;
+  min-height: 360px;
+  max-height: 900px;
   overflow-y: auto;
-  font-size: 14px;
+  font-size: 21px;
+  font-weight: 700;
   line-height: 1.45;
   color: #0a0a0a;
   font-variant-numeric: tabular-nums;
@@ -634,18 +635,19 @@ button {
   text-align: center;
 }
 .rc-brand {
-  font-size: 19px;
+  font-size: 28px;
   font-weight: 700;
   line-height: 1.25;
 }
 .rc-brand-sub {
-  font-size: 15px;
+  font-size: 22px;
   font-weight: 700;
   line-height: 1.25;
   margin-bottom: 3px;
 }
 .rc-small {
-  font-size: 13px;
+  font-size: 19px;
+  font-weight: 700;
   line-height: 1.4;
 }
 .rc-divider {
@@ -653,7 +655,8 @@ button {
   margin: 7px 0;
 }
 .rc-meta {
-  font-size: 13px;
+  font-size: 19px;
+  font-weight: 700;
 }
 .rc-meta-line {
   margin: 2px 0;
@@ -662,14 +665,15 @@ button {
   padding: 5px 0;
 }
 .rc-entry-name {
-  font-size: 15px;
+  font-size: 22px;
   font-weight: 700;
   line-height: 1.35;
   overflow-wrap: anywhere;
   color: #0a0a0a;
 }
 .rc-entry-option {
-  font-size: 13px;
+  font-size: 19px;
+  font-weight: 700;
   color: #374151;
   padding-top: 2px;
 }
@@ -701,27 +705,36 @@ button {
   padding: 1px 0;
 }
 .rc-note {
-  font-size: 13px;
+  font-size: 19px;
+  font-weight: 700;
   padding: 3px 0 0;
   white-space: pre-wrap;
   color: #1f2937;
 }
 .rc-side-summary {
-  font-size: 13px;
+  font-size: 19px;
+  font-weight: 700;
   padding: 3px 0 0;
   white-space: nowrap;
   color: #1f2937;
+}
+.rc-delivery-row {
+  border-top: 1px dashed #000;
+  border-bottom: 1px dashed #000;
+  padding: 5px 0;
+  margin: 5px 0;
+  font-weight: 700;
 }
 .rc-total {
   border-top: 1.5px solid #000;
   margin-top: 5px;
   padding-top: 5px;
-  font-size: 17px;
+  font-size: 25px;
   font-weight: 700;
   color: #0a0a0a;
 }
 .rc-thank {
-  font-size: 14px;
+  font-size: 21px;
   font-weight: 700;
   margin-top: 5px;
   color: #0a0a0a;
@@ -867,8 +880,9 @@ button {
     max-height: none;
     overflow: visible;
     color: #000;
-    font-size: 11px;
-    line-height: 1.35;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.4;
     page-break-inside: avoid;
     break-inside: avoid;
   }
@@ -879,15 +893,18 @@ button {
   }
 
   .rc-brand {
-    font-size: 14px;
+    font-size: 18px;
+    font-weight: 700;
   }
 
   .rc-brand-sub {
-    font-size: 12px;
+    font-size: 15px;
+    font-weight: 700;
   }
 
   .rc-entry-name {
-    font-size: 12px;
+    font-size: 15px;
+    font-weight: 700;
   }
 
   .rc-small,
@@ -895,7 +912,8 @@ button {
   .rc-note,
   .rc-side-summary,
   .rc-entry-option {
-    font-size: 10px;
+    font-size: 13px;
+    font-weight: 700;
     color: #000;
   }
 
@@ -912,7 +930,8 @@ button {
   }
 
   .rc-total {
-    font-size: 13px;
+    font-size: 17px;
+    font-weight: 700;
   }
 }
 
