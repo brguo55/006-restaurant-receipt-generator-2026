@@ -747,6 +747,14 @@ button {
 .receipt-mode-row {
   margin-bottom: 10px;
 }
+.receipt-mode-row .tip-buttons {
+  margin-bottom: 0;
+}
+.receipt-mode-row .tip-btn {
+  font-size: 13px;
+  min-width: 0;
+  white-space: nowrap;
+}
 
 /* Category Navigator */
 .category-nav {

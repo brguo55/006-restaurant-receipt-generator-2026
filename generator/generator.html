@@ -93,11 +93,11 @@
           <span>Total</span><span id="total">$0.00</span>
         </div>
         <div class="receipt-mode-row">
-          <label for="receiptTipMode">Receipt Mode</label>
-          <select id="receiptTipMode">
-            <option value="suggestions">Tip Suggestions</option>
-            <option value="paid">Paid / Actual Tip</option>
-          </select>
+          <label>Receipt Mode</label>
+          <div class="tip-buttons">
+            <button type="button" class="tip-btn active" id="modeBtnSuggestions">Tip Suggestions</button>
+            <button type="button" class="tip-btn" id="modeBtnPaid">Paid / Actual Tip</button>
+          </div>
         </div>
         <div class="actions">
           <button class="primary" id="gen">Generate Receipt</button>

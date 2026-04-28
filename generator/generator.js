@@ -16,6 +16,7 @@ const TAX_RATE = 0.075;
 let tipAmount = 0;
 let activeTipPct = null;
 let deliveryFee = 0;
+let receiptTipMode = "suggestions";
 
 const categoryOrder = [
   "Appetizer",
@@ -1124,7 +1125,7 @@ function genReceipt() {
     `);
   });
 
-  const tipMode = $("receiptTipMode")?.value || "suggestions";
+  const tipMode = receiptTipMode;
   const receiptTotal = tipMode === "paid" ? total : subtotal + tax + delivery;
 
   parts.push(`<div class="rc-divider"></div>`);
@@ -1515,6 +1516,15 @@ function bindEvents() {
     deliveryFee = isNaN(val) || val < 0 ? 0 : val;
     updateTotalsDisplay();
   };
+
+  // Receipt tip mode toggle
+  function setReceiptTipMode(mode) {
+    receiptTipMode = mode;
+    $("modeBtnSuggestions").classList.toggle("active", mode === "suggestions");
+    $("modeBtnPaid").classList.toggle("active", mode === "paid");
+  }
+  $("modeBtnSuggestions").onclick = () => setReceiptTipMode("suggestions");
+  $("modeBtnPaid").onclick = () => setReceiptTipMode("paid");
 }
 
 // ============================================================================
