@@ -1,7 +1,7 @@
 body {
   font-family: Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
   margin: 0;
-  background: #f1f3f5;
+  background: #eef1f5;
   color: #1f2937;
   padding: 0;
   overflow-x: hidden;
@@ -18,10 +18,10 @@ body {
 }
 .card {
   background: #ffffff;
-  border-radius: 8px;
+  border-radius: 12px;
   padding: 24px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  border: 1px solid #e5e7eb;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 6px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e2e6ea;
 }
 .card.menu-card {
   display: flex;
@@ -50,8 +50,9 @@ h1 {
 }
 h2 {
   font-size: 20px;
-  border-bottom: 2px solid #d1d5db;
+  border-bottom: 2px solid #e5e7eb;
   padding-bottom: 10px;
+  color: #374151;
 }
 .small {
   font-size: 13px;
@@ -64,9 +65,9 @@ h2 {
   gap: 12px;
   flex-wrap: wrap;
   margin-bottom: 18px;
-  background: #f9fafb;
+  background: #f8fafc;
   padding: 16px;
-  border-radius: 6px;
+  border-radius: 8px;
   border: 1px solid #e5e7eb;
   align-items: flex-end;
 }
@@ -91,20 +92,20 @@ select,
 input,
 textarea {
   width: 100%;
-  padding: 12px;
-  border: 1px solid #d1d5db;
-  border-radius: 6px;
+  padding: 10px 12px;
+  border: 1.5px solid #d1d5db;
+  border-radius: 7px;
   font-size: 14px;
   font-family: inherit;
   box-sizing: border-box;
-  transition: border-color 0.2s;
+  transition: border-color 0.18s, box-shadow 0.18s;
 }
 select:focus,
 input:focus,
 textarea:focus {
   outline: none;
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  border-color: #1f3b73;
+  box-shadow: 0 0 0 3px rgba(31, 59, 115, 0.12);
 }
 .cat {
   margin-top: 0;
@@ -140,7 +141,7 @@ textarea:focus {
   flex-direction: column;
 }
 .item:hover {
-  background-color: #f9fafb;
+  background-color: #f4f7ff;
 }
 .addon-item {
   grid-column: 1 / -1;
@@ -185,12 +186,12 @@ textarea:focus {
 }
 button {
   border: none;
-  border-radius: 6px;
-  padding: 12px 16px;
+  border-radius: 7px;
+  padding: 11px 16px;
   cursor: pointer;
   font-weight: 700;
   font-size: 14px;
-  transition: all 0.2s ease;
+  transition: all 0.18s ease;
   font-family: inherit;
 }
 .add {
@@ -203,8 +204,8 @@ button {
   font-weight: 700;
 }
 .add:hover {
-  background: #162d5a;
-  box-shadow: 0 4px 12px rgba(31, 59, 115, 0.2);
+  background: #17306a;
+  box-shadow: 0 4px 14px rgba(31, 59, 115, 0.3);
 }
 .add:active {
   background: #0f1e38;
@@ -267,8 +268,10 @@ button {
   align-items: center;
   justify-content: center;
   padding: 20px;
-  background: rgba(17, 24, 39, 0.42);
+  background: rgba(17, 24, 39, 0.44);
   z-index: 300;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
 }
 
 .combo-modal {
@@ -277,9 +280,9 @@ button {
   overflow-y: auto;
   background: #fff;
   border: 2px solid #1f3b73;
-  border-radius: 12px;
-  box-shadow: 0 18px 44px rgba(15, 23, 42, 0.24);
-  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.28);
+  padding: 22px;
 }
 
 .combo-modal-header {
@@ -323,17 +326,19 @@ button {
 }
 
 .combo-group {
-  border: 1px solid #e5e7eb;
+  border: 1.5px solid #e2e6ea;
   border-radius: 8px;
-  background: #f9fafb;
+  background: #f8fafc;
   padding: 14px;
 }
 
 .combo-group-title {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 700;
   color: #374151;
   margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
 .combo-options {
@@ -346,12 +351,17 @@ button {
   align-items: flex-start;
   gap: 10px;
   padding: 10px 12px;
-  border: 1px solid #d1d5db;
+  border: 1.5px solid #e2e6ea;
   border-radius: 8px;
   background: #fff;
   cursor: pointer;
   font-weight: 600;
   line-height: 1.4;
+  transition: border-color 0.15s, background 0.15s;
+}
+.combo-choice:hover {
+  border-color: #1f3b73;
+  background: #f0f4ff;
 }
 
 .combo-choice input {
@@ -397,8 +407,8 @@ button {
   position: fixed;
   background: #fff;
   border: 2px solid #1f3b73;
-  border-radius: 8px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+  border-radius: 10px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.16);
   z-index: 200;
   overflow: hidden;
 }
@@ -428,34 +438,35 @@ button {
 .line {
   display: grid;
   grid-template-columns: 1fr auto auto;
-  gap: 12px;
+  gap: 10px;
   align-items: center;
-  border: 1px solid #e5e7eb;
-  border-radius: 6px;
-  padding: 12px;
-  margin-bottom: 10px;
+  border: 1.5px solid #e8eaf0;
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin-bottom: 8px;
   background: #fafbfc;
-  transition: background-color 0.2s;
+  transition: background-color 0.15s, border-color 0.15s;
 }
 .line:hover {
-  background: #f3f4f6;
+  background: #f0f4ff;
+  border-color: #c5cde8;
 }
 .qty {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   background: #fff;
-  border: 1px solid #d1d5db;
-  border-radius: 4px;
-  padding: 4px;
+  border: 1.5px solid #d1d5db;
+  border-radius: 6px;
+  padding: 3px;
 }
 .qty button {
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
   background: #1f3b73;
   color: #fff;
   padding: 0;
-  border-radius: 4px;
+  border-radius: 5px;
   font-size: 16px;
   line-height: 1;
 }
@@ -470,35 +481,40 @@ button {
 .sum {
   display: flex;
   justify-content: space-between;
-  margin: 12px 0;
-  padding: 0 4px;
+  margin: 10px 0;
+  padding: 4px 8px;
   font-size: 15px;
+  color: #374151;
 }
 .total {
-  font-size: 18px;
+  font-size: 19px;
   font-weight: 900;
-  border-top: 2px solid #d1d5db;
-  border-bottom: 2px solid #d1d5db;
-  padding: 12px 4px;
-  margin: 16px 0;
+  background: #f0f4ff;
+  border: 2px solid #1f3b73;
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin: 14px 0;
   color: #1f3b73;
 }
 
 /* Tip Section */
 .tip-section {
-  margin: 12px 0;
-  padding: 12px;
-  background: #f9fafb;
-  border: 1px solid #e5e7eb;
-  border-radius: 6px;
+  margin: 10px 0;
+  padding: 14px;
+  background: #f8fafc;
+  border: 1.5px solid #e2e6ea;
+  border-radius: 8px;
 }
 .tip-header {
   display: flex;
   justify-content: space-between;
-  font-size: 15px;
-  font-weight: 600;
+  font-size: 12px;
+  font-weight: 700;
   margin-bottom: 10px;
-  padding: 0 4px;
+  padding: 0 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #6b7280;
 }
 .tip-buttons {
   display: flex;
@@ -510,18 +526,20 @@ button {
   flex: 1;
   min-width: 50px;
   padding: 8px 4px;
-  background: #e5e7eb;
+  background: #eef0f5;
   color: #374151;
   font-size: 13px;
   font-weight: 600;
-  border-radius: 4px;
+  border-radius: 6px;
+  transition: background 0.15s, color 0.15s;
 }
 .tip-btn:hover {
-  background: #d1d5db;
+  background: #dde1ea;
 }
 .tip-btn.active {
   background: #1f3b73;
   color: #fff;
+  box-shadow: 0 2px 6px rgba(31, 59, 115, 0.25);
 }
 .tip-custom {
   display: flex;
@@ -543,19 +561,22 @@ button {
 
 /* Delivery Fee Section */
 .delivery-section {
-  margin: 12px 0;
-  padding: 12px;
-  background: #f9fafb;
-  border: 1px solid #e5e7eb;
-  border-radius: 6px;
+  margin: 10px 0;
+  padding: 14px;
+  background: #f8fafc;
+  border: 1.5px solid #e2e6ea;
+  border-radius: 8px;
 }
 .delivery-header {
   display: flex;
   justify-content: space-between;
-  font-size: 15px;
-  font-weight: 600;
+  font-size: 12px;
+  font-weight: 700;
   margin-bottom: 10px;
-  padding: 0 4px;
+  padding: 0 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #6b7280;
 }
 .delivery-input-row {
   display: flex;
@@ -596,28 +617,34 @@ button {
   font-weight: 700;
 }
 .primary:hover {
-  background: #162d5a;
-  box-shadow: 0 4px 12px rgba(31, 59, 115, 0.2);
+  background: #17306a;
+  box-shadow: 0 4px 14px rgba(31, 59, 115, 0.3);
+}
+.primary:active {
+  background: #0f1e38;
+  transform: scale(0.98);
 }
 .secondary {
-  background: #e5e7eb;
+  background: #eef0f4;
   color: #374151;
   font-weight: 600;
+  border: 1.5px solid #d1d5db;
 }
 .secondary:hover {
-  background: #d1d5db;
+  background: #e2e6ea;
+  border-color: #b5bcc8;
 }
 .receipt {
-  margin-top: 16px;
+  margin-top: 18px;
   width: 72mm;
   max-width: 100%;
   margin-left: auto;
   margin-right: auto;
   box-sizing: border-box;
   background: #ffffff;
-  border: 1px dashed #111827;
-  border-radius: 0;
-  padding: 12px 10px;
+  border: 1.5px dashed #9ca3af;
+  border-radius: 4px;
+  padding: 14px 12px;
   font-family: Arial, Helvetica, "PingFang SC", "Microsoft YaHei", sans-serif;
   min-height: 360px;
   max-height: 900px;
@@ -627,6 +654,7 @@ button {
   line-height: 1.45;
   color: #0a0a0a;
   font-variant-numeric: tabular-nums;
+  box-shadow: inset 0 1px 8px rgba(0, 0, 0, 0.04);
 }
 .rc-slip {
   width: 100%;
