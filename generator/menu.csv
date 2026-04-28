@@ -299,10 +299,23 @@ Beverage,W4,Apple Juice,苹果汁,2.95
 Beverage,W5,Orange Juice,橙汁,2.95
 Beverage,W6,Wong Lo Kat,王老吉,2.95
 
-Others,X1a,Stir-Fried Snow Pea Leaves,清炒豆苗,15.95
-Others,X1b,Stir-Fried Baby Broccoli,清炒芥蓝,15.95
-Others,X1c,Stir-Fried Bok Choy,清炒小白菜,15.95
-Others,X2,Chicken Wings with Shrimp Fried Rice,鸡翅虾炒饭套餐,15.95
-Others,X3,BBQ Spare Ribs with Roast Pork Fried Rice,烧烤排骨叉烧炒饭套餐,15.95
-Others,X4,Sizzling Shrimp Paste Tofu,铁板虾滑豆腐,15.95
-Others,X5,Steamed Whole Fish,清蒸全鱼,30.00
+Alcohol & Beer,X1a,Woodbridge Cabernet Split,,6.95
+Alcohol & Beer,X1b,Woodbridge Cabernet Bottle,,20.95
+Alcohol & Beer,X2a,Woodbridge Merlot Split,,6.95
+Alcohol & Beer,X2b,Woodbridge Merlot Bottle,,20.95
+Alcohol & Beer,X3a,Woodbridge Chardonnay Split,,6.95
+Alcohol & Beer,X3b,Woodbridge Chardonnay Bottle,,20.95
+Alcohol & Beer,X4,Takara Plum Wine,,6.95
+Alcohol & Beer,X5,Hakutsuru Sake,,20.95
+Alcohol & Beer,X6,Tsingtao,,4.95
+Alcohol & Beer,X7,Lucky Buddha,,4.95
+Alcohol & Beer,X8,Asahi,,4.95
+Alcohol & Beer,X9,Heineken,,4.95
+
+Others,Y1a,Stir-Fried Snow Pea Leaves,清炒豆苗,15.95
+Others,Y1b,Stir-Fried Baby Broccoli,清炒芥蓝,15.95
+Others,Y1c,Stir-Fried Bok Choy,清炒小白菜,15.95
+Others,Y2,Chicken Wings with Shrimp Fried Rice,鸡翅虾炒饭套餐,15.95
+Others,Y3,BBQ Spare Ribs with Roast Pork Fried Rice,烧烤排骨叉烧炒饭套餐,15.95
+Others,Y4,Sizzling Shrimp Paste Tofu,铁板虾滑豆腐,15.95
+Others,Y5,Steamed Whole Fish,清蒸全鱼,30.00

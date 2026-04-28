@@ -42,6 +42,7 @@ const categoryOrder = [
   "Hunam Special Combo",
   "Side Order",
   "Beverage",
+  "Alcohol & Beer",
   "Others",
   "Add-On",
 ];
@@ -55,6 +56,7 @@ const BEVERAGE_CATEGORY = "Beverage";
 const ADD_ON_CATEGORY = "Add-On";
 const HUNAM_SPECIAL_COMBO_CATEGORY = "Hunam Special Combo";
 const OTHERS_CATEGORY = "Others";
+const ALCOHOL_BEER_CATEGORY = "Alcohol & Beer";
 const SIDE_SELECTION_CATEGORIES = new Set([
   "Pork",
   "Beef",
@@ -75,7 +77,7 @@ const OTHERS_SEASONAL_VEGETABLES = [
   "Stir-Fried Baby Broccoli",
   "Stir-Fried Bok Choy",
 ];
-const OTHERS_GLOBAL_SIDE_CODES = new Set(["X1a", "X1b", "X1c", "X4", "X5"]);
+const OTHERS_GLOBAL_SIDE_CODES = new Set(["Y1a", "Y1b", "Y1c", "Y4", "Y5"]);
 const HUNAM_COMBO_NO_RICE_BASE_CODES = new Set(["U26", "U29"]);
 const NO_SIDE_OPTION = { key: "no-side", en: "No Side", zh: "无", surcharge: 0 };
 const NO_STARTER_OPTION = { key: "no-side", en: "No Starter", zh: "无", surcharge: 0 };
@@ -883,6 +885,49 @@ function renderBeverageSection(grid, items) {
   });
 }
 
+function renderAlcoholBeerSection(grid, items) {
+  const grouped = groupItems(items);
+
+  grouped.forEach((group) => {
+    if (group.length === 1) {
+      const item = group[0];
+      const el = document.createElement("div");
+      el.className = "item";
+      el.innerHTML = `
+        <div class="row">
+          <div class="name">${label(item)}</div>
+          <div class="price">${money(item.price)}</div>
+        </div>
+        <button class="add">Add</button>
+      `;
+      el.querySelector("button").onclick = () => add(item);
+      grid.appendChild(el);
+    } else {
+      const groupName = getGroupEnLabel(group);
+      const priceInfo = getGroupPrice(group);
+      const el = document.createElement("div");
+      el.className = "item";
+      el.style.position = "relative";
+      el.innerHTML = `
+        <div class="row">
+          <div class="name">${groupName}</div>
+          <div class="price">${priceInfo.same ? money(priceInfo.min) : `from ${money(priceInfo.min)}`}</div>
+        </div>
+        <button class="add">Add</button>
+      `;
+      el.querySelector("button").onclick = (e) => {
+        e.stopPropagation();
+        const options = group.map((item) => ({
+          item,
+          text: item.en.replace(groupName, "").trim() || item.en,
+        }));
+        showPopupOptions(options, e.target);
+      };
+      grid.appendChild(el);
+    }
+  });
+}
+
 function submitAddOnForm(form) {
   const nameInput = form.elements.addOnName;
   const priceInput = form.elements.addOnPrice;
@@ -1278,6 +1323,12 @@ function renderMenu() {
 
     if (cat === BEVERAGE_CATEGORY) {
       renderBeverageSection(grid, items);
+      root.appendChild(sec);
+      return;
+    }
+
+    if (cat === ALCOHOL_BEER_CATEGORY) {
+      renderAlcoholBeerSection(grid, items);
       root.appendChild(sec);
       return;
     }
