@@ -1143,6 +1143,7 @@ function genReceipt() {
   parts.push(`<div class="rc-center rc-brand-sub">南苑餐厅</div>`);
   parts.push(`<div class="rc-center rc-small">790 Martin Luther King Jr Blvd</div>`);
   parts.push(`<div class="rc-center rc-small">Chapel Hill, NC 27514</div>`);
+  parts.push(`<div class="rc-center rc-small">hunamrestaurant.net</div>`);
   parts.push(`<div class="rc-center rc-small">(919) 967-6133</div>`);
   parts.push(`<div class="rc-divider"></div>`);
   parts.push(`<div class="rc-meta">`);
@@ -1186,11 +1187,24 @@ function genReceipt() {
   parts.push(`<div class="rc-summary-row rc-total"><span>Total</span><span>${money(receiptTotal)}</span></div>`);
   parts.push(`</div>`);
   if (tipMode === "suggestions") {
+    const partySize = parseInt($('partySize')?.value, 10) || 0;
+    const isLargeParty = partySize >= 5;
     parts.push(`<div class="rc-divider"></div>`);
+    if (isLargeParty) {
+      parts.push(`<div class="rc-tip-suggestions-title">*At least 18% service charge on parties of 5 or more</div>`);
+    } else {
+      parts.push(`<div class="rc-tip-suggestions-title">A suggested gratuity of 18% would be appreciated by our wait staff.</div>`);
+    }
     parts.push(`<div class="rc-tip-suggestions-title">Tip Suggestions</div>`);
-    parts.push(`<div class="rc-summary-row"><span>15%</span><span>${money(subtotal * 0.15)}</span></div>`);
-    parts.push(`<div class="rc-summary-row"><span>18%</span><span>${money(subtotal * 0.18)}</span></div>`);
-    parts.push(`<div class="rc-summary-row"><span>20%</span><span>${money(subtotal * 0.20)}</span></div>`);
+    if (isLargeParty) {
+      parts.push(`<div class="rc-summary-row"><span>18%</span><span>${money(subtotal * 0.18)}</span></div>`);
+      parts.push(`<div class="rc-summary-row"><span>20%</span><span>${money(subtotal * 0.20)}</span></div>`);
+      parts.push(`<div class="rc-summary-row"><span>25%</span><span>${money(subtotal * 0.25)}</span></div>`);
+    } else {
+      parts.push(`<div class="rc-summary-row"><span>15%</span><span>${money(subtotal * 0.15)}</span></div>`);
+      parts.push(`<div class="rc-summary-row"><span>18%</span><span>${money(subtotal * 0.18)}</span></div>`);
+      parts.push(`<div class="rc-summary-row"><span>20%</span><span>${money(subtotal * 0.20)}</span></div>`);
+    }
   }
 
   if ($("note").value.trim()) {
@@ -1209,7 +1223,6 @@ function genReceipt() {
   parts.push(`<div class="rc-divider"></div>`);
   parts.push(`<div class="rc-center rc-thank">Thank you!</div>`);
   parts.push(`<div class="rc-center rc-small">欢迎再次光临</div>`);
-  parts.push(`<div class="rc-center rc-small">hunamrestaurant.net</div>`);
   parts.push(`<div class="rc-center rc-small">Serving North Carolina since 1980</div>`);
   parts.push(`</div>`);
 
