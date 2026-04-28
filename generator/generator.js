@@ -1201,7 +1201,7 @@ function genReceipt() {
     }
     parts.push(`<div class="rc-divider"></div>`);
     if (isLargeParty) {
-      parts.push(`<div class="rc-gratuity-msg">At least 18% service charge on parties of 5 or more</div>`);
+      parts.push(`<div class="rc-gratuity-msg">*At least 18% service charge on parties of 5 or more.</div>`);
     } else {
       parts.push(`<div class="rc-gratuity-msg">A suggested gratuity of 18% would be appreciated by our wait staff.</div>`);
     }
