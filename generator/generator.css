@@ -772,6 +772,14 @@ button {
   font-weight: 700;
   margin-bottom: 3px;
 }
+.rc-gratuity-msg {
+  font-size: 17px;
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.4;
+  color: #1f2937;
+  padding: 2px 0;
+}
 .receipt-mode-row {
   margin-bottom: 10px;
 }
