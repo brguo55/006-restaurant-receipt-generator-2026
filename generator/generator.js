@@ -1118,7 +1118,7 @@ function updateTotalsDisplay() {
   $("subtotal").textContent = money(subtotal);
   $("tax").textContent = money(tax);
   $("tipDisplay").textContent = money(tip);
-  $("deliveryDisplay").textContent = delivery > 0 ? money(delivery) : "\u2014";
+  $("deliveryDisplay").textContent = delivery > 0 ? money(delivery) : "";
   $("total").textContent = money(total);
 
   // Highlight active tip button
@@ -1573,6 +1573,22 @@ function bindEvents() {
   $("deliveryDelBtn").onclick = () => {
     deliveryFee = 0;
     updateTotalsDisplay();
+  };
+
+  // Delivery fee toggle
+  $("deliveryToggleBtn").onclick = () => {
+    const controls = $("deliveryControls");
+    const visible = controls.style.display !== "none";
+    controls.style.display = visible ? "none" : "flex";
+    $("deliveryToggleBtn").textContent = visible ? "Show" : "Hide";
+  };
+
+  // Guests toggle
+  $("guestsToggleBtn").onclick = () => {
+    const controls = $("guestsControls");
+    const visible = controls.style.display !== "none";
+    controls.style.display = visible ? "none" : "flex";
+    $("guestsToggleBtn").textContent = visible ? "Show" : "Hide";
   };
 
   // Receipt tip mode toggle
