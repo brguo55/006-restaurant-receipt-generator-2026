@@ -739,6 +739,14 @@ button {
   margin-top: 5px;
   color: #0a0a0a;
 }
+.rc-tip-suggestions-title {
+  font-size: 19px;
+  font-weight: 700;
+  margin-bottom: 3px;
+}
+.receipt-mode-row {
+  margin-bottom: 10px;
+}
 
 /* Category Navigator */
 .category-nav {

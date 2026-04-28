@@ -1124,16 +1124,28 @@ function genReceipt() {
     `);
   });
 
+  const tipMode = $("receiptTipMode")?.value || "suggestions";
+  const receiptTotal = tipMode === "paid" ? total : subtotal + tax + delivery;
+
   parts.push(`<div class="rc-divider"></div>`);
   parts.push(`<div class="rc-summary">`);
   parts.push(`<div class="rc-summary-row"><span>Subtotal</span><span>${money(subtotal)}</span></div>`);
   parts.push(`<div class="rc-summary-row"><span>Tax (7.5%)</span><span>${money(tax)}</span></div>`);
-  parts.push(`<div class="rc-summary-row"><span>Tip</span><span>${money(tip)}</span></div>`);
+  if (tipMode === "paid") {
+    parts.push(`<div class="rc-summary-row"><span>Tip</span><span>${money(tip)}</span></div>`);
+  }
   if (delivery > 0) {
     parts.push(`<div class="rc-summary-row rc-delivery-row"><span>Delivery Fee</span><span>${money(delivery)}</span></div>`);
   }
-  parts.push(`<div class="rc-summary-row rc-total"><span>Total</span><span>${money(total)}</span></div>`);
+  parts.push(`<div class="rc-summary-row rc-total"><span>Total</span><span>${money(receiptTotal)}</span></div>`);
   parts.push(`</div>`);
+  if (tipMode === "suggestions") {
+    parts.push(`<div class="rc-divider"></div>`);
+    parts.push(`<div class="rc-tip-suggestions-title">Tip Suggestions</div>`);
+    parts.push(`<div class="rc-summary-row"><span>15%</span><span>${money(subtotal * 0.15)}</span></div>`);
+    parts.push(`<div class="rc-summary-row"><span>18%</span><span>${money(subtotal * 0.18)}</span></div>`);
+    parts.push(`<div class="rc-summary-row"><span>20%</span><span>${money(subtotal * 0.20)}</span></div>`);
+  }
 
   if ($("note").value.trim()) {
     parts.push(`<div class="rc-divider"></div>`);
