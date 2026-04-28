@@ -299,18 +299,20 @@ Beverage,W4,Apple Juice,苹果汁,2.95
 Beverage,W5,Orange Juice,橙汁,2.95
 Beverage,W6,Wong Lo Kat,王老吉,2.95
 
-Alcohol & Beer,X1a,Woodbridge Cabernet Split,,6.95
-Alcohol & Beer,X1b,Woodbridge Cabernet Bottle,,20.95
-Alcohol & Beer,X2a,Woodbridge Merlot Split,,6.95
-Alcohol & Beer,X2b,Woodbridge Merlot Bottle,,20.95
-Alcohol & Beer,X3a,Woodbridge Chardonnay Split,,6.95
-Alcohol & Beer,X3b,Woodbridge Chardonnay Bottle,,20.95
-Alcohol & Beer,X4,Takara Plum Wine,,6.95
-Alcohol & Beer,X5,Hakutsuru Sake,,20.95
-Alcohol & Beer,X6,Tsingtao,,4.95
-Alcohol & Beer,X7,Lucky Buddha,,4.95
-Alcohol & Beer,X8,Asahi,,4.95
-Alcohol & Beer,X9,Heineken,,4.95
+Alcohol & Beer,X1a,Woodbridge Cabernet Sauvignon (Split),,6.95
+Alcohol & Beer,X1b,Woodbridge Cabernet Sauvignon (Bottle),,20.95
+Alcohol & Beer,X2a,Woodbridge Merlot (Split),,6.95
+Alcohol & Beer,X2b,Woodbridge Merlot (Bottle),,20.95
+Alcohol & Beer,X3a,Woodbridge Chardonnay (Split),,6.95
+Alcohol & Beer,X3b,Woodbridge Chardonnay (Bottle),,20.95
+Alcohol & Beer,X4a,Takara Plum Wine (Glass),,6.95
+Alcohol & Beer,X4b,Takara Plum Wine (Bottle),,20.95
+Alcohol & Beer,X5a,Hakutsuru Sake (Glass),,6.95
+Alcohol & Beer,X5b,Hakutsuru Sake (Bottle),,20.95
+Alcohol & Beer,X6,Tsingtao Beer,,4.95
+Alcohol & Beer,X7,Lucky Buddha Beer,,4.95
+Alcohol & Beer,X8,Asahi Beer,,4.95
+Alcohol & Beer,X9,Heineken Beer,,4.95
 
 Others,Y1a,Stir-Fried Snow Pea Leaves,清炒豆苗,15.95
 Others,Y1b,Stir-Fried Baby Broccoli,清炒芥蓝,15.95
