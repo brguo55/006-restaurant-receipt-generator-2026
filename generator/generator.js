@@ -917,10 +917,10 @@ function renderAlcoholBeerSection(grid, items) {
       `;
       el.querySelector("button").onclick = (e) => {
         e.stopPropagation();
-        const options = group.map((item) => ({
-          item,
-          text: item.en.replace(groupName, "").trim() || item.en,
-        }));
+        const options = group.map((item) => {
+          const size = item.en.replace(groupName, "").trim().replace(/^\(|\)$/g, "").trim();
+          return { item, text: size ? `${groupName} (${size})` : item.en };
+        });
         showPopupOptions(options, e.target);
       };
       grid.appendChild(el);
