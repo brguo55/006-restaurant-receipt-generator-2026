@@ -1136,7 +1136,7 @@ function genReceipt() {
     parts.push(`<div class="rc-summary-row"><span>Tip</span><span>${money(tip)}</span></div>`);
   }
   if (delivery > 0) {
-    parts.push(`<div class="rc-summary-row rc-delivery-row"><span>Delivery Fee</span><span>${money(delivery)}</span></div>`);
+    parts.push(`<div class="rc-summary-row"><span>Delivery Fee</span><span>${money(delivery)}</span></div>`);
   }
   parts.push(`<div class="rc-summary-row rc-total"><span>Total</span><span>${money(receiptTotal)}</span></div>`);
   parts.push(`</div>`);
