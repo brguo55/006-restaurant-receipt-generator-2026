@@ -36,9 +36,10 @@ const categoryOrder = [
   "Combination",
   "House Specialty",
   "Fried Rice & Lo Mein",
-  "Chinese Cuisine",
-  "Hot Pot",
+  "Chinese Entree",
   "Noodle",
+  "Hot Pot",
+  "Chinese Soup",
   "Hunam Special Combo",
   "Side Order",
   "Beverage",
@@ -69,7 +70,7 @@ const SIDE_SELECTION_CATEGORIES = new Set([
   "Kid's Meal",
   "Combination",
   "House Specialty",
-  "Chinese Cuisine",
+  "Chinese Entree",
   "Hot Pot",
 ]);
 const OTHERS_SEASONAL_VEGETABLES = [
