@@ -1205,6 +1205,7 @@ function genReceipt() {
     const partySize = parseInt($('partySize')?.value, 10) || 0;
     const isLargeParty = partySize >= 5;
     parts.push(`<div class="rc-divider"></div>`);
+    parts.push(`<div class="rc-tip-section">`);
     parts.push(`<div class="rc-tip-suggestions-title">Tip Suggestions</div>`);
     if (isLargeParty) {
       parts.push(`<div class="rc-summary-row"><span>18%</span><span>${money(subtotal * 0.18)}</span></div>`);
@@ -1221,6 +1222,7 @@ function genReceipt() {
     } else {
       parts.push(`<div class="rc-gratuity-msg">A suggested gratuity of 18% would be appreciated by our wait staff.</div>`);
     }
+    parts.push(`</div>`);
   }
 
   if ($("note").value.trim()) {

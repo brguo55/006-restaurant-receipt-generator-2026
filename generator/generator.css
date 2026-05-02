@@ -773,13 +773,19 @@ button {
   margin-top: 5px;
   color: #0a0a0a;
 }
+.rc-tip-section {
+  font-size: 15px;
+}
+.rc-tip-section .rc-summary-row {
+  font-size: 15px;
+}
 .rc-tip-suggestions-title {
-  font-size: 19px;
+  font-size: 15px;
   font-weight: 700;
   margin-bottom: 3px;
 }
 .rc-gratuity-msg {
-  font-size: 17px;
+  font-size: 14px;
   font-weight: 700;
   text-align: center;
   line-height: 1.4;
@@ -990,6 +996,19 @@ button {
   .rc-total {
     font-size: 17px;
     font-weight: 700;
+  }
+
+  .rc-tip-section {
+    font-size: 12px;
+  }
+  .rc-tip-section .rc-summary-row {
+    font-size: 12px;
+  }
+  .rc-tip-suggestions-title {
+    font-size: 12px;
+  }
+  .rc-gratuity-msg {
+    font-size: 11px;
   }
 }
 
