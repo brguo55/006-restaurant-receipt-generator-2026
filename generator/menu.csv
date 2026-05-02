@@ -191,28 +191,29 @@ Chinese Entree,R36a,Jumbo Oyster with Ginger and Scallions,姜葱生蚝,29.95
 Chinese Entree,R36b,Fried Jumbo Oyster,酥炸生蚝,29.95
 Chinese Entree,R37,Peking Duck Two Way,北京片皮鸭二食,62.95
 
-Noodle,S1a,Chicken Soup Noodle,鸡汤面,14.95
-Noodle,S1b,Vegetable Soup Noodle,菜汤面,14.95
+Noodle,S1a,Chicken Soup Noodle,鸡丝汤面,14.95
+Noodle,S1b,Vegetable Soup Noodle,蔬菜汤面,14.95
 Noodle,S1c,Beef Stew Soup Noodle,牛腩汤面,15.95
-Noodle,S2a,Singapore Rice Noodle (Curry Sauce),星洲咖喱炒米粉,14.95
-Noodle,S2b,Singapore Rice Noodle (Soy Sauce),星洲酱油炒米粉,14.95
+Noodle,S2a,Singapore Rice Noodle (Curry Sauce),星洲炒米粉(咖喱),14.95
+Noodle,S2b,Singapore Rice Noodle (Soy Sauce),星洲炒米粉(酱油),14.95
 Noodle,S3a,Vegetable Chow Fun,干炒菜河粉,15.95
-Noodle,S3b,Chicken Chow Fun,干炒鸡河粉,15.95
-Noodle,S3c,Pork Chow Fun,干炒叉烧河粉,15.9
-Noodle,S3d,Beef Chow Fun,干炒牛河粉,15.95
-Noodle,S4,Beef Chow Fun with Black Bean Sauce,豉汁炒牛河粉,19.95
-Noodle,S5a,Chicken Cantonese Style Chow Mein,广东炒面（鸡）,18.95
-Noodle,S5b,Roast Pork Cantonese Style Chow Mein,广东炒面（叉烧）,18.95
-Noodle,S5c,Seafood Cantonese Style Chow Mein,广东炒面（海鲜）,21.95
-Noodle,S5d,Shrimp Cantonese Style Chow Mein,广东炒面（虾）,21.95
-Noodle,S5e,Vegetable Cantonese Style Chow Mein,广东炒面（菜）,17.95
+Noodle,S3b,Chicken Chow Fun,干炒鸡河粉,16.95
+Noodle,S3c,Pork Chow Fun,干炒叉烧河粉,16.95
+Noodle,S3d,Beef Chow Fun,干炒牛河粉,16.95
+Noodle,S4,Beef Chow Fun w/ Black Bean Sauce,豉汁炒牛河粉,17.95
+Noodle,S5,Salted Fish & Chicken Fried Rice,咸鱼鸡粒炒饭,16.95
+Noodle,S6a,Vegetable Chow Mein (Cantonese Style),蔬菜两面黄,18.95
+Noodle,S6b,Chicken Chow Mein (Cantonese Style),鸡丝两面黄,19.95
+Noodle,S6c,Roast Pork Chow Mein (Cantonese Style),叉烧两面黄,19.95
+Noodle,S6d,Shrimp Chow Mein (Cantonese Style),鲜虾两面黄,21.95
+Noodle,S6e,Seafood Chow Mein (Cantonese Style),海鲜两面黄,23.95
 
 Hot Pot,T1,Eggplant Hot Pot,鱼香茄子煲,16.95
 Hot Pot,T2,Braised Tofu w/ Mix Vegetables Hot Pot,红烧豆腐煲,16.95
 Hot Pot,T3,"Salted Fish, Chicken, and Egg Plant Hot Pot",咸鱼鸡粒茄子煲,18.95
 Hot Pot,T4,Seafood Tofu Hot Pot,海鲜豆腐煲,21.95
 Hot Pot,T5,Beef Stew Hot Pot,柱侯牛腩煲,21.95
-Hot Pot,T6,Braised Lamb Hot Pot,红烧羊肉堡,29.95
+Hot Pot,T6,Braised Lamb Hot Pot,红烧羊肉煲,29.95
 
 Chinese Soup,U1,Salted Egg & Mustard Green Soup,咸蛋芥菜汤,15.95
 Chinese Soup,U2,Seafood TOfu Soup,海鲜豆腐汤,16.95
@@ -224,7 +225,7 @@ Hunam Special Combo,V1b,Pork Chow Mein,炒面套餐（猪）,14.95
 Hunam Special Combo,V1c,Beef Chow Mein,炒面套餐（牛）,14.95
 Hunam Special Combo,V1d,Shrimp Chow Mein,炒面套餐（虾）,14.95
 Hunam Special Combo,V1e,Vegetable Chow Mein,炒面套餐（菜）,14.95
-Hunam Special Combo,V2,Szechuan Pork,四川猪肉套餐,14.95
+Hunam Special Combo,V2,Szechuan Pork,四川猪套餐,14.95
 Hunam Special Combo,V3,Cantonese Chicken,广东鸡套餐,14.95
 Hunam Special Combo,V4a,Sweet & Sour Chicken,糖醋鸡套餐,14.95
 Hunam Special Combo,V4b,Sweet & Sour Shrimp,糖醋虾套餐,14.95
