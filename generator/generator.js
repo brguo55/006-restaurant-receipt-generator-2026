@@ -736,36 +736,36 @@ function getNoodleSections(items) {
     {
       title: "Soup Noodle",
       options: [
-        makeOption("Vegetable", "菜", "T1b"),
-        makeOption("Chicken", "鸡", "T1a"),
-        makeOption("Beef Stew", "牛腩", "T1c"),
+        makeOption("Vegetable", "菜", "S1b"),
+        makeOption("Chicken", "鸡", "S1a"),
+        makeOption("Beef Stew", "牛腩", "S1c"),
       ].filter(Boolean),
     },
     {
       title: "Singapore Rice Noodle",
       options: [
-        makeOption("Curry Sauce", "咖喱", "T2a"),
-        makeOption("Soy Sauce", "酱油", "T2b"),
+        makeOption("Curry Sauce", "咖喱", "S2a"),
+        makeOption("Soy Sauce", "酱油", "S2b"),
       ].filter(Boolean),
     },
     {
       title: "Chow Fun",
       options: [
-        makeOption("Vegetable", "菜", "T3a"),
-        makeOption("Chicken", "鸡", "T3b"),
-        makeOption("Pork", "猪", "T3c"),
-        makeOption("Beef", "牛", "T3d"),
+        makeOption("Vegetable", "菜", "S3a"),
+        makeOption("Chicken", "鸡", "S3b"),
+        makeOption("Pork", "猪", "S3c"),
+        makeOption("Beef", "牛", "S3d"),
       ].filter(Boolean),
     },
-    makeSingle("Beef Chow Fun with Black Bean Sauce", "T4"),
+    makeSingle("Beef Chow Fun with Black Bean Sauce", "S4"),
     {
       title: "Cantonese Style Chow Mein",
       options: [
-        makeOption("Vegetable", "菜", "T5e"),
-        makeOption("Chicken", "鸡", "T5a"),
-        makeOption("Roast Pork", "叉烧", "T5b"),
-        makeOption("Shrimp", "虾", "T5d"),
-        makeOption("Seafood", "海鲜", "T5c"),
+        makeOption("Vegetable", "菜", "S5e"),
+        makeOption("Chicken", "鸡", "S5a"),
+        makeOption("Roast Pork", "叉烧", "S5b"),
+        makeOption("Shrimp", "虾", "S5d"),
+        makeOption("Seafood", "海鲜", "S5c"),
       ].filter(Boolean),
     },
   ].filter((section) => section && (section.item || section.options?.length));
@@ -827,26 +827,26 @@ function getBeverageSections(items) {
   };
 
   return [
-    makeSingle("Hot Tea", "W1"),
+    makeSingle("Hot Tea", "X1"),
     {
       title: "Ice Tea",
       options: [
-        makeOption("Unsweet", "无糖", "W2b"),
-        makeOption("Sweet", "甜", "W2a"),
+        makeOption("Unsweet", "无糖", "X2b"),
+        makeOption("Sweet", "甜", "X2a"),
       ].filter(Boolean),
     },
     {
       title: "Soft Drink",
       options: [
-        makeOption("Coke", "可乐", "W3a"),
-        makeOption("Diet Coke", "健怡可乐", "W3b"),
-        makeOption("Dr. Pepper", "胡椒博士", "W3c"),
-        makeOption("Sprite", "雪碧", "W3d"),
+        makeOption("Coke", "可乐", "X3a"),
+        makeOption("Diet Coke", "健怡可乐", "X3b"),
+        makeOption("Dr. Pepper", "胡椒博士", "X3c"),
+        makeOption("Sprite", "雪碧", "X3d"),
       ].filter(Boolean),
     },
-    makeSingle("Apple Juice", "W4"),
-    makeSingle("Orange Juice", "W5"),
-    makeSingle("Wong Lo Kat", "W6"),
+    makeSingle("Apple Juice", "X4"),
+    makeSingle("Orange Juice", "X5"),
+    makeSingle("Wong Lo Kat", "X6"),
   ].filter((section) => section && (section.item || section.options?.length));
 }
 
