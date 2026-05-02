@@ -10,7 +10,7 @@ Appetizer,A7a,Fried Dumplings (6),炸饺子（6）,8.50
 Appetizer,A7b,Steamed Dumplings (6),蒸饺子（6）,8.50
 Appetizer,A8a,Chicken Wings w/ Garlic Sauce,蒜酱鸡翅,8.95
 Appetizer,A8b,Chicken Wings w/ Pepper Salt Sauce,椒盐鸡翅,8.95
-Appetizer,A9,Honey Walnut Shrimp (Sample),蜂蜜核桃虾,10.95
+Appetizer,A9,Honey Walnut Shrimp (Sample),生汁核桃大虾（小份）,10.95
 Appetizer,A10,Pepper Salt Fried Calamari,椒盐炸鱿鱼,10.95
 Appetizer,A11,BBQ Spare Ribs (4),烧烤排骨（4）,14.95
 Appetizer,A12,Five Spice Beef Tripe,五香牛肚,14.95
@@ -36,7 +36,7 @@ Soup,D8,"Shredded Pork, Tofu, Vegetable Soup",肉丝豆腐蔬菜汤,15.95
 
 Pork,E1,Szechwan Pork,四川猪肉,15.95
 Pork,E2,Fresh Chili w/ Shredded Pork,尖椒炒肉丝,16.95
-Pork,E3,Double Cooked Pork,回锅肉(美式),16.95
+Pork,E3,Double Cooked Pork,回锅肉（美式）,16.95
 
 Beef,F1,Broccoli w/ Beef,西兰花牛,14.95
 Beef,F2,Snow Peas w/ Beef,荷兰豆牛肉,14.95
@@ -114,9 +114,9 @@ Gluten-Free Steamed Dishes,M2,Steamed Vegetable w/ Shrimp,清蒸虾仁时蔬,15.
 Gluten-Free Steamed Dishes,M3,Steamed Vegetable w/ Tofu,清蒸豆腐时蔬,13.95
 Gluten-Free Steamed Dishes,M4,Steamed Seafood Delight,清蒸海鲜什锦,18.95
 
-Kid's Meal,N1,Sweet & Sour Chicken (Kid's Meal),糖醋鸡(儿童套餐),7.95
-Kid's Meal,N2,Chicken Finger & Beef Sticks (Kid's Meal),鸡柳牛肉串(儿童套餐),7.95
-Kid's Meal,N3,Sesame Chicken (Kid's Meal),芝麻鸡(儿童套餐),7.95
+Kid's Meal,N1,Sweet & Sour Chicken (Kid's Meal),糖醋鸡（儿童套餐）,7.95
+Kid's Meal,N2,Chicken Finger & Beef Sticks (Kid's Meal),鸡柳牛肉串（儿童套餐）,7.95
+Kid's Meal,N3,Sesame Chicken (Kid's Meal),芝麻鸡（儿童套餐）,7.95
 
 Combination,O1,Orange Chicken and Shrimp,橙汁鸡虾,19.95
 Combination,O2,Steak and Shrimp,牛肉虾,22.95
@@ -194,8 +194,8 @@ Chinese Entree,R37,Peking Duck Two Way,北京片皮鸭二食,62.95
 Noodle,S1a,Chicken Soup Noodle,鸡丝汤面,14.95
 Noodle,S1b,Vegetable Soup Noodle,蔬菜汤面,14.95
 Noodle,S1c,Beef Stew Soup Noodle,牛腩汤面,15.95
-Noodle,S2a,Singapore Rice Noodle (Curry Sauce),星洲炒米粉(咖喱),14.95
-Noodle,S2b,Singapore Rice Noodle (Soy Sauce),星洲炒米粉(酱油),14.95
+Noodle,S2a,Singapore Rice Noodle (Curry Sauce),星洲炒米粉（咖喱）,14.95
+Noodle,S2b,Singapore Rice Noodle (Soy Sauce),星洲炒米粉（酱油）,14.95
 Noodle,S3a,Vegetable Chow Fun,干炒菜河粉,15.95
 Noodle,S3b,Chicken Chow Fun,干炒鸡河粉,16.95
 Noodle,S3c,Pork Chow Fun,干炒叉烧河粉,16.95
@@ -307,20 +307,20 @@ Beverage,X4,Apple Juice,苹果汁,2.95
 Beverage,X5,Orange Juice,橙汁,2.95
 Beverage,X6,Wong Lo Kat,王老吉,2.95
 
-Alcohol & Beer,Y1a,Woodbridge Cabernet Sauvignon (Split),,6.95
-Alcohol & Beer,Y1b,Woodbridge Cabernet Sauvignon (Bottle),,20.95
-Alcohol & Beer,Y2a,Woodbridge Merlot (Split),,6.95
-Alcohol & Beer,Y2b,Woodbridge Merlot (Bottle),,20.95
-Alcohol & Beer,Y3a,Woodbridge Chardonnay (Split),,6.95
-Alcohol & Beer,Y3b,Woodbridge Chardonnay (Bottle),,20.95
-Alcohol & Beer,Y4a,Takara Plum Wine (Glass),,6.95
-Alcohol & Beer,Y4b,Takara Plum Wine (Bottle),,20.95
-Alcohol & Beer,Y5a,Hakutsuru Sake (Glass),,6.95
-Alcohol & Beer,Y5b,Hakutsuru Sake (Bottle),,20.95
-Alcohol & Beer,Y6,Tsingtao,,4.95
-Alcohol & Beer,Y7,Lucky Buddha,,4.95
-Alcohol & Beer,Y8,Asahi,,4.95
-Alcohol & Beer,Y9,Heineken,,4.95
+Alcohol & Beer,Y1a,Woodbridge Cabernet Sauvignon (Split),木桥赤霞珠红葡萄酒（小瓶）,6.95
+Alcohol & Beer,Y1b,Woodbridge Cabernet Sauvignon (Bottle),木桥赤霞珠红葡萄酒（整瓶）,20.95
+Alcohol & Beer,Y2a,Woodbridge Merlot (Split),木桥梅洛红葡萄酒（小瓶）,6.95
+Alcohol & Beer,Y2b,Woodbridge Merlot (Bottle),木桥梅洛红葡萄酒（整瓶）,20.95
+Alcohol & Beer,Y3a,Woodbridge Chardonnay (Split),木桥霞多丽白葡萄酒（小瓶）,6.95
+Alcohol & Beer,Y3b,Woodbridge Chardonnay (Bottle),木桥霞多丽白葡萄酒（整瓶）,20.95
+Alcohol & Beer,Y4a,Takara Plum Wine (Glass),宝牌梅酒（小杯）,6.95
+Alcohol & Beer,Y4b,Takara Plum Wine (Bottle),宝牌梅酒（整瓶）,20.95
+Alcohol & Beer,Y5a,Hakutsuru Sake (Glass),白鹤清酒（小杯）,6.95
+Alcohol & Beer,Y5b,Hakutsuru Sake (Bottle),白鹤清酒（整瓶）,20.95
+Alcohol & Beer,Y6,Tsingtao,青岛啤酒,4.95
+Alcohol & Beer,Y7,Lucky Buddha,乐开啤酒,4.95
+Alcohol & Beer,Y8,Asahi,朝日啤酒,4.95
+Alcohol & Beer,Y9,Heineken,喜力啤酒,4.95
 
 Others,Z1a,Stir-Fried Snow Pea Leaves,清炒豆苗,15.95
 Others,Z1b,Stir-Fried Baby Broccoli,清炒芥蓝,15.95
