@@ -58,6 +58,7 @@ const ADD_ON_CATEGORY = "Add-On";
 const HUNAM_SPECIAL_COMBO_CATEGORY = "Hunam Special Combo";
 const OTHERS_CATEGORY = "Others";
 const ALCOHOL_BEER_CATEGORY = "Alcohol & Beer";
+const FISH_FILLET_BASE_CODE = "H11";
 const SIDE_SELECTION_CATEGORIES = new Set([
   "Pork",
   "Beef",
@@ -621,6 +622,20 @@ function getFriedRiceLoMeinSections(items) {
       ].filter(Boolean),
     },
   ].filter((section) => section.options.length > 0);
+}
+
+function getFishFilletPopupOptions(items) {
+  const shortLabels = {
+    "H11a": { en: "Steamed Fish Fillet", zh: "清蒸鱼片" },
+    "H11b": { en: "Sauteed Fish Fillet", zh: "清炒鱼片" },
+  };
+  return items.map((item) => {
+    const lbl = shortLabels[item.code];
+    const text = lbl
+      ? ($('mode').value === 'both' ? `${lbl.en} / ${lbl.zh}` : lbl.en)
+      : label(item);
+    return { item, text };
+  });
 }
 
 function renderFriedRiceLoMeinSection(grid, items) {
@@ -1379,7 +1394,11 @@ function renderMenu() {
         `;
         el.querySelector("button").onclick = (e) => {
           e.stopPropagation();
-          showVariantPopup(group, e.target);
+          if (getBaseCode(group[0].code) === FISH_FILLET_BASE_CODE) {
+            showPopupOptions(getFishFilletPopupOptions(group), e.target);
+          } else {
+            showVariantPopup(group, e.target);
+          }
         };
         grid.appendChild(el);
       }
