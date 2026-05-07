@@ -21,6 +21,7 @@ let dragSrcKey = null;
 let touchDragKey = null;
 let touchDragEl = null;
 let touchClone = null;
+let scrollTrackingInitialized = false;
 
 const categoryOrder = [
   "Appetizer",
@@ -1298,6 +1299,7 @@ function clearOrder() {
   deliveryFee = 0;
   $("tipInput").value = "";
   $("deliveryInput").value = "10.00";
+  $("partySize").value = "";
   if (touchClone) { touchClone.remove(); touchClone = null; }
   touchDragEl = null;
   touchDragKey = null;
@@ -1614,20 +1616,20 @@ function scrollToCategory(category) {
 // ============================================================================
 
 function setupScrollTracking() {
-  const menuContent = $("menu").parentElement;
-  if (!menuContent) return;
-
-  menuContent.addEventListener("scroll", updateActiveCategory, { passive: true });
+  if (scrollTrackingInitialized) return;
+  const menuEl = $("menu");
+  if (!menuEl) return;
+  menuEl.addEventListener("scroll", updateActiveCategory, { passive: true });
+  scrollTrackingInitialized = true;
 }
 
 function updateActiveCategory() {
-  const menuContent = $("menu").parentElement;
-  const menuItems = $("menu");
-  if (!menuContent || !menuItems) return;
+  const menuEl = $("menu");
+  if (!menuEl) return;
 
-  const categories = menuItems.querySelectorAll(".cat");
+  const categories = menuEl.querySelectorAll(".cat");
   let activeCategory = null;
-  const containerRect = menuContent.getBoundingClientRect();
+  const containerRect = menuEl.getBoundingClientRect();
 
   categories.forEach(cat => {
     const rect = cat.getBoundingClientRect();
