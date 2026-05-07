@@ -62,21 +62,14 @@
         <div class="sum">
           <span>Tax (7.5%)</span><span id="tax">$0.00</span>
         </div>
-        <div class="tip-section">
-          <div class="tip-header">
-            <span>Tip</span><span id="tipDisplay">$0.00</span>
+        <div class="delivery-section">
+          <div class="delivery-header">
+            <span>Guests</span>
+            <button type="button" class="secondary delivery-toggle-btn" id="guestsToggleBtn">Show</button>
           </div>
-          <div class="tip-buttons">
-            <button class="tip-btn" data-pct="15">15%</button>
-            <button class="tip-btn" data-pct="18">18%</button>
-            <button class="tip-btn" data-pct="20">20%</button>
-            <button class="tip-btn" data-pct="25">25%</button>
-            <button class="tip-btn" data-pct="30">30%</button>
-            <button class="tip-btn" data-pct="0">No Tip</button>
-          </div>
-          <div class="tip-custom">
-            <label for="tipInput">Custom $</label>
-            <input id="tipInput" type="number" min="0" step="0.01" placeholder="0.00" />
+          <div class="delivery-input-row" id="guestsControls" style="display:none">
+            <label for="partySize">#</label>
+            <input id="partySize" type="number" min="1" step="1" placeholder="—" />
           </div>
         </div>
         <div class="delivery-section">
@@ -91,14 +84,24 @@
             <button class="secondary" id="deliveryDelBtn">Del</button>
           </div>
         </div>
-        <div class="delivery-section">
-          <div class="delivery-header">
-            <span>Guests</span>
-            <button type="button" class="secondary delivery-toggle-btn" id="guestsToggleBtn">Show</button>
+        <div class="tip-section">
+          <div class="tip-header">
+            <span>Tip</span><span id="tipDisplay">$0.00</span>
+            <button type="button" class="secondary delivery-toggle-btn" id="tipToggleBtn">Show</button>
           </div>
-          <div class="delivery-input-row" id="guestsControls" style="display:none">
-            <label for="partySize">#</label>
-            <input id="partySize" type="number" min="1" step="1" placeholder="—" />
+          <div id="tipControls" style="display:none">
+            <div class="tip-buttons">
+              <button class="tip-btn" data-pct="15">15%</button>
+              <button class="tip-btn" data-pct="18">18%</button>
+              <button class="tip-btn" data-pct="20">20%</button>
+              <button class="tip-btn" data-pct="25">25%</button>
+              <button class="tip-btn" data-pct="30">30%</button>
+              <button class="tip-btn" data-pct="0">No Tip</button>
+            </div>
+            <div class="tip-custom">
+              <label for="tipInput">Custom $</label>
+              <input id="tipInput" type="number" min="0" step="0.01" placeholder="0.00" />
+            </div>
           </div>
         </div>
         <div class="sum total">
@@ -107,8 +110,8 @@
         <div class="receipt-mode-row">
           <label>Receipt Mode</label>
           <div class="tip-buttons">
-            <button type="button" class="tip-btn active" id="modeBtnSuggestions">Tip Suggestions</button>
-            <button type="button" class="tip-btn" id="modeBtnPaid">Paid / Actual Tip</button>
+            <button type="button" class="tip-btn active" id="modeBtnSuggestions">Pre-Payment (Tip Suggestions)</button>
+            <button type="button" class="tip-btn" id="modeBtnPaid">Tip Included</button>
           </div>
         </div>
         <div class="actions">

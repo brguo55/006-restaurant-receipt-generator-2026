@@ -1729,6 +1729,14 @@ function bindEvents() {
     $("guestsToggleBtn").textContent = visible ? "Show" : "Hide";
   };
 
+  // Tip toggle
+  $("tipToggleBtn").onclick = () => {
+    const controls = $("tipControls");
+    const visible = controls.style.display !== "none";
+    controls.style.display = visible ? "none" : "block";
+    $("tipToggleBtn").textContent = visible ? "Show" : "Hide";
+  };
+
   // Receipt tip mode toggle
   function setReceiptTipMode(mode) {
     receiptTipMode = mode;
