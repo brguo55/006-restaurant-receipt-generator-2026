@@ -437,7 +437,7 @@ button {
 
 .line {
   display: grid;
-  grid-template-columns: 1fr auto auto;
+  grid-template-columns: auto 1fr auto auto;
   gap: 10px;
   align-items: center;
   border: 1.5px solid #e8eaf0;
@@ -445,11 +445,34 @@ button {
   padding: 12px 14px;
   margin-bottom: 8px;
   background: #fafbfc;
-  transition: background-color 0.15s, border-color 0.15s;
+  transition: background-color 0.15s, border-color 0.15s, box-shadow 0.15s;
 }
 .line:hover {
   background: #f0f4ff;
   border-color: #c5cde8;
+}
+.drag-handle {
+  cursor: grab;
+  color: #b0b7c3;
+  font-size: 18px;
+  line-height: 1;
+  padding: 2px 2px 2px 0;
+  user-select: none;
+  touch-action: none;
+  display: flex;
+  align-items: center;
+}
+.drag-handle:active {
+  cursor: grabbing;
+  color: #6b7280;
+}
+.line.dragging {
+  opacity: 0.4;
+}
+.line.drag-over {
+  border-color: #1f3b73;
+  background: #e8eeff;
+  box-shadow: 0 0 0 2px #1f3b73;
 }
 .qty {
   display: flex;

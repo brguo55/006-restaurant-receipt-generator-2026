@@ -17,6 +17,10 @@ let tipAmount = 0;
 let activeTipPct = null;
 let deliveryFee = 0;
 let receiptTipMode = "suggestions";
+let dragSrcKey = null;
+let touchDragKey = null;
+let touchDragEl = null;
+let touchClone = null;
 
 const categoryOrder = [
   "Appetizer",
@@ -1294,10 +1298,27 @@ function clearOrder() {
   deliveryFee = 0;
   $("tipInput").value = "";
   $("deliveryInput").value = "10.00";
+  if (touchClone) { touchClone.remove(); touchClone = null; }
+  touchDragEl = null;
+  touchDragKey = null;
+  dragSrcKey = null;
   closeHunamComboModal();
   closeSideSelectionModal();
   renderOrder();
   $("receipt").innerHTML = "";
+}
+
+function reorderItem(srcKey, targetKey) {
+  if (srcKey === targetKey) return;
+  const entries = [...order.entries()];
+  const srcIdx = entries.findIndex(([k]) => k === srcKey);
+  const tgtIdx = entries.findIndex(([k]) => k === targetKey);
+  if (srcIdx === -1 || tgtIdx === -1) return;
+  const [removed] = entries.splice(srcIdx, 1);
+  entries.splice(tgtIdx, 0, removed);
+  order.clear();
+  entries.forEach(([k, v]) => order.set(k, v));
+  renderOrder();
 }
 
 // ============================================================================
@@ -1435,7 +1456,9 @@ function renderOrder() {
       .join('');
     const el = document.createElement("div");
     el.className = "line";
+    el.dataset.orderKey = key;
     el.innerHTML = `
+      <div class="drag-handle" title="Drag to reorder">⠿</div>
       <div>
         <div style="font-weight:900">${label(v.item)}</div>
         ${detailLines}
@@ -1446,13 +1469,104 @@ function renderOrder() {
         <span>${v.qty}</span>
         <button>+</button>
       </div>
-      <button>✕</button>
+      <button>&#x2715;</button>
     `;
 
     const btns = el.querySelectorAll("button");
     btns[0].onclick = () => decrementItem(key);
     btns[1].onclick = () => incrementItem(key);
     btns[2].onclick = () => remove(key);
+
+    // HTML5 drag (desktop) — only starts when initiated from the drag handle
+    const handle = el.querySelector('.drag-handle');
+    handle.addEventListener('mousedown', () => { el.draggable = true; });
+
+    el.addEventListener('dragstart', (e) => {
+      dragSrcKey = key;
+      e.dataTransfer.effectAllowed = 'move';
+      setTimeout(() => el.classList.add('dragging'), 0);
+    });
+
+    el.addEventListener('dragend', () => {
+      el.draggable = false;
+      el.classList.remove('dragging');
+      root.querySelectorAll('.drag-over').forEach(l => l.classList.remove('drag-over'));
+      dragSrcKey = null;
+    });
+
+    el.addEventListener('dragover', (e) => {
+      if (!dragSrcKey || dragSrcKey === key) return;
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+      root.querySelectorAll('.drag-over').forEach(l => l.classList.remove('drag-over'));
+      el.classList.add('drag-over');
+    });
+
+    el.addEventListener('dragleave', (e) => {
+      if (e.relatedTarget && el.contains(e.relatedTarget)) return;
+      el.classList.remove('drag-over');
+    });
+
+    el.addEventListener('drop', (e) => {
+      e.preventDefault();
+      el.classList.remove('drag-over');
+      if (dragSrcKey && dragSrcKey !== key) {
+        reorderItem(dragSrcKey, key);
+      }
+    });
+
+    // Touch drag (tablet / touchscreen) — handle only, leaves page scroll unaffected
+    const cleanupTouch = () => {
+      if (touchClone) { touchClone.remove(); touchClone = null; }
+      root.querySelectorAll('.drag-over').forEach(l => l.classList.remove('drag-over'));
+      if (touchDragEl) touchDragEl.classList.remove('dragging');
+      touchDragEl = null;
+      touchDragKey = null;
+    };
+
+    handle.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      touchDragKey = key;
+      touchDragEl = el;
+      const touch = e.touches[0];
+      const rect = el.getBoundingClientRect();
+      const clone = el.cloneNode(true);
+      clone.style.cssText = `position:fixed;width:${rect.width}px;left:${rect.left}px;top:${rect.top}px;opacity:0.85;pointer-events:none;z-index:9999;margin:0;border-radius:8px;`;
+      document.body.appendChild(clone);
+      touchClone = clone;
+      touchClone._offsetX = touch.clientX - rect.left;
+      touchClone._offsetY = touch.clientY - rect.top;
+      el.classList.add('dragging');
+    }, { passive: false });
+
+    handle.addEventListener('touchmove', (e) => {
+      if (!touchClone) return;
+      e.preventDefault();
+      const touch = e.touches[0];
+      touchClone.style.left = (touch.clientX - touchClone._offsetX) + 'px';
+      touchClone.style.top  = (touch.clientY - touchClone._offsetY) + 'px';
+      touchClone.style.display = 'none';
+      const elUnder = document.elementFromPoint(touch.clientX, touch.clientY);
+      touchClone.style.display = '';
+      const lineUnder = elUnder?.closest('.line[data-order-key]');
+      root.querySelectorAll('.drag-over').forEach(l => l.classList.remove('drag-over'));
+      if (lineUnder && lineUnder !== touchDragEl) lineUnder.classList.add('drag-over');
+    }, { passive: false });
+
+    handle.addEventListener('touchend', (e) => {
+      if (!touchClone) return;
+      const touch = e.changedTouches[0];
+      touchClone.style.display = 'none';
+      const elUnder = document.elementFromPoint(touch.clientX, touch.clientY);
+      const lineUnder = elUnder?.closest('.line[data-order-key]');
+      const savedSrcKey = touchDragKey;
+      cleanupTouch();
+      if (lineUnder && savedSrcKey && lineUnder.dataset.orderKey !== savedSrcKey) {
+        reorderItem(savedSrcKey, lineUnder.dataset.orderKey);
+      }
+    }, { passive: false });
+
+    handle.addEventListener('touchcancel', cleanupTouch, { passive: true });
 
     root.appendChild(el);
   });
