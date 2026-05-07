@@ -295,6 +295,31 @@ function formatOption(option) {
   return option.surcharge > 0 ? `${text} (+${money(option.surcharge)})` : text;
 }
 
+// Returns "en / zh" when in bilingual mode and zh is non-empty, otherwise just en.
+// Used for synthetic section titles that have no menu item object.
+function bilingualLabel(en, zh) {
+  if ($("mode").value === "both" && zh) {
+    return `${en} / ${zh}`;
+  }
+  return en;
+}
+
+// Derives a Chinese label for a group of items by finding the longest common
+// prefix across all zh values, then stripping any trailing open bracket （/(.
+// Used for Alcohol & Beer groups where the suffix algorithm produces garbage.
+function getGroupZhBaseLabel(items) {
+  const zhs = items.map(i => i.zh).filter(Boolean);
+  if (!zhs.length) return '';
+  let commonLen = 0;
+  const minLen = Math.min(...zhs.map(z => z.length));
+  for (let i = 0; i < minLen; i++) {
+    if (zhs.every(z => z[i] === zhs[0][i])) commonLen++;
+    else break;
+  }
+  const prefix = zhs[0].slice(0, commonLen).replace(/[（(]\s*$/, '').trim();
+  return prefix || zhs[0];
+}
+
 function getItemDetailLines(item) {
   if (item.comboSelection) {
     const lines = [`Starter: ${formatOption(item.comboSelection.side)}`];
@@ -606,6 +631,7 @@ function getFriedRiceLoMeinSections(items) {
   return [
     {
       title: "Fried Rice",
+      zhTitle: "炒饭",
       options: [
         makeOption("Vegetable", "菜", "Vegetable Fried Rice"),
         makeOption("Chicken", "鸡", "Chicken Fried Rice"),
@@ -617,6 +643,7 @@ function getFriedRiceLoMeinSections(items) {
     },
     {
       title: "Lo Mein",
+      zhTitle: "捞面",
       options: [
         makeOption("Vegetable", "菜", "Vegetable Lo Mein"),
         makeOption("Chicken", "鸡", "Chicken Lo Mein"),
@@ -653,7 +680,7 @@ function renderFriedRiceLoMeinSection(grid, items) {
     el.style.position = "relative";
     el.innerHTML = `
       <div class="row">
-        <div class="name">${section.title}</div>
+        <div class="name">${bilingualLabel(section.title, section.zhTitle)}</div>
         <div class="price">${priceInfo.same ? money(priceInfo.min) : `from ${money(priceInfo.min)}`}</div>
       </div>
       <button class="add">Add</button>
@@ -755,14 +782,16 @@ function getNoodleSections(items) {
   return [
     {
       title: "Soup Noodle",
+      zhTitle: "汤面",
       options: [
-        makeOption("Vegetable", "菜", "S1b"),
-        makeOption("Chicken", "鸡", "S1a"),
+        makeOption("Vegetable", "蔬菜", "S1b"),
+        makeOption("Chicken", "鸡丝", "S1a"),
         makeOption("Beef Stew", "牛腩", "S1c"),
       ].filter(Boolean),
     },
     {
       title: "Singapore Rice Noodle",
+      zhTitle: "星洲炒米粉",
       options: [
         makeOption("Curry Sauce", "咖喱", "S2a"),
         makeOption("Soy Sauce", "酱油", "S2b"),
@@ -770,22 +799,25 @@ function getNoodleSections(items) {
     },
     {
       title: "Chow Fun",
+      zhTitle: "炒河粉",
       options: [
-        makeOption("Vegetable", "菜", "S3a"),
+        makeOption("Vegetable", "蔬菜", "S3a"),
         makeOption("Chicken", "鸡", "S3b"),
-        makeOption("Pork", "猪", "S3c"),
+        makeOption("Pork", "叉烧", "S3c"),
         makeOption("Beef", "牛", "S3d"),
       ].filter(Boolean),
     },
-    makeSingle("Beef Chow Fun with Black Bean Sauce", "S4"),
+    makeSingle("Beef Chow Fun w/ Black Bean Sauce", "S4"),
+    makeSingle("Salted Fish & Chicken Fried Rice", "S5"),
     {
       title: "Cantonese Style Chow Mein",
+      zhTitle: "两面黄",
       options: [
-        makeOption("Vegetable", "菜", "S5e"),
-        makeOption("Chicken", "鸡", "S5a"),
-        makeOption("Roast Pork", "叉烧", "S5b"),
-        makeOption("Shrimp", "虾", "S5d"),
-        makeOption("Seafood", "海鲜", "S5c"),
+        makeOption("Vegetable", "蔬菜", "S6a"),
+        makeOption("Chicken", "鸡丝", "S6b"),
+        makeOption("Roast Pork", "叉烧", "S6c"),
+        makeOption("Shrimp", "鲜虾", "S6d"),
+        makeOption("Seafood", "海鲜", "S6e"),
       ].filter(Boolean),
     },
   ].filter((section) => section && (section.item || section.options?.length));
@@ -801,7 +833,7 @@ function renderNoodleSection(grid, items) {
     if (section.item) {
       el.innerHTML = `
         <div class="row">
-          <div class="name">${section.title}</div>
+          <div class="name">${label(section.item)}</div>
           <div class="price">${money(section.item.price)}</div>
         </div>
         <button class="add">Add</button>
@@ -815,7 +847,7 @@ function renderNoodleSection(grid, items) {
     el.style.position = "relative";
     el.innerHTML = `
       <div class="row">
-        <div class="name">${section.title}</div>
+        <div class="name">${bilingualLabel(section.title, section.zhTitle)}</div>
         <div class="price">${priceInfo.same ? money(priceInfo.min) : `from ${money(priceInfo.min)}`}</div>
       </div>
       <button class="add">Add</button>
@@ -850,6 +882,7 @@ function getBeverageSections(items) {
     makeSingle("Hot Tea", "X1"),
     {
       title: "Ice Tea",
+      zhTitle: "冰茶",
       options: [
         makeOption("Unsweet", "无糖", "X2b"),
         makeOption("Sweet", "甜", "X2a"),
@@ -857,6 +890,7 @@ function getBeverageSections(items) {
     },
     {
       title: "Soft Drink",
+      zhTitle: "汽水",
       options: [
         makeOption("Coke", "可乐", "X3a"),
         makeOption("Diet Coke", "健怡可乐", "X3b"),
@@ -880,7 +914,7 @@ function renderBeverageSection(grid, items) {
     if (section.item) {
       el.innerHTML = `
         <div class="row">
-          <div class="name">${section.title}</div>
+          <div class="name">${label(section.item)}</div>
           <div class="price">${money(section.item.price)}</div>
         </div>
         <button class="add">Add</button>
@@ -894,7 +928,7 @@ function renderBeverageSection(grid, items) {
     el.style.position = "relative";
     el.innerHTML = `
       <div class="row">
-        <div class="name">${section.title}</div>
+        <div class="name">${bilingualLabel(section.title, section.zhTitle)}</div>
         <div class="price">${priceInfo.same ? money(priceInfo.min) : `from ${money(priceInfo.min)}`}</div>
       </div>
       <button class="add">Add</button>
@@ -926,23 +960,21 @@ function renderAlcoholBeerSection(grid, items) {
       grid.appendChild(el);
     } else {
       const groupName = getGroupEnLabel(group);
+      const groupZh = getGroupZhBaseLabel(group);
       const priceInfo = getGroupPrice(group);
       const el = document.createElement("div");
       el.className = "item";
       el.style.position = "relative";
       el.innerHTML = `
         <div class="row">
-          <div class="name">${groupName}</div>
+          <div class="name">${bilingualLabel(groupName, groupZh)}</div>
           <div class="price">${priceInfo.same ? money(priceInfo.min) : `from ${money(priceInfo.min)}`}</div>
         </div>
         <button class="add">Add</button>
       `;
       el.querySelector("button").onclick = (e) => {
         e.stopPropagation();
-        const options = group.map((item) => {
-          const size = item.en.replace(groupName, "").trim().replace(/^\(|\)$/g, "").trim();
-          return { item, text: size ? `${groupName} (${size})` : item.en };
-        });
+        const options = group.map((item) => ({ item, text: label(item) }));
         showPopupOptions(options, e.target);
       };
       grid.appendChild(el);
@@ -1044,6 +1076,7 @@ function getOthersSections(items) {
   return [
     {
       title: "Seasonal Vegetables",
+      zhTitle: "时蔬",
       options: OTHERS_SEASONAL_VEGETABLES.map(makeOption).filter(Boolean),
     },
   ].filter((section) => section.options.length > 0);
@@ -1062,7 +1095,7 @@ function renderOthersSection(grid, items) {
     el.style.position = "relative";
     el.innerHTML = `
       <div class="row">
-        <div class="name">${section.title}</div>
+        <div class="name">${bilingualLabel(section.title, section.zhTitle)}</div>
         <div class="price">${priceInfo.same ? money(priceInfo.min) : `from ${money(priceInfo.min)}`}</div>
       </div>
       <button class="add">Add</button>
