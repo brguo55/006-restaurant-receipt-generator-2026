@@ -119,6 +119,15 @@ function money(n) {
   return `$${n.toFixed(2)}`;
 }
 
+function escapeHtml(str) {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 function displayCategoryName(category) {
   if (category === FRIED_RICE_LO_MEIN_CATEGORY) {
     return FRIED_RICE_LO_MEIN_TITLE;
@@ -139,7 +148,7 @@ function displayCategoryNavigatorName(category) {
 function getHunamComboNumber(item) {
   if (item.category !== HUNAM_SPECIAL_COMBO_CATEGORY) return '';
 
-  const match = getBaseCode(item.code).match(/^U(\d+)$/i);
+  const match = getBaseCode(item.code).match(/^V(\d+)$/i);
   return match ? match[1] : '';
 }
 
@@ -1206,7 +1215,7 @@ function updateTotalsDisplay() {
 function genReceipt() {
   const { subtotal, tax, tip, delivery, total } = calculateTotals();
   const parts = [];
-  const who = $("who").value.trim();
+  const who = escapeHtml($("who").value.trim());
   parts.push(`<div class="rc-slip">`);
   parts.push(`<div class="rc-center rc-brand">Hunam Chinese Restaurant</div>`);
   parts.push(`<div class="rc-center rc-brand-sub">南苑餐厅</div>`);
@@ -1216,7 +1225,7 @@ function genReceipt() {
   parts.push(`<div class="rc-center rc-small">(919) 967-6133</div>`);
   parts.push(`<div class="rc-divider"></div>`);
   parts.push(`<div class="rc-meta">`);
-  parts.push(`<div class="rc-meta-line">Order: ${$("type").value}</div>`);
+  parts.push(`<div class="rc-meta-line">Order: ${escapeHtml($("type").value)}</div>`);
   if (who) {
     parts.push(`<div class="rc-meta-line">Ref: ${who}</div>`);
   }
@@ -1281,7 +1290,7 @@ function genReceipt() {
 
   if ($("note").value.trim()) {
     parts.push(`<div class="rc-divider"></div>`);
-    parts.push(`<div class="rc-note"><strong>NOTE:</strong> ${$("note").value.trim()}</div>`);
+    parts.push(`<div class="rc-note"><strong>NOTE:</strong> ${escapeHtml($("note").value.trim())}</div>`);
   }
 
   parts.push(`<div class="rc-divider"></div>`);
@@ -1369,6 +1378,7 @@ function clearOrder() {
   $("tipInput").value = "";
   $("deliveryInput").value = "10.00";
   $("partySize").value = "";
+  $("note").value = "";
   if (touchClone) { touchClone.remove(); touchClone = null; }
   touchDragEl = null;
   touchDragKey = null;
