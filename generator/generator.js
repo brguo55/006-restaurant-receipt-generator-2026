@@ -253,9 +253,12 @@ function getGroupZhLabel(items) {
   }
   // Strip any leading brackets/parens from the common suffix.
   // e.g. suffix "）" from 炒面套餐（鸡）/炒面套餐（猪）/… becomes "".
-  const cleaned = common.replace(/^[（(）)【】〔〕]+/, '').trim();
+  let cleaned = common.replace(/^[（(）)【】〔〕]+/, '').trim();
+  // Also strip a trailing balanced （...） quantifier such as （6） in 饺子（6）,
+  // which is shared across all items as a count marker, not part of the name.
+  cleaned = cleaned.replace(/[（(][^（(）)]*[）)]$/, '').trim();
   // Reject if:
-  //  - empty after stripping leading brackets
+  //  - empty after stripping
   //  - exactly "套餐" alone (too generic, e.g. 咖喱鸡套餐/咖喱牛套餐 share suffix "套餐")
   //  - still contains any bracket/paren character anywhere (e.g. "只）" from 广东烧鸭（半只）/（整只）,
   //    or "份）" from 蒜蓉西兰花（半份）/（整份）) — these are portion-size fragments, not names.
