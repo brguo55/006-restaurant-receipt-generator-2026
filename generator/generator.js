@@ -251,7 +251,15 @@ function getGroupZhLabel(items) {
       common = ch + common;
     } else break;
   }
-  return common || zhs[0];
+  // Strip any leading brackets/parens from the common suffix.
+  // e.g. suffix "）" from 炒面套餐（鸡）/炒面套餐（猪）/… becomes "".
+  const cleaned = common.replace(/^[（(）)【】〔〕]+/, '').trim();
+  // Reject empty results and "套餐" alone (too generic — e.g. 咖喱鸡套餐/咖喱牛套餐 share suffix "套餐").
+  // In those cases fall back to the common-prefix algorithm which gives a more meaningful label.
+  if (!cleaned || cleaned === '套餐') {
+    return getGroupZhBaseLabel(items);
+  }
+  return cleaned;
 }
 
 function groupLabel(items) {
@@ -306,7 +314,8 @@ function bilingualLabel(en, zh) {
 
 // Derives a Chinese label for a group of items by finding the longest common
 // prefix across all zh values, then stripping any trailing open bracket （/(.
-// Used for Alcohol & Beer groups where the suffix algorithm produces garbage.
+// Returns '' (not a fallback to zhs[0]) when there is no common prefix, to
+// avoid showing a misleading individual-item zh as a group label.
 function getGroupZhBaseLabel(items) {
   const zhs = items.map(i => i.zh).filter(Boolean);
   if (!zhs.length) return '';
@@ -316,8 +325,8 @@ function getGroupZhBaseLabel(items) {
     if (zhs.every(z => z[i] === zhs[0][i])) commonLen++;
     else break;
   }
-  const prefix = zhs[0].slice(0, commonLen).replace(/[（(]\s*$/, '').trim();
-  return prefix || zhs[0];
+  if (!commonLen) return '';
+  return zhs[0].slice(0, commonLen).replace(/[（(【\s]+$/, '').trim();
 }
 
 function getItemDetailLines(item) {
@@ -679,7 +688,7 @@ function renderFriedRiceLoMeinSection(grid, items) {
     el.className = "item";
     el.style.position = "relative";
     el.innerHTML = `
-      <div class="row">
+      <div class="row"> 
         <div class="name">${bilingualLabel(section.title, section.zhTitle)}</div>
         <div class="price">${priceInfo.same ? money(priceInfo.min) : `from ${money(priceInfo.min)}`}</div>
       </div>
@@ -1275,11 +1284,31 @@ function genReceipt() {
   parts.push(`</div>`);
 
   $("receipt").innerHTML = parts.join("");
+  fitReceiptPreview();
 }
 
-// ============================================================================
-// CART OPERATIONS
-// ============================================================================
+// Scales the on-screen receipt preview to fit without scrolling.
+// Measures the receipt's natural height, and if it exceeds MAX_PREVIEW_H,
+// applies a CSS scale transform so the full receipt is visible at once.
+// This only affects the on-screen preview; print CSS is unaffected.
+const MAX_PREVIEW_H = 900;
+function fitReceiptPreview() {
+  const el = $("receipt");
+  if (!el.innerHTML.trim()) return;
+
+  // Reset any previous scaling first so we measure the true natural height.
+  el.style.transform = "";
+  el.style.height = "";
+
+  const naturalH = el.scrollHeight;
+  if (naturalH > MAX_PREVIEW_H) {
+    const scale = MAX_PREVIEW_H / naturalH;
+    el.style.transform = `scale(${scale})`;
+    // Collapse the layout space to match the visually scaled height so
+    // no gap appears below the receipt and no scrollbar can appear.
+    el.style.height = Math.ceil(naturalH * scale) + "px";
+  }
+}
 
 function addResolvedItem(item) {
   const key = getOrderKey(item);
@@ -1340,7 +1369,10 @@ function clearOrder() {
   closeHunamComboModal();
   closeSideSelectionModal();
   renderOrder();
-  $("receipt").innerHTML = "";
+  const receiptEl = $("receipt");
+  receiptEl.innerHTML = "";
+  receiptEl.style.transform = "";
+  receiptEl.style.height = "";
 }
 
 function reorderItem(srcKey, targetKey) {
@@ -1640,7 +1672,7 @@ function scrollToCategory(category) {
   const catId = `cat-${category.replace(/\s+/g, '-').toLowerCase()}`;
   const element = $(catId);
   if (element) {
-    element.scrollIntoView({ behavior: "smooth", block: "center" });
+    element.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 }
 
