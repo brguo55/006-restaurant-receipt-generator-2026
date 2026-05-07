@@ -268,15 +268,15 @@ function getGroupZhLabel(items) {
 
 function groupLabel(items) {
   const en = getGroupEnLabel(items);
-  const baseText = $("mode").value === "both"
-    ? (() => {
-        const zh = getGroupZhLabel(items);
-        return zh ? `${en} / ${zh}` : en;
-      })()
-    : en;
 
   if (items[0]?.category === HUNAM_SPECIAL_COMBO_CATEGORY) {
-    return prefixHunamComboNumber(baseText, items[0]);
+    if ($("mode").value === "both") {
+      let zh = getGroupZhLabel(items);
+      if (zh && !zh.endsWith('套餐')) zh += '套餐';
+      const text = zh ? `${en} / ${zh}` : en;
+      return prefixHunamComboNumber(text, items[0]);
+    }
+    return prefixHunamComboNumber(en, items[0]);
   }
 
   if ($("mode").value === "both") {
