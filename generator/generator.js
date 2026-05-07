@@ -724,7 +724,7 @@ function renderMooShuSection(grid, items) {
   el.style.position = "relative";
   el.innerHTML = `
     <div class="row">
-      <div class="name">${MOO_SHU_CATEGORY}</div>
+      <div class="name">${bilingualLabel(MOO_SHU_CATEGORY, "木须")}</div>
       <div class="price">${priceInfo.same ? money(priceInfo.min) : `from ${money(priceInfo.min)}`}</div>
     </div>
     <button class="add">Add</button>
@@ -758,7 +758,7 @@ function renderEggFooYoungSection(grid, items) {
   el.style.position = "relative";
   el.innerHTML = `
     <div class="row">
-      <div class="name">${EGG_FOO_YOUNG_CATEGORY}</div>
+      <div class="name">${bilingualLabel(EGG_FOO_YOUNG_CATEGORY, "芙蓉蛋")}</div>
       <div class="price">${priceInfo.same ? money(priceInfo.min) : `from ${money(priceInfo.min)}`}</div>
     </div>
     <button class="add">Add</button>
