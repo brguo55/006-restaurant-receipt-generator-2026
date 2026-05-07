@@ -1667,6 +1667,79 @@ function bindMinZeroValidationMessages() {
 }
 
 // ============================================================================
+// CUSTOM SELECT WIDGETS
+// ============================================================================
+
+function initCustomSelects() {
+  document.querySelectorAll('select.custom-select').forEach((select) => {
+    const wrap = document.createElement('div');
+    wrap.className = 'custom-select-wrap';
+
+    const trigger = document.createElement('button');
+    trigger.type = 'button';
+    trigger.className = 'custom-select-trigger';
+    const triggerLabel = document.createElement('span');
+    trigger.appendChild(triggerLabel);
+
+    const optionsPanel = document.createElement('div');
+    optionsPanel.className = 'custom-select-options';
+
+    const updateTrigger = () => {
+      const sel = select.options[select.selectedIndex];
+      triggerLabel.textContent = sel ? sel.text : '';
+    };
+
+    const closePanel = () => {
+      optionsPanel.classList.remove('open');
+      trigger.classList.remove('open');
+    };
+
+    Array.from(select.options).forEach((opt) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'custom-select-option' + (opt.selected ? ' active' : '');
+      btn.textContent = opt.text;
+      btn.onclick = () => {
+        select.value = opt.value;
+        select.dispatchEvent(new Event('change', { bubbles: true }));
+        optionsPanel.querySelectorAll('.custom-select-option').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        updateTrigger();
+        closePanel();
+      };
+      optionsPanel.appendChild(btn);
+    });
+
+    trigger.onclick = (e) => {
+      e.stopPropagation();
+      const isOpen = optionsPanel.classList.contains('open');
+      document.querySelectorAll('.custom-select-wrap').forEach(w => {
+        w.querySelector('.custom-select-options')?.classList.remove('open');
+        w.querySelector('.custom-select-trigger')?.classList.remove('open');
+      });
+      if (!isOpen) {
+        optionsPanel.classList.add('open');
+        trigger.classList.add('open');
+      }
+    };
+
+    updateTrigger();
+    select.parentNode.insertBefore(wrap, select);
+    select.style.display = 'none';
+    wrap.appendChild(trigger);
+    wrap.appendChild(optionsPanel);
+    wrap.appendChild(select);
+  });
+
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.custom-select-wrap').forEach(w => {
+      w.querySelector('.custom-select-options')?.classList.remove('open');
+      w.querySelector('.custom-select-trigger')?.classList.remove('open');
+    });
+  });
+}
+
+// ============================================================================
 // EVENT BINDINGS
 // ============================================================================
 
@@ -1752,6 +1825,7 @@ function bindEvents() {
 // ============================================================================
 
 function init() {
+  initCustomSelects();
   bindEvents();
   
   // Load menu from CSV
