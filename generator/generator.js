@@ -1197,7 +1197,7 @@ function genReceipt() {
     parts.push(`<div class="rc-summary-row"><span>Tip</span><span>${money(tip)}</span></div>`);
   }
   if (delivery > 0) {
-    parts.push(`<div class="rc-summary-row"><span>Delivery Fee</span><span>${money(delivery)}</span></div>`);
+    parts.push(`<div class="rc-summary-row rc-delivery-row"><span>Delivery Fee</span><span>${money(delivery)}</span></div>`);
   }
   parts.push(`<div class="rc-summary-row rc-total"><span>Total</span><span>${money(receiptTotal)}</span></div>`);
   parts.push(`</div>`);
@@ -1216,7 +1216,7 @@ function genReceipt() {
       parts.push(`<div class="rc-summary-row"><span>18%</span><span>${money(subtotal * 0.18)}</span></div>`);
       parts.push(`<div class="rc-summary-row"><span>20%</span><span>${money(subtotal * 0.20)}</span></div>`);
     }
-    parts.push(`<div class="rc-divider"></div>`);
+    parts.push(`<div class="rc-divider-solid"></div>`);
     if (isLargeParty) {
       parts.push(`<div class="rc-gratuity-msg">*At least 18% service charge on parties of 5 or more.</div>`);
     } else {
@@ -1233,6 +1233,7 @@ function genReceipt() {
   parts.push(`<div class="rc-divider"></div>`);
   parts.push(`<div class="rc-center rc-thank">Thank you!!</div>`);
   parts.push(`<div class="rc-center rc-small">欢迎再次光临</div>`);
+  parts.push(`<div class="rc-footer-space"></div>`);
   parts.push(`</div>`);
 
   $("receipt").innerHTML = parts.join("");
@@ -1572,7 +1573,7 @@ function bindEvents() {
   $("clear").onclick = clearOrder;
 
   $("printBtn").onclick = () => {
-    if (!$("receipt").innerHTML.trim()) genReceipt();
+    genReceipt();
     window.print();
   };
 

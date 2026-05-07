@@ -688,6 +688,13 @@ button {
   border-top: 1px dashed #000;
   margin: 7px 0;
 }
+.rc-divider-solid {
+  border-top: 1.5px solid #000;
+  margin: 7px 0;
+}
+.rc-footer-space {
+  height: 16px;
+}
 .rc-meta {
   font-size: 19px;
   font-weight: 700;
@@ -1009,6 +1016,13 @@ button {
   }
   .rc-gratuity-msg {
     font-size: 11px;
+  }
+  .rc-divider-solid {
+    border-top: 1.5px solid #000;
+    margin: 5px 0;
+  }
+  .rc-footer-space {
+    height: 32px;
   }
 }
 
