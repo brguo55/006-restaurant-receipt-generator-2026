@@ -227,7 +227,7 @@ function getGroupEnLabel(items) {
   const commonWords = [...wordSets[0]].filter(w => wordSets.every(s => s.has(w)));
   const ordered = items[0].en.split(' ').filter(w => commonWords.includes(w));
   const trailingJoiners = new Set(['with', 'or', '&']);
-  const leadingJoiners = new Set(['with', 'or', '&']);
+  const leadingJoiners = new Set(['with', 'w/', 'or', '&']);
 
   while (ordered.length && leadingJoiners.has(ordered[0].toLowerCase())) {
     ordered.shift();
