@@ -1138,8 +1138,8 @@ function updateTotalsDisplay() {
   $("deliveryDisplay").textContent = delivery > 0 ? money(delivery) : "";
   $("total").textContent = money(total);
 
-  // Highlight active tip button
-  document.querySelectorAll(".tip-btn").forEach((btn) => {
+  // Highlight active tip button (only buttons with data-pct, not receipt-mode buttons)
+  document.querySelectorAll(".tip-btn[data-pct]").forEach((btn) => {
     const pct = parseInt(btn.dataset.pct, 10);
     btn.classList.toggle("active", activeTipPct === pct);
   });
@@ -1513,11 +1513,11 @@ function updateActiveCategory() {
 
   const categories = menuItems.querySelectorAll(".cat");
   let activeCategory = null;
+  const containerRect = menuContent.getBoundingClientRect();
 
   categories.forEach(cat => {
     const rect = cat.getBoundingClientRect();
-    const containerRect = menuContent.getBoundingClientRect();
-    
+
     // Check if category header is in viewport
     if (rect.top < containerRect.top + 120) {
       activeCategory = cat.id;
@@ -1577,8 +1577,8 @@ function bindEvents() {
     window.print();
   };
 
-  // Tip percentage buttons
-  document.querySelectorAll(".tip-btn").forEach((btn) => {
+  // Tip percentage buttons (only buttons with data-pct, not receipt-mode buttons)
+  document.querySelectorAll(".tip-btn[data-pct]").forEach((btn) => {
     btn.onclick = () => setTipByPercent(parseInt(btn.dataset.pct, 10));
   });
 
