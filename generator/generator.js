@@ -12,7 +12,7 @@ const $ = (id) => document.getElementById(id);
 let menuData = [];
 const order = new Map();
 
-const TAX_RATE = 0.075;
+const TAX_RATE = 0.0775;
 let tipAmount = 0;
 let activeTipPct = null;
 let deliveryFee = 0;
@@ -1255,7 +1255,7 @@ function genReceipt() {
   parts.push(`<div class="rc-divider"></div>`);
   parts.push(`<div class="rc-summary">`);
   parts.push(`<div class="rc-summary-row"><span>Subtotal</span><span>${money(subtotal)}</span></div>`);
-  parts.push(`<div class="rc-summary-row"><span>Tax (7.5%)</span><span>${money(tax)}</span></div>`);
+  parts.push(`<div class="rc-summary-row"><span>Tax (7.75%)</span><span>${money(tax)}</span></div>`);
   if (tipMode === "paid") {
     parts.push(`<div class="rc-summary-row"><span>Tip</span><span>${money(tip)}</span></div>`);
   }
