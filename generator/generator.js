@@ -132,6 +132,9 @@ function displayCategoryName(category) {
   if (category === FRIED_RICE_LO_MEIN_CATEGORY) {
     return FRIED_RICE_LO_MEIN_TITLE;
   }
+  if (category === "Side Order") {
+    return "Side";
+  }
   if (category === ADD_ON_CATEGORY) {
     return 'Signature Food';
   }
