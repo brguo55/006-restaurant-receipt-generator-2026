@@ -1123,9 +1123,14 @@ button {
   .rc-note,
   .rc-side-summary,
   .rc-entry-option {
-    font-size: 19px;
+    font-size: 20px;
     font-weight: 700;
     color: #000;
+  }
+
+  .rc-entry-meta,
+  .rc-summary-row {
+    font-size: 20px;
   }
 
   .rc-side-summary {
@@ -1145,17 +1150,21 @@ button {
     font-weight: 700;
   }
 
+  .rc-thank {
+    font-size: 22px;
+  }
+
   .rc-tip-section {
-    font-size: 17px;
+    font-size: 18px;
   }
   .rc-tip-section .rc-summary-row {
-    font-size: 17px;
+    font-size: 18px;
   }
   .rc-tip-suggestions-title {
-    font-size: 17px;
+    font-size: 18px;
   }
   .rc-gratuity-msg {
-    font-size: 16px;
+    font-size: 17px;
   }
   .rc-divider-solid {
     border-top: 1.5px solid #000;
