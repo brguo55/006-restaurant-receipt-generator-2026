@@ -1196,16 +1196,13 @@ function recalcTipIfPercent() {
 function updateTotalsDisplay() {
   const { subtotal, tax, tip, delivery, total } = calculateTotals();
   const partySize = parseInt($("partySize")?.value, 10) || 0;
-  const guestServiceCharge = 0;
   $("subtotal").textContent = money(subtotal);
   $("tax").textContent = money(tax);
   $("tipDisplay").textContent = money(tip);
   $("deliveryDisplay").textContent = delivery > 0 ? money(delivery) : "";
-  $("tipSummary").textContent = `Adds ${money(tip)} tip`;
-  $("deliverySummary").textContent = `Adds ${money(delivery)} delivery fee`;
-  $("guestsSummary").textContent = partySize >= 5
-    ? `5+ guests policy: Adds ${money(guestServiceCharge)} service charge`
-    : `Adds ${money(guestServiceCharge)} service charge`;
+  $("tipSummary").textContent = money(tip);
+  $("deliverySummary").textContent = money(delivery);
+  $("guestsSummary").textContent = String(partySize);
   $("total").textContent = money(total);
 
   // Highlight active tip button (only buttons with data-pct, not receipt-mode buttons)
@@ -1221,6 +1218,7 @@ function updateTotalsDisplay() {
 
 function genReceipt() {
   const { subtotal, tax, tip, delivery, total } = calculateTotals();
+  const partySize = parseInt($("partySize")?.value, 10) || 0;
   const parts = [];
   const who = escapeHtml($("who").value.trim());
   parts.push(`<div class="rc-slip">`);
@@ -1233,6 +1231,7 @@ function genReceipt() {
   parts.push(`<div class="rc-divider"></div>`);
   parts.push(`<div class="rc-meta">`);
   parts.push(`<div class="rc-meta-line">Order: ${escapeHtml($("type").value)}</div>`);
+  parts.push(`<div class="rc-meta-line">Guests: ${partySize}</div>`);
   if (who) {
     parts.push(`<div class="rc-meta-line">Ref: ${who}</div>`);
   }
@@ -1854,7 +1853,7 @@ function bindEvents() {
     setTipByAmount(isNaN(val) ? 0 : val);
   });
 
-  // Guests count (for receipt policy messaging and Guests summary line)
+  // Guests count (for Guests summary line and receipt header)
   $("partySize").addEventListener("input", () => {
     updateTotalsDisplay();
   });
