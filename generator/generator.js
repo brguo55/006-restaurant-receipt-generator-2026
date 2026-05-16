@@ -1685,9 +1685,17 @@ function renderCategoryNavigator() {
 function scrollToCategory(category) {
   const catId = `cat-${category.replace(/\s+/g, '-').toLowerCase()}`;
   const element = $(catId);
-  if (element) {
-    element.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
+  const menuEl = $("menu");
+  if (!element || !menuEl) return;
+
+  const menuRect = menuEl.getBoundingClientRect();
+  const elementRect = element.getBoundingClientRect();
+  const currentTop = menuEl.scrollTop + (elementRect.top - menuRect.top);
+  const centeredTop = currentTop - (menuEl.clientHeight - elementRect.height) / 2;
+  const maxTop = Math.max(0, menuEl.scrollHeight - menuEl.clientHeight);
+  const targetTop = Math.max(0, Math.min(centeredTop, maxTop));
+
+  menuEl.scrollTo({ top: targetTop, behavior: "smooth" });
 }
 
 // ============================================================================
