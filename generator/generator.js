@@ -1303,27 +1303,15 @@ function genReceipt() {
   fitReceiptPreview();
 }
 
-// Scales the on-screen receipt preview to fit without scrolling.
-// Measures the receipt's natural height, and if it exceeds MAX_PREVIEW_H,
-// applies a CSS scale transform so the full receipt is visible at once.
-// This only affects the on-screen preview; print CSS is unaffected.
-const MAX_PREVIEW_H = 900;
+// Keep the on-screen receipt preview at natural size so long receipts
+// expand vertically instead of being scaled into a fixed box.
 function fitReceiptPreview() {
   const el = $("receipt");
   if (!el.innerHTML.trim()) return;
 
-  // Reset any previous scaling first so we measure the true natural height.
+  // Reset any previous sizing/scaling and allow natural document flow.
   el.style.transform = "";
-  el.style.height = "";
-
-  const naturalH = el.scrollHeight;
-  if (naturalH > MAX_PREVIEW_H) {
-    const scale = MAX_PREVIEW_H / naturalH;
-    el.style.transform = `scale(${scale})`;
-    // Collapse the layout space to match the visually scaled height so
-    // no gap appears below the receipt and no scrollbar can appear.
-    el.style.height = Math.ceil(naturalH * scale) + "px";
-  }
+  el.style.height = "auto";
 }
 
 function addResolvedItem(item) {

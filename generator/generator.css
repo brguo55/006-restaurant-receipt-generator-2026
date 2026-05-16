@@ -779,19 +779,18 @@ button {
   margin-right: auto;
   box-sizing: border-box;
   background: #ffffff;
-  border: 1.5px dashed #9ca3af;
-  border-radius: 4px;
-  padding: 14px 12px;
+  border: none;
+  border-radius: 0;
+  padding: 0;
   font-family: Arial, Helvetica, "PingFang SC", "Microsoft YaHei", sans-serif;
-  min-height: 360px;
-  overflow: hidden;
+  min-height: 0;
+  overflow: visible;
   font-size: 21px;
   font-weight: 700;
   line-height: 1.45;
   color: #0a0a0a;
   font-variant-numeric: tabular-nums;
-  box-shadow: inset 0 1px 8px rgba(0, 0, 0, 0.04);
-  transform-origin: top center;
+  box-shadow: none;
 }
 .rc-slip {
   width: 100%;
@@ -1082,9 +1081,9 @@ button {
     max-height: none;
     overflow: visible;
     color: #000;
-    font-size: 14px;
+    font-size: 20px;
     font-weight: 700;
-    line-height: 1.4;
+    line-height: 1.45;
     page-break-inside: avoid;
     break-inside: avoid;
   }
@@ -1095,17 +1094,17 @@ button {
   }
 
   .rc-brand {
-    font-size: 18px;
+    font-size: 28px;
     font-weight: 700;
   }
 
   .rc-brand-sub {
-    font-size: 15px;
+    font-size: 22px;
     font-weight: 700;
   }
 
   .rc-entry-name {
-    font-size: 15px;
+    font-size: 21px;
     font-weight: 700;
   }
 
@@ -1114,7 +1113,7 @@ button {
   .rc-note,
   .rc-side-summary,
   .rc-entry-option {
-    font-size: 13px;
+    font-size: 19px;
     font-weight: 700;
     color: #000;
   }
@@ -1124,29 +1123,29 @@ button {
   }
 
   .rc-entry {
-    padding: 3px 0;
+    padding: 4px 0;
   }
 
   .rc-entry-meta span:first-child {
-    padding-right: 4px;
+    padding-right: 6px;
   }
 
   .rc-total {
-    font-size: 17px;
+    font-size: 25px;
     font-weight: 700;
   }
 
   .rc-tip-section {
-    font-size: 12px;
+    font-size: 16px;
   }
   .rc-tip-section .rc-summary-row {
-    font-size: 12px;
+    font-size: 16px;
   }
   .rc-tip-suggestions-title {
-    font-size: 12px;
+    font-size: 16px;
   }
   .rc-gratuity-msg {
-    font-size: 11px;
+    font-size: 15px;
   }
   .rc-divider-solid {
     border-top: 1.5px solid #000;
