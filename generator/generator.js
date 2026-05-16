@@ -1195,10 +1195,17 @@ function recalcTipIfPercent() {
 
 function updateTotalsDisplay() {
   const { subtotal, tax, tip, delivery, total } = calculateTotals();
+  const partySize = parseInt($("partySize")?.value, 10) || 0;
+  const guestServiceCharge = 0;
   $("subtotal").textContent = money(subtotal);
   $("tax").textContent = money(tax);
   $("tipDisplay").textContent = money(tip);
   $("deliveryDisplay").textContent = delivery > 0 ? money(delivery) : "";
+  $("tipSummary").textContent = `Adds ${money(tip)} tip`;
+  $("deliverySummary").textContent = `Adds ${money(delivery)} delivery fee`;
+  $("guestsSummary").textContent = partySize >= 5
+    ? `5+ guests policy: Adds ${money(guestServiceCharge)} service charge`
+    : `Adds ${money(guestServiceCharge)} service charge`;
   $("total").textContent = money(total);
 
   // Highlight active tip button (only buttons with data-pct, not receipt-mode buttons)
@@ -1845,6 +1852,11 @@ function bindEvents() {
   $("tipInput").addEventListener("input", () => {
     const val = parseFloat($("tipInput").value);
     setTipByAmount(isNaN(val) ? 0 : val);
+  });
+
+  // Guests count (for receipt policy messaging and Guests summary line)
+  $("partySize").addEventListener("input", () => {
+    updateTotalsDisplay();
   });
 
   // Delivery fee
