@@ -1685,17 +1685,28 @@ function renderCategoryNavigator() {
 function scrollToCategory(category) {
   const catId = `cat-${category.replace(/\s+/g, '-').toLowerCase()}`;
   const element = $(catId);
+  if (!element) return;
+
   const menuEl = $("menu");
-  if (!element || !menuEl) return;
+  const menuIsScrollable = !!menuEl && menuEl.scrollHeight > menuEl.clientHeight + 1;
 
-  const menuRect = menuEl.getBoundingClientRect();
+  if (menuIsScrollable) {
+    const menuRect = menuEl.getBoundingClientRect();
+    const elementRect = element.getBoundingClientRect();
+    const currentTop = menuEl.scrollTop + (elementRect.top - menuRect.top);
+    const centeredTop = currentTop - (menuEl.clientHeight - elementRect.height) / 2;
+    const maxTop = Math.max(0, menuEl.scrollHeight - menuEl.clientHeight);
+    const targetTop = Math.max(0, Math.min(centeredTop, maxTop));
+    menuEl.scrollTo({ top: targetTop, behavior: "smooth" });
+    return;
+  }
+
   const elementRect = element.getBoundingClientRect();
-  const currentTop = menuEl.scrollTop + (elementRect.top - menuRect.top);
-  const centeredTop = currentTop - (menuEl.clientHeight - elementRect.height) / 2;
-  const maxTop = Math.max(0, menuEl.scrollHeight - menuEl.clientHeight);
+  const currentTop = window.scrollY + elementRect.top;
+  const centeredTop = currentTop - (window.innerHeight - elementRect.height) / 2;
+  const maxTop = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
   const targetTop = Math.max(0, Math.min(centeredTop, maxTop));
-
-  menuEl.scrollTo({ top: targetTop, behavior: "smooth" });
+  window.scrollTo({ top: targetTop, behavior: "smooth" });
 }
 
 // ============================================================================
