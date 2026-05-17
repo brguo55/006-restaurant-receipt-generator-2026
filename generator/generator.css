@@ -973,6 +973,73 @@ button {
   white-space: nowrap;
 }
 
+/* Keep screen preview close to printed receipt sizing for easier visual checks. */
+@media screen {
+  #receipt {
+    width: 72mm;
+    max-width: 72mm;
+    font-size: 19px;
+    line-height: 1.45;
+  }
+
+  #receipt .rc-brand {
+    font-size: 24px;
+  }
+
+  #receipt .rc-brand-sub {
+    font-size: 20px;
+  }
+
+  #receipt .rc-small,
+  #receipt .rc-meta {
+    font-size: 18px;
+  }
+
+  #receipt .rc-small.rc-address-line {
+    font-size: 18px;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+  }
+
+  #receipt .rc-entry-name {
+    font-size: 20px;
+  }
+
+  #receipt .rc-entry-meta {
+    font-size: 18px;
+  }
+
+  #receipt .rc-meta,
+  #receipt .rc-summary-row {
+    font-size: 16px;
+  }
+
+  #receipt .rc-total {
+    font-size: 22px;
+  }
+
+  #receipt .rc-contact-site,
+  #receipt .rc-contact-phone {
+    font-size: 14px;
+  }
+
+  #receipt .rc-thank {
+    font-size: 18px;
+  }
+
+  #receipt .rc-thank-sub {
+    font-size: 16px;
+  }
+
+  #receipt .rc-tip-section,
+  #receipt .rc-tip-section .rc-summary-row,
+  #receipt .rc-tip-suggestions-title,
+  #receipt .rc-gratuity-msg {
+    font-size: 16px;
+  }
+}
+
 /* Category Navigator */
 .category-nav {
   position: fixed;
@@ -1195,28 +1262,28 @@ button {
   }
 
   .rc-total {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 700;
   }
 
   .rc-contact-site {
-    font-size: 15px;
+    font-size: 14px;
     margin-top: 2px;
     color: #000;
   }
 
   .rc-contact-phone {
-    font-size: 15px;
+    font-size: 14px;
     margin-bottom: 4px;
     color: #000;
   }
 
   .rc-thank {
-    font-size: 20px;
+    font-size: 18px;
   }
 
   .rc-thank-sub {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
     color: #000;
   }
