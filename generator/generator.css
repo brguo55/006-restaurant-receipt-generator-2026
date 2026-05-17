@@ -1091,7 +1091,7 @@ button {
     max-height: none;
     overflow: visible;
     color: #000;
-    font-size: 20px;
+    font-size: 19px;
     font-weight: 700;
     line-height: 1.45;
     page-break-inside: avoid;
@@ -1104,17 +1104,17 @@ button {
   }
 
   .rc-brand {
-    font-size: 28px;
+    font-size: 26px;
     font-weight: 700;
   }
 
   .rc-brand-sub {
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 700;
   }
 
   .rc-entry-name {
-    font-size: 21px;
+    font-size: 20px;
     font-weight: 700;
   }
 
@@ -1123,14 +1123,14 @@ button {
   .rc-note,
   .rc-side-summary,
   .rc-entry-option {
-    font-size: 21px;
+    font-size: 19px;
     font-weight: 700;
     color: #000;
   }
 
   .rc-entry-meta,
   .rc-summary-row {
-    font-size: 21px;
+    font-size: 19px;
   }
 
   .rc-side-summary {
@@ -1146,32 +1146,32 @@ button {
   }
 
   .rc-total {
-    font-size: 25px;
+    font-size: 23px;
     font-weight: 700;
   }
 
   .rc-thank {
-    font-size: 22px;
+    font-size: 20px;
   }
 
   .rc-tip-section {
-    font-size: 19px;
+    font-size: 17px;
   }
   .rc-tip-section .rc-summary-row {
-    font-size: 19px;
+    font-size: 17px;
   }
   .rc-tip-suggestions-title {
-    font-size: 19px;
+    font-size: 17px;
   }
   .rc-gratuity-msg {
-    font-size: 18px;
+    font-size: 17px;
   }
   .rc-divider-solid {
     border-top: 1.5px solid #000;
     margin: 5px 0;
   }
   .rc-footer-space {
-    height: 32px;
+    height: 28px;
   }
 }
 
