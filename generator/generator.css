@@ -809,6 +809,7 @@ button {
   font-size: 28px;
   font-weight: 700;
   line-height: 1.25;
+  white-space: nowrap;
 }
 .rc-brand-sub {
   font-size: 22px;
@@ -820,6 +821,12 @@ button {
   font-size: 19px;
   font-weight: 700;
   line-height: 1.4;
+}
+.rc-small.rc-address-line {
+  font-size: 18px;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
 }
 .rc-divider {
   border-top: 1px dashed #000;
@@ -897,10 +904,8 @@ button {
   color: #1f2937;
 }
 .rc-delivery-row {
-  border-top: 1px dashed #000;
-  border-bottom: 1px dashed #000;
-  padding: 5px 0;
-  margin: 5px 0;
+  padding: 1px 0;
+  margin: 0;
   font-weight: 700;
 }
 .rc-total {
@@ -911,10 +916,30 @@ button {
   font-weight: 700;
   color: #0a0a0a;
 }
+.rc-contact-site {
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.35;
+  margin-top: 2px;
+  color: #1f2937;
+}
+.rc-contact-phone {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.35;
+  margin-bottom: 4px;
+  color: #0a0a0a;
+}
 .rc-thank {
   font-size: 21px;
   font-weight: 700;
   margin-top: 5px;
+  color: #0a0a0a;
+}
+.rc-thank-sub {
+  font-size: 19px;
+  font-weight: 700;
+  margin-top: 1px;
   color: #0a0a0a;
 }
 .rc-tip-section {
@@ -1104,8 +1129,15 @@ button {
   }
 
   .rc-brand {
-    font-size: 26px;
+    font-size: 24px;
     font-weight: 700;
+  }
+
+  .rc-small.rc-address-line {
+    font-size: 18px;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
   }
 
   .rc-brand-sub {
@@ -1119,7 +1151,21 @@ button {
   }
 
   .rc-small,
-  .rc-meta,
+  .rc-meta {
+    font-size: 18px;
+    font-weight: 700;
+    color: #000;
+  }
+
+  .rc-entry-meta,
+  .rc-summary-row {
+    font-size: 19px;
+  }
+
+  .rc-entry-meta {
+    font-size: 18px;
+  }
+
   .rc-note,
   .rc-side-summary,
   .rc-entry-option {
@@ -1128,9 +1174,12 @@ button {
     color: #000;
   }
 
-  .rc-entry-meta,
+  .rc-meta {
+    font-size: 16px;
+  }
+
   .rc-summary-row {
-    font-size: 19px;
+    font-size: 16px;
   }
 
   .rc-side-summary {
@@ -1146,25 +1195,43 @@ button {
   }
 
   .rc-total {
-    font-size: 23px;
+    font-size: 20px;
     font-weight: 700;
+  }
+
+  .rc-contact-site {
+    font-size: 15px;
+    margin-top: 2px;
+    color: #000;
+  }
+
+  .rc-contact-phone {
+    font-size: 15px;
+    margin-bottom: 4px;
+    color: #000;
   }
 
   .rc-thank {
     font-size: 20px;
   }
 
+  .rc-thank-sub {
+    font-size: 18px;
+    font-weight: 700;
+    color: #000;
+  }
+
   .rc-tip-section {
-    font-size: 17px;
+    font-size: 16px;
   }
   .rc-tip-section .rc-summary-row {
-    font-size: 17px;
+    font-size: 16px;
   }
   .rc-tip-suggestions-title {
-    font-size: 17px;
+    font-size: 16px;
   }
   .rc-gratuity-msg {
-    font-size: 17px;
+    font-size: 16px;
   }
   .rc-divider-solid {
     border-top: 1.5px solid #000;
