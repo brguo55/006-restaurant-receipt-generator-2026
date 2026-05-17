@@ -25,7 +25,6 @@ let scrollTrackingInitialized = false;
 
 const categoryOrder = [
   "Appetizer",
-  "Dessert",
   "Salad",
   "Soup",
   "Pork",
@@ -47,6 +46,7 @@ const categoryOrder = [
   "Chinese Soup",
   "Hunam Special Combo",
   "Side Order",
+  "Dessert",
   "Beverage",
   "Alcohol & Beer",
   "Others",
