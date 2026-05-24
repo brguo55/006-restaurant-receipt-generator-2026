@@ -978,71 +978,71 @@ button {
   #receipt {
     width: 72mm;
     max-width: 72mm;
-    font-size: 18px;
+    font-size: 17px;
     line-height: 1.45;
   }
 
   #receipt .rc-brand {
-    font-size: 22px;
+    font-size: 21px;
   }
 
   #receipt .rc-brand-sub {
-    font-size: 18px;
+    font-size: 17px;
   }
 
   #receipt .rc-small,
   #receipt .rc-meta {
-    font-size: 16px;
+    font-size: 15px;
   }
 
   #receipt .rc-small.rc-address-line {
-    font-size: 16px;
+    font-size: 15px;
     line-height: 1.3;
     letter-spacing: -0.01em;
     white-space: nowrap;
   }
 
   #receipt .rc-entry-name {
-    font-size: 18px;
+    font-size: 17px;
   }
 
   #receipt .rc-entry-meta {
-    font-size: 16px;
+    font-size: 15px;
   }
 
   #receipt .rc-note,
   #receipt .rc-side-summary,
   #receipt .rc-entry-option {
-    font-size: 18px;
+    font-size: 17px;
   }
 
   #receipt .rc-meta,
   #receipt .rc-summary-row {
-    font-size: 14px;
+    font-size: 13px;
   }
 
   #receipt .rc-total {
-    font-size: 18px;
+    font-size: 17px;
   }
 
   #receipt .rc-contact-site,
   #receipt .rc-contact-phone {
-    font-size: 13px;
+    font-size: 12px;
   }
 
   #receipt .rc-thank {
-    font-size: 16px;
+    font-size: 15px;
   }
 
   #receipt .rc-thank-sub {
-    font-size: 14px;
+    font-size: 13px;
   }
 
   #receipt .rc-tip-section,
   #receipt .rc-tip-section .rc-summary-row,
   #receipt .rc-tip-suggestions-title,
   #receipt .rc-gratuity-msg {
-    font-size: 14px;
+    font-size: 13px;
   }
 }
 
@@ -1189,7 +1189,7 @@ button {
     max-height: none;
     overflow: visible;
     color: #000;
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 700;
     line-height: 1.45;
     page-break-inside: avoid;
@@ -1202,57 +1202,57 @@ button {
   }
 
   .rc-brand {
-    font-size: 22px;
+    font-size: 21px;
     font-weight: 700;
   }
 
   .rc-small.rc-address-line {
-    font-size: 16px;
+    font-size: 15px;
     line-height: 1.3;
     letter-spacing: -0.01em;
     white-space: nowrap;
   }
 
   .rc-brand-sub {
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 700;
   }
 
   .rc-entry-name {
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 700;
   }
 
   .rc-small,
   .rc-meta {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 700;
     color: #000;
   }
 
   .rc-entry-meta,
   .rc-summary-row {
-    font-size: 16px;
+    font-size: 15px;
   }
 
   .rc-entry-meta {
-    font-size: 16px;
+    font-size: 15px;
   }
 
   .rc-note,
   .rc-side-summary,
   .rc-entry-option {
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 700;
     color: #000;
   }
 
   .rc-meta {
-    font-size: 14px;
+    font-size: 13px;
   }
 
   .rc-summary-row {
-    font-size: 14px;
+    font-size: 13px;
   }
 
   .rc-side-summary {
@@ -1268,43 +1268,43 @@ button {
   }
 
   .rc-total {
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 700;
   }
 
   .rc-contact-site {
-    font-size: 13px;
+    font-size: 12px;
     margin-top: 2px;
     color: #000;
   }
 
   .rc-contact-phone {
-    font-size: 13px;
+    font-size: 12px;
     margin-bottom: 4px;
     color: #000;
   }
 
   .rc-thank {
-    font-size: 16px;
+    font-size: 15px;
   }
 
   .rc-thank-sub {
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 700;
     color: #000;
   }
 
   .rc-tip-section {
-    font-size: 14px;
+    font-size: 13px;
   }
   .rc-tip-section .rc-summary-row {
-    font-size: 14px;
+    font-size: 13px;
   }
   .rc-tip-suggestions-title {
-    font-size: 14px;
+    font-size: 13px;
   }
   .rc-gratuity-msg {
-    font-size: 14px;
+    font-size: 13px;
   }
   .rc-divider-solid {
     border-top: 1.5px solid #000;
