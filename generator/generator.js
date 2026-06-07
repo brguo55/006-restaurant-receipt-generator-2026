@@ -1175,10 +1175,16 @@ function calculateTotals() {
   return { subtotal, tax, tip: tipAmount, delivery: deliveryFee, total };
 }
 
+function calculateAfterTaxTotal() {
+  const subtotal = calculateSubtotal();
+  const tax = calculateTax(subtotal);
+  return subtotal + tax;
+}
+
 function setTipByPercent(pct) {
   activeTipPct = pct;
-  const subtotal = calculateSubtotal();
-  tipAmount = subtotal * (pct / 100);
+  const afterTaxTotal = calculateAfterTaxTotal();
+  tipAmount = afterTaxTotal * (pct / 100);
   $("tipInput").value = "";
   updateTotalsDisplay();
 }
@@ -1191,8 +1197,8 @@ function setTipByAmount(amount) {
 
 function recalcTipIfPercent() {
   if (activeTipPct !== null) {
-    const subtotal = calculateSubtotal();
-    tipAmount = subtotal * (activeTipPct / 100);
+    const afterTaxTotal = calculateAfterTaxTotal();
+    tipAmount = afterTaxTotal * (activeTipPct / 100);
   }
 }
 
@@ -1258,6 +1264,7 @@ function genReceipt() {
 
   const tipMode = receiptTipMode;
   const receiptTotal = tipMode === "paid" ? total : subtotal + tax + delivery;
+  const afterTaxTotal = subtotal + tax;
 
   parts.push(`<div class="rc-divider"></div>`);
   parts.push(`<div class="rc-summary">`);
@@ -1278,13 +1285,13 @@ function genReceipt() {
     parts.push(`<div class="rc-tip-section">`);
     parts.push(`<div class="rc-tip-suggestions-title">Tip Suggestions</div>`);
     if (isLargeParty) {
-      parts.push(`<div class="rc-summary-row"><span>18%</span><span>${money(subtotal * 0.18)}</span></div>`);
-      parts.push(`<div class="rc-summary-row"><span>20%</span><span>${money(subtotal * 0.20)}</span></div>`);
-      parts.push(`<div class="rc-summary-row"><span>25%</span><span>${money(subtotal * 0.25)}</span></div>`);
+      parts.push(`<div class="rc-summary-row"><span>18%</span><span>${money(afterTaxTotal * 0.18)}</span></div>`);
+      parts.push(`<div class="rc-summary-row"><span>20%</span><span>${money(afterTaxTotal * 0.20)}</span></div>`);
+      parts.push(`<div class="rc-summary-row"><span>25%</span><span>${money(afterTaxTotal * 0.25)}</span></div>`);
     } else {
-      parts.push(`<div class="rc-summary-row"><span>15%</span><span>${money(subtotal * 0.15)}</span></div>`);
-      parts.push(`<div class="rc-summary-row"><span>18%</span><span>${money(subtotal * 0.18)}</span></div>`);
-      parts.push(`<div class="rc-summary-row"><span>20%</span><span>${money(subtotal * 0.20)}</span></div>`);
+      parts.push(`<div class="rc-summary-row"><span>15%</span><span>${money(afterTaxTotal * 0.15)}</span></div>`);
+      parts.push(`<div class="rc-summary-row"><span>18%</span><span>${money(afterTaxTotal * 0.18)}</span></div>`);
+      parts.push(`<div class="rc-summary-row"><span>20%</span><span>${money(afterTaxTotal * 0.20)}</span></div>`);
     }
     parts.push(`<div class="rc-divider-solid"></div>`);
     if (isLargeParty) {
