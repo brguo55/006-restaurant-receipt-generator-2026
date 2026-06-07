@@ -1181,10 +1181,19 @@ function calculateAfterTaxTotal() {
   return subtotal + tax;
 }
 
+function roundUpToCents(amount) {
+  return Math.ceil(Number(amount.toFixed(10)) * 100) / 100;
+}
+
+function calculateTipFromPercent(afterTaxTotal, pct) {
+  const rawTip = afterTaxTotal * (pct / 100);
+  return roundUpToCents(rawTip);
+}
+
 function setTipByPercent(pct) {
   activeTipPct = pct;
   const afterTaxTotal = calculateAfterTaxTotal();
-  tipAmount = afterTaxTotal * (pct / 100);
+  tipAmount = calculateTipFromPercent(afterTaxTotal, pct);
   $("tipInput").value = "";
   updateTotalsDisplay();
 }
@@ -1198,7 +1207,7 @@ function setTipByAmount(amount) {
 function recalcTipIfPercent() {
   if (activeTipPct !== null) {
     const afterTaxTotal = calculateAfterTaxTotal();
-    tipAmount = afterTaxTotal * (activeTipPct / 100);
+    tipAmount = calculateTipFromPercent(afterTaxTotal, activeTipPct);
   }
 }
 
@@ -1285,13 +1294,13 @@ function genReceipt() {
     parts.push(`<div class="rc-tip-section">`);
     parts.push(`<div class="rc-tip-suggestions-title">Tip Suggestions</div>`);
     if (isLargeParty) {
-      parts.push(`<div class="rc-summary-row"><span>18%</span><span>${money(afterTaxTotal * 0.18)}</span></div>`);
-      parts.push(`<div class="rc-summary-row"><span>20%</span><span>${money(afterTaxTotal * 0.20)}</span></div>`);
-      parts.push(`<div class="rc-summary-row"><span>25%</span><span>${money(afterTaxTotal * 0.25)}</span></div>`);
+      parts.push(`<div class="rc-summary-row"><span>18%</span><span>${money(calculateTipFromPercent(afterTaxTotal, 18))}</span></div>`);
+      parts.push(`<div class="rc-summary-row"><span>20%</span><span>${money(calculateTipFromPercent(afterTaxTotal, 20))}</span></div>`);
+      parts.push(`<div class="rc-summary-row"><span>25%</span><span>${money(calculateTipFromPercent(afterTaxTotal, 25))}</span></div>`);
     } else {
-      parts.push(`<div class="rc-summary-row"><span>15%</span><span>${money(afterTaxTotal * 0.15)}</span></div>`);
-      parts.push(`<div class="rc-summary-row"><span>18%</span><span>${money(afterTaxTotal * 0.18)}</span></div>`);
-      parts.push(`<div class="rc-summary-row"><span>20%</span><span>${money(afterTaxTotal * 0.20)}</span></div>`);
+      parts.push(`<div class="rc-summary-row"><span>15%</span><span>${money(calculateTipFromPercent(afterTaxTotal, 15))}</span></div>`);
+      parts.push(`<div class="rc-summary-row"><span>18%</span><span>${money(calculateTipFromPercent(afterTaxTotal, 18))}</span></div>`);
+      parts.push(`<div class="rc-summary-row"><span>20%</span><span>${money(calculateTipFromPercent(afterTaxTotal, 20))}</span></div>`);
     }
     parts.push(`<div class="rc-divider-solid"></div>`);
     if (isLargeParty) {
